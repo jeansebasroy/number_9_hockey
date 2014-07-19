@@ -2,11 +2,18 @@ require 'rails_helper'
 
 describe "Static pages" do
 
+	let(:base_title) { "#9 Hockey" }
+
 	describe "Home page" do
 
-		it "should have the right title" do
+		it "should have the base title" do
 			visit '/static_pages/home'
-			expect(page).to have_title("#9 Hockey | Home")
+			expect(page).to have_title("#{base_title}")
+		end
+
+		it "should not have a custom title" do
+			visit '/static_pages/home'
+			expect(page).not_to have_title("| Home")
 		end
 
 		it "should have the content '#9 Hockey'" do
@@ -18,9 +25,9 @@ describe "Static pages" do
 
 	describe "Why #9? page" do
 
-		it "should have the right title" do
+		it "should have the title 'Why #9?'" do
 			visit '/static_pages/why_9'
-			expect(page).to have_title("#9 Hockey | Why #9?")
+			expect(page).to have_title("#{base_title} | Why #9?")
 		end
 
 		it "should have the content 'Why #9?'" do
@@ -37,15 +44,14 @@ describe "Static pages" do
 			visit '/static_pages/why_9'
 			expect(page).to have_content('For Coaches')
 		end
-
 		
 	end
 
 	describe "About Us page" do
 
-		it "should have the right title" do
+		it "should have the title 'About Us'" do
 			visit '/static_pages/about_us'
-			expect(page).to have_title("#9 Hockey | About Us")
+			expect(page).to have_title("#{base_title} | About Us")
 		end
 
 		it "should have the content 'Who 'we' are?'" do
