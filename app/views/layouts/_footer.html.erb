@@ -1,13 +1,11 @@
 <footer >
   <nav class="navbar navbar-inverse navbar-inner navbar-fixed-bottom" >
     <small>
-      <a href= <%= root_path %>> © #9 Hockey</a>    
+      <a href= <%= root_path %>>© #9 Hockey</a>    
     </small>
     <ul>
-      <li><%= link_to "Scouting",   '#' %></li>
-      <li><%= link_to "Contact Us", '#' %></li>
-      <!--<li><a href="scouting@number9hockey.com">Scouting</a></li>
-      <li><a href="info@number9hockey.com">Info</a></li>-->
+      <li><%= mail_to "scouting@number9hockey.com", "Scouting", subject: "Request for Scouting" %></li>
+      <li><%= mail_to "info@number9hockey.com", "Contact Us", subject: "Request for Info" %></li>
     </ul>
   </nav>
 </footer>
