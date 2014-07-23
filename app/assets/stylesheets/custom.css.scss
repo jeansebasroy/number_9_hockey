@@ -12,6 +12,7 @@ html {
 
 body {
   padding-top: 60px;
+  /*padding-bottom: 60px;*/
 }
 
 section {
@@ -78,16 +79,25 @@ p {
 /* footer */
 
 footer {
-  margin-top: 45px;
+  /*position: relative;*/
+  /*bottom: -100px;*/
+  width: auto;
+  /*margin-top: -60px;*/
+  /*margin-bottom: -60px;*/
+  height: 60px;
   padding-top: 5px;
-  border-top: 1px solid $grayMediumLight;
-  color: $grayLight;
+  /*border-top: 1px solid $grayMediumLight;*/
   a {
     color: $gray;
     &:hover {
-      color: $grayDarker;
-    }
+    	color: white;
+    	text-decoration: none;
+  		}
   }
+  /*container {
+  	/*color: $grayLight;*/
+  	/*color: $grayMediumLight;*/
+  /*}*/
   small {
     float: left;
   }
