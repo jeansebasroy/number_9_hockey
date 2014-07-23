@@ -1,11 +1,15 @@
 <footer >
-  <nav class="navbar navbar-inverse navbar-inner navbar-fixed-bottom" >
-    <small>
-      <a href= <%= root_path %>>© #9 Hockey</a>    
-    </small>
-    <ul>
-      <li><%= mail_to "scouting@number9hockey.com", "Scouting", subject: "Request for Scouting" %></li>
-      <li><%= mail_to "info@number9hockey.com", "Contact Us", subject: "Request for Info" %></li>
-    </ul>
+  <nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class= "navbar-inner">
+    	<div class="container">
+    	<small>
+      		<a href= <%= root_path %>>© #9 Hockey</a>    
+    	</small>
+    	<ul>
+      		<li><%= mail_to "scouting@number9hockey.com", "Scouting", subject: "Request for Scouting" %></li>
+      		<li><%= mail_to "info@number9hockey.com", "Contact Us", subject: "Request for Info" %></li>
+    	</ul>
+    </div>
+  	</div>
   </nav>
 </footer>
