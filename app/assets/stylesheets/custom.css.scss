@@ -79,26 +79,19 @@ p {
 /* footer */
 
 footer {
-  /*position: relative;*/
-  /*bottom: -100px;*/
-  /*width: auto;*/
-  /*margin-top: -60px;*/
-  /*margin-bottom: -60px;*/
   height: 60px;
   padding-top: 5px;
-  /*border-top: 1px solid $grayMediumLight;*/
   a {
-    color: $gray;
+    color: $grayLight;
     &:hover {
     	color: white;
     	text-decoration: none;
   		}
   }
-  /*container {
-  	/*color: $grayLight;*/
-  	/*color: $grayMediumLight;*/
-  /*}*/
   small {
+    position: relative;
+    top: 50%;
+    transform: translateY(50%);
     float: left;
   }
   ul {
