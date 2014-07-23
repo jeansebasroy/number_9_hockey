@@ -3,7 +3,8 @@ require 'rails_helper'
 describe "Static pages" do
 
 	let(:base_title) { "#9 Hockey" }
-
+	# need to create a 'helper' file to define this for both "Static pages" & "User pages"
+	
 	subject { page }
 
 	describe "Home page" do
