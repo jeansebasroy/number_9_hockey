@@ -7,6 +7,7 @@ gem 'pg'
 	
 gem 'bootstrap-sass'
 gem 'sprockets'
+gem 'bcrypt', '3.1.7'
 
 group :development, :test do
 	gem 'rspec-rails'
