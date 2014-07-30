@@ -42,4 +42,12 @@ describe "Static pages" do
 		
 	end
 
+	describe "Login page" do
+
+		before { visit login_path }
+
+		it { should have_title("#{base_title} | Login") }
+				
+	end
+  	
 end
