@@ -171,6 +171,7 @@ DEPENDENCIES
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   selenium-webdriver
+  sprockets
   turbolinks
   tzinfo-data
   uglifier (= 2.1.1)
