@@ -6,7 +6,7 @@ gem 'rails', '4.1.4'
 gem 'pg'
 	
 gem 'bootstrap-sass'
-#gem 'sprockets'
+gem 'sprockets'
 
 group :development, :test do
 	gem 'rspec-rails'
