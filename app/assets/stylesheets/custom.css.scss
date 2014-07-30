@@ -77,7 +77,16 @@ p {
 }
 
 header {
-    ul {
+  height: 60px;
+  padding-top: 5px;
+  a {
+    color: #999;
+    &:hover {
+      color: white;
+      text-decoration: none;
+      }
+  }
+  ul {
     float: right;
     list-style: none;
     li {
