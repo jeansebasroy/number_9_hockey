@@ -42,11 +42,11 @@ describe "Static pages" do
 		
 	end
 
-	describe "Login page" do
+	describe "Sign In page" do
 
-		before { visit login_path }
+		before { visit signin_path }
 
-		it { should have_title("#{base_title} | Login") }
+		it { should have_title("#{base_title} | Sign In") }
 				
 	end
   	
