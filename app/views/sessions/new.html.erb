@@ -1,6 +1,6 @@
 <% provide(:title, "Sign In") %>
 <h1>Sign In</h1>
-
+<p>Already have an account?  Sign in below.</p>
 
 <div class="row">
   	<div class="span6 offset3">
@@ -14,7 +14,20 @@
 
       		<%= f.submit "Sign In", class: "btn btn-large btn-primary" %>
     	<% end %>
+    </div>
+</div>
 
-    	<!--<p>New user? <%= link_to "Sign up now!", signup_path %></p>-->
+<h1>Submit Invitation Code</h1>
+
+<p>Been invited to attend a #9 Hockey event? Submit your Invitation Code below to Sign Up for #9 Hockey.</p>
+<div class="row">
+    <div class="span6 offset3">
+      <%= form_for(:invitations, url: "/invitations/verify") do |g| %>
+
+          <%= g.label :invitation_code, "Invitation Code" %>
+          <%= g.text_field :invitation_code %>
+
+          <%= g.submit "Submit Code", class: "btn btn-large btn-primary" %>
+      <% end %>
   	</div>
 </div>
