@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   match '/signin',    to: 'sessions#new',           via: 'get'
   match '/signout',   to: 'sessions#destroy',       via: 'delete'
 
-  match '/invitations/verify', to: 'invitations#verify', via: 'post'
+  match '/invitation/verify', to: 'invitations#verify_invitation', via: 'post'
     #fix this hack
 
   # The priority is based upon order of creation: first created -> highest priority.

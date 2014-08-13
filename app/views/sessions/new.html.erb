@@ -22,7 +22,7 @@
 <p>Been invited to attend a #9 Hockey event? Submit your Invitation Code below to Sign Up for #9 Hockey.</p>
 <div class="row">
     <div class="span6 offset3">
-      <%= form_for(:invitations, url: "/invitations/verify") do |g| %>
+      <%= form_for(:invitations, url: "/invitation/verify") do |g| %>
 
           <%= g.label :invitation_code, "Invitation Code" %>
           <%= g.text_field :invitation_code %>

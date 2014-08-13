@@ -4,7 +4,7 @@ class InvitationsController < ApplicationController
   	#generates a new invitation_code
   end
 
-  def verify
+  def verify_invitation
   	#verify that the submitted invitation_code is valid
   		#is in database, has not expired, & has not been used
   	if 1 == 1
