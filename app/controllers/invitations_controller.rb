@@ -7,9 +7,19 @@ class InvitationsController < ApplicationController
   def verify_invitation
     valid_code = Invitation.find_by(code: params[:invitations][:invitation_code])
     #need to verify that the code has not expired & has not been used before
-  	if  valid_code
+  	#checks that valid_code has not expired
+#    if valid_code.expiration_date ==
+#      valid_code = nil
+#    end
+
+    #checks that valid_code has not been used
+    if valid_code.use_date.nil? == false
+      valid_code = nil
+    end
+
+    if  valid_code
   		#set the use_date field in the invitations model
-  		#allow user to go to signup page
+        		#allow user to go to signup page
   		redirect_to "/signup"
   	else
   		flash[:error] = "The Invitation Code submitted did not match our records.  Try again."
