@@ -4,23 +4,71 @@
        	<%= link_to "#9 Hockey", root_path, id: "logo" %>
       	<nav>
          		<ul class="nav pull-right">
-           		<li><%= link_to "Home",		root_path %></li>
               <% if signed_in? %>
-                <li><%= link_to "Users", '#' %></li>
-                <li id="fat-menu" class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    Account <b class="caret"></b>
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><%= link_to "Profile", current_user %></li>
-                    <li><%= link_to "Settings", '#' %></li>
-                    <li class="divider"></li>
-                    <li>
-                      <%= link_to "Sign Out", signout_path, method: "delete" %>
-                    </li>
+                <% if current_user.admin? %>
+                  <li><%= link_to "My Home", '#' %></li>
+                  <li id="fat-menu" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      Camps <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to "All", '#' %></li>
+                      <li><%= link_to "In Development", '#' %></li>
+                      <li class="divider"></li>
+                      <li><%= link_to "Create New", camps_new_path %></li>
                   </ul>
+                  <li id="fat-menu" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      Players <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to "All", '#' %></li>
+                      <li class="divider"></li>
+                      <li><%= link_to "Search", '#' %></li>
+                      <li><%= link_to "New Eval", '#' %></li>
+                  </ul>
+                  <li id="fat-menu" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      Coaches <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to "All", '#' %></li>
+                      <li class="divider"></li>
+                      <li><%= link_to "Search", '#' %></li>
+                      <li><%= link_to "New Eval", '#' %></li>
+                    </ul>
+                  <li id="fat-menu" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      Profile <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to "Edit Profile", '#' %></li>
+                      <li><%= link_to "Settings", '#' %></li>
+                      <li class="divider"></li>
+                      <li>
+                        <%= link_to "Sign Out", signout_path, method: "delete" %>
+                      </li>
+                    </ul>
+                  </li>
+                <% else %>
+                  <li><%= link_to "My Home", root_path %></li>
+                  <li><%= link_to "Users", '#' %></li>
+                  <li id="fat-menu" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      Profile <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><%= link_to "Edit Profile", '#' %></li>
+                      <li><%= link_to "Settings", '#' %></li>
+                      <li class="divider"></li>
+                      <li>
+                        <%= link_to "Sign Out", signout_path, method: "delete" %>
+                      </li>
+                    </ul>
                 </li>
+                <% end %>
               <% else %>
+                <li><%= link_to "Home", root_path %></li>
                 <li><%= link_to "Why #9?",  why_9_path %></li>
                 <li><%= link_to "About Us", about_us_path %></li>
                 <li><%= link_to "Sign In",  signin_path %></li>

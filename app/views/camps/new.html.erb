@@ -1,0 +1,18 @@
+<% provide(:title, "Create Camp") %>
+<h1>Create Camp</h1>
+<p>Enter the Camp's details below:</p>
+
+<div class="row">
+  	<div class="span6 offset3">
+    	<%= form_for(:camp, url: camps_path) do |f| %>
+
+      		<%= f.label :name %>
+      		<%= f.text_field :name %>
+
+      		<%= f.label :description %>
+      		<%= f.password_field :description %>
+
+      		<%= f.submit "Save", class: "btn btn-large btn-primary" %>
+    	<% end %>
+    </div>
+</div>

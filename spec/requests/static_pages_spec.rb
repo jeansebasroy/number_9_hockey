@@ -47,6 +47,11 @@ describe "Static pages" do
 		before { visit signin_path }
 
 		it { should have_title("#{base_title} | Sign In") }
+
+		it { should have_content('Sign In') }
+		it { should have_content('Submit Invitation Code') }
+		
+
 				
 	end
   	

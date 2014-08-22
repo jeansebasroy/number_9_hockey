@@ -1,15 +1,21 @@
 Rails.application.routes.draw do
-  get 'invitations/new'
-
-  resources :users
+    resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :camps
+  resources :invitations
+  
   root 'static_pages#home'
+  
   match '/why_9',     to: 'static_pages#why_9',     via: 'get'
   match '/about_us',  to: 'static_pages#about_us',  via: 'get'
   #match '/signin',    to: 'static_pages#signin',    via: 'get'
+  
   match '/signup',    to: 'users#new',              via: 'get'
   match '/signin',    to: 'sessions#new',           via: 'get'
   match '/signout',   to: 'sessions#destroy',       via: 'delete'
+  
+  match '/camps/new', to: 'camps#new',              via: 'get'
+  
 
   match '/invitation/verify', to: 'invitations#verify_invitation', via: 'post'
     #fix this hack
