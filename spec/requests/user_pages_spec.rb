@@ -58,14 +58,14 @@ describe "User pages" do
           it { should have_selector('div.alert.alert-success', text: "Welcome") }
         end
     	end
-  	end
 
   	describe "profile page" do
     	let(:user) { FactoryGirl.create(:user) }
     	before { visit user_path(user) }
 
-    	it { should have_content(user.first_name) }
-    	it { should have_title(user.first_name) }
+      it { should have_content(user.first_name) }
+     	it { should have_title(user.first_name) }
   	end
 
+  end
 end

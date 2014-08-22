@@ -1,0 +1,13 @@
+<% provide(:title, "Edit Camp") %>
+<h1>Update Camp</h1>
+<p>Update the Camp's details below:</p>
+
+<div class="row">
+  	<div class="span6 offset3">
+    	<%= form_for(@camp) do |f| %>
+			<%= render 'fields', f: f %>
+
+      		<%= f.submit "Update", class: "btn btn-large btn-primary" %>
+    	<% end %>
+    </div>
+</div>

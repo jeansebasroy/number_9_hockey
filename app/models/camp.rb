@@ -1,8 +1,8 @@
 class Camp < ActiveRecord::Base
-	validates :name, presence: true, 
-				length: { minimum: 6 }
-	validates :description, presence: true, 
-				length: { minimum: 10 }
+	has_many :date_time_locations, dependent: :destroy
 
+
+	validates :name, presence: true
+	validates :description, presence: true
 
 end

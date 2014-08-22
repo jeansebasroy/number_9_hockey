@@ -1,0 +1,15 @@
+<% provide(:title) %>
+<p>Camp Name: <%= @camp.name %></p>
+<p>Description: <%= @camp.description %></p>
+<p>Date Published: 
+	<% if @camp.publish_date.nil? %>
+		Under Development
+	<%else%>
+		<%= @camp.publish_date %>
+	<%end%>
+</p>
+
+<div>
+	<%= link_to "Edit",		edit_camp_path(@camp), class: "btn btn-large btn-primary" %>
+	<%= button_to "Publish", { action: "publish", id: @camp.id }, class: "btn btn-large btn-primary pull-right" %>
+</div>

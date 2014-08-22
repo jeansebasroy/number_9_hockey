@@ -5,8 +5,10 @@
 <div class="row">
   	<div class="span6 offset3">
     	<%= form_for(:session, url: sessions_path) do |f| %>
-
-      		<%= f.label :email %>
+      	
+          <%#= render 'shared/error_messages', object: f.object %>
+      	
+          <%= f.label :email %>
       		<%= f.text_field :email %>
 
       		<%= f.label :password %>
@@ -23,7 +25,9 @@
 <div class="row">
     <div class="span6 offset3">
       <%= form_for(:invitations, url: "/invitation/verify") do |g| %>
-
+        
+          <%#= render 'shared/error_messages', object: g.object %>
+        
           <%= g.label :invitation_code, "Invitation Code" %>
           <%= g.text_field :invitation_code %>
 

@@ -50,9 +50,7 @@ describe "Static pages" do
 
 		it { should have_content('Sign In') }
 		it { should have_content('Submit Invitation Code') }
-		
-
-				
+						
 	end
   	
 end

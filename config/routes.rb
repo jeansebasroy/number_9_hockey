@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-    resources :users
+  resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :camps
   resources :invitations
@@ -14,12 +14,10 @@ Rails.application.routes.draw do
   match '/signin',    to: 'sessions#new',           via: 'get'
   match '/signout',   to: 'sessions#destroy',       via: 'delete'
   
-  match '/camps/new', to: 'camps#new',              via: 'get'
-  
-
+  #fix these hacks
   match '/invitation/verify', to: 'invitations#verify_invitation', via: 'post'
-    #fix this hack
-
+  match '/camps/publish',     to: 'camps#publish',                 via: 'post'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
