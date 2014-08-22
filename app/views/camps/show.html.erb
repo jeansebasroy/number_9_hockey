@@ -11,5 +11,5 @@
 
 <div>
 	<%= link_to "Edit",		edit_camp_path(@camp), class: "btn btn-large btn-primary" %>
-	<%= button_to "Publish", { action: "publish", id: @camp.id }, class: "btn btn-large btn-primary pull-right" %>
+	<%= link_to "Publish", { action: "publish", id: @camp.id }, class: "btn btn-large btn-primary", :method => :post %>
 </div>
