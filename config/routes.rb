@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   #fix these hacks
   match '/invitation/verify', to: 'invitations#verify_invitation', via: 'post'
   match '/camps/publish',     to: 'camps#publish',                 via: 'post'
+  match '/camps/unpublish',   to: 'camps#unpublish',               via: 'post'
   
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

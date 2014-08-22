@@ -36,17 +36,21 @@ class CampsController < ApplicationController
   def publish
     @camp = Camp.find(params[:id])
     @camp.update(publish_date: Date.today)
-    flash[:success] = "Camp information has been published."
+    flash[:success] = "Camp information has been Published."
     
     #this should point a list of all camps, sorted by most recently published
-    #render 'new'
     redirect_to @camp
 
   end
 
   def unpublish
-#    @camp = Camp.find(params[:id])
-#    @camp.update(publish_date: nil)
+    @camp = Camp.find(params[:id])
+    @camp.update(publish_date: nil)
+    flash[:success] = "Camp information has been Un-Published."
+
+    #this should point a list of all camps, sorted by most recently published
+    redirect_to @camp
+
   end
 
     private

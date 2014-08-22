@@ -94,12 +94,25 @@ describe "Admin sign in" do
 
           end
 
-          describe "publish Camp" do
+          describe "Publish Camp" do
             
             before { click_link "Publish" }
 
             it { should have_selector('div.alert.alert-success') }
+
+            it { should have_content(Date.today)}
+
 # => check that the database attribute is not nil
+            describe "then Un-Publish Camp" do
+
+              before { click_link "Un-Publish" }
+
+              it { should have_selector('div.alert.alert-success') }
+
+              it { should_not have_content(Date.today)}              
+# => check that the database attribute is nil
+
+            end
 
           end
         

@@ -11,5 +11,9 @@
 
 <div>
 	<%= link_to "Edit",		edit_camp_path(@camp), class: "btn btn-large btn-primary" %>
-	<%= link_to "Publish", { action: "publish", id: @camp.id }, class: "btn btn-large btn-primary", :method => :post %>
+	<% if @camp.publish_date.nil? %>
+		<%= link_to "Publish", { action: "publish", id: @camp.id }, class: "btn btn-large btn-primary", :method => :post %>
+	<% else %>
+		<%= link_to "Un-Publish", { action: "unpublish", id: @camp.id }, class: "btn btn-large btn-primary", :method => :post %>
+	<% end %>
 </div>
