@@ -4,10 +4,10 @@
 
 <div class="row">
   	<div class="span6 offset3">
-    	<%= form_for(@camp) do |f| %>
-			  <%= render 'fields', f: f %>
+    	<%= form_for(@camp) do |camp| %>
+			<%= render 'camps_form', camp: camp %>
 
-      	<%= f.submit "Save", class: "btn btn-large btn-primary" %>
+      		<%= camp.submit "Save", class: "btn btn-large btn-primary" %>
     	<% end %>
     </div>
 </div>

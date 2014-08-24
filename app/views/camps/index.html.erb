@@ -1,0 +1,32 @@
+<% provide(:title, "All Camps") %>
+
+<!-- table to show associated dates, times & rinks -->
+<table class="table table-bordered">
+	<tr>
+		<th>Camp Name:</th>
+		<th>Description:</th>
+		<th>Start Date:</th>
+		<th>End Date:</th>
+		<!--<th>Rinks:</th>-->
+	</tr>
+	<% @camps.each do |camp| %>
+		<tr>
+			<td><%= camp.name %></td>
+			<td><%= camp.description %></td>
+			<td><%#= camp.start_date %></td>
+			<td><%#= camp.end_date %></td>
+			<!--<td><%#= camp.rink %></td>-->
+			<td><%= link_to 'View', camp_path(camp),  class: "btn btn-large btn-primary" %></td>
+			<td><%= link_to 'Edit', edit_camp_path(camp),  class: "btn btn-large btn-primary" %></td>
+			<td>
+				<% if camp.publish_date.nil? %>
+					<%= link_to 'Publish', { action: "publish", id: camp.id }, class: "btn btn-large btn-primary", :method => :post %>
+				<% else %>
+					<%= link_to 'Un-Publish', { action: "unpublish", id: camp.id }, class: "btn btn-large btn-primary", :method => :post %>
+				<% end %>
+			</td>
+			<td><%= link_to 'Delete', camp_path(camp), class: "btn btn-large btn-primary", :method => :delete %></td>
+		</tr>
+	<% end %>
+</table>
+<%= link_to 'Add Camp', new_camp_path,  class: "btn btn-large btn-primary" %>

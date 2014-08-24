@@ -1,0 +1,13 @@
+<%= render 'shared/error_messages', object: camp.object %>
+      		
+<%= camp.label :name, "Name:" %>
+<%= camp.text_field :name %>
+
+<%= camp.label :description, "Description:" %>
+<%= camp.text_field :description %>
+
+<%= camp.label :age_group, 'Select Age Group:' %>
+<%= camp.select :age_group, options_from_collection_for_select(AgeGroup.all, :id, :name) %>
+
+<%#= camp.label :skill, 'Select Skills (multiple):' %>
+<%#= camp.select :publish_date, options_from_collection_for_select(Skill.all, :id, :name), :multiple => true %>

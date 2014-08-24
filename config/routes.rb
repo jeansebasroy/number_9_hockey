@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :camps
+  resources :camps do
+    resources :date_time_locations
+  end
   resources :invitations
   
   root 'static_pages#home'

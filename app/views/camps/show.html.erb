@@ -1,4 +1,5 @@
-<% provide(:title) %>
+<% provide(:title, "Your Camp") %>
+
 <p>Camp Name: <%= @camp.name %></p>
 <p>Description: <%= @camp.description %></p>
 <p>Date Published: 
@@ -17,3 +18,26 @@
 		<%= link_to "Un-Publish", { action: "unpublish", id: @camp.id }, class: "btn btn-large btn-primary", :method => :post %>
 	<% end %>
 </div>
+<br>
+<!-- table to show associated dates, times & rinks -->
+<table class="table table-bordered">
+	<tr>
+		<th>Date:</th>
+		<th>Time Start:</th>
+		<th>Time End:</th>
+		<th>Rink:</th>
+		<!--<th>Sheet:</th>-->
+	</tr>
+	<% @dates.each do |date| %>
+		<tr>
+			<td><%= date.date %></td>
+			<td><%= date.start_time %></td>
+			<td><%= date.end_time %></td>
+			<td><%= date.rink_id %></td>
+			<!--<td><%#= date.sheet %></td>-->
+			<td><%= link_to 'Edit', edit_camp_date_time_location_path(@camp, date) %></td>
+			<td><%= link_to 'Delete', camp_date_time_location_path(@camp, date), :method => :delete %></td>
+		</tr>
+	<% end %>
+</table>
+<%= link_to 'Add Date', new_camp_date_time_location_path(@camp) %>
