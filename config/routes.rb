@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :date_time_locations
   end
   resources :invitations
+  resources :players
   
   root 'static_pages#home'
   

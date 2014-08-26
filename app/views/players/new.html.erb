@@ -1,0 +1,13 @@
+<% provide(:title, "New Player") %>
+<h1>New Player</h1>
+<p>Enter the Player's details below:</p>
+
+<div class="row">
+  	<div class="span6 offset3">
+    	<%= form_for(@player) do |player| %>
+			<%= render 'players_form', player: player %>
+
+      		<%= player.submit "Save", class: "btn btn-large btn-primary" %>
+    	<% end %>
+    </div>
+</div>
