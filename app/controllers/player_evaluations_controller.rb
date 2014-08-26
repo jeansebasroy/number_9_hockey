@@ -43,7 +43,7 @@ class PlayerEvaluationsController < ApplicationController
 
     private
       def player_evaluation_params
-        params.require(:player_evaluation).permit(:player_id, :evaluation_typ, :league, :team, :date)
+        params.require(:player_evaluation).permit(:player_id, :evaluation_type, :league, :team, :date)
       end
 
 end

@@ -18,9 +18,18 @@ class PlayersController < ApplicationController
 
   def create
   	@player = Player.new(player_params)
-  	if @player.save
-  	  flash[:success] = "Player information has been saved."
-  	  redirect_to @player
+
+  	if @player.save 
+  		@player_evaluation = PlayerEvaluation.create(player_evaluation_params)
+  		@player_evaluation.player_id = @player.id
+  		
+  		if @player_evaluation.save
+  	  		flash[:success] = "Player & Evaluation have been saved."
+  	  		redirect_to @player
+
+  	  	else
+  	  		render 'new'
+  	  	end
   	else
   	  render 'new'
   	end
@@ -65,5 +74,8 @@ class PlayersController < ApplicationController
       def player_params
         params.require(:player).permit(:first_name, :last_name, :date_of_birth, :shoots)
       end
-
+      
+      def player_evaluation_params
+        params.require(:player_evaluation).permit(:player_id, :evaluation_type, :league, :team, :date)
+      end
 end

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :date_time_locations
   end
   resources :players do
-    resource :player_evaluations
+    resources :player_evaluations
   end
   resources :invitations
 

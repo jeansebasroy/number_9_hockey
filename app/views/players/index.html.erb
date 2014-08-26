@@ -19,7 +19,7 @@
 			<td><%= player.date_of_birth %></td>
 			<td><%= player.shoots %></td>
 			<!--<td><%#= camp.rink %></td>-->
-			<td><%= link_to 'Evaluate', new_player_player_evaluations_path(player),  class: "btn btn-large btn-primary" %></td>
+			<td><%= link_to 'Evaluate', new_player_player_evaluation_path(player),  class: "btn btn-large btn-primary" %></td>
 			<td><%= link_to 'View', player_path(player),  class: "btn btn-large btn-primary" %></td>
 			<td><%= link_to 'Edit', edit_player_path(player),  class: "btn btn-large btn-primary" %></td>
 			<td><%= link_to 'Delete', player_path(player), class: "btn btn-large btn-primary", :method => :delete %></td>

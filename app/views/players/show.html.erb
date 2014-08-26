@@ -4,8 +4,13 @@
 <p>Date of Birth: <%= @player.date_of_birth %></p>
 <p>Shoots: <%= @player.shoots %></p>
 
-<p>Linked user: 
-	User to which this player is linked.
+<p>Linked User: 
+	<% if @user.nil? %>
+		No linked User.
+	<% else %>
+		<%= link_to 'User', '#' %>
+	<% end %>
+
 </p>	
 <div>
 	<%= link_to "Edit",		edit_player_path(@player), class: "btn btn-large btn-primary" %>
@@ -32,12 +37,13 @@
 			<td><%= evaluation.league %></td>
 			<td><%= evaluation.team %></td>
 			<!--<td><%#= evaluation.something_else %></td>-->
-			<td><%= link_to 'Edit', edit_player_player_evaluations_path(@player, evaluation) %></td>
-			<td><%= link_to 'Delete', player_player_evaluations_path(@player, evaluation), :method => :delete %></td>
+			<td><%= link_to 'Edit', edit_player_player_evaluation_path(@player, evaluation) %></td>
+			<td><%= link_to 'Delete', player_player_evaluation_path(@player, evaluation), :method => :delete %></td>
 		</tr>
 	<% end %>
 </table>
-<%= link_to 'Add Evaluation', new_player_player_evaluations_path(@player) %>
+
+<%= link_to 'Add Evaluation', new_player_player_evaluation_path(@player) %>
 
 <br>
 <br>
