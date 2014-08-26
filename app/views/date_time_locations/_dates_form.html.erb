@@ -3,11 +3,11 @@
 <%= date.label :date, 'Date:'  %>
 <%= date.date_select :date %>
 
-<%= date.label :start_time, 'Start Time (hh:mm, Military Time):' %>
-<%= date.time_field :start_time %>	
+<%= date.label :start_time, 'Start Time:' %>
+<%= date.time_select :start_time %>	
 
-<%= date.label :end_time, 'End Time (hh:mm, Military Time):' %>
-<%= date.time_field :end_time %>
+<%= date.label :end_time, 'End Time:' %>
+<%= date.time_select :end_time %>
 
 <%= date.label :rink_id, 'Select Rink:' %>
 <%= date.select :rink_id, options_from_collection_for_select(Rink.all, :id, :name) %>

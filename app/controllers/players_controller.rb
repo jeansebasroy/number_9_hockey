@@ -3,6 +3,7 @@ class PlayersController < ApplicationController
 
   def new
   	@player = Player.new
+  	@player_evaluation = @player.player_evaluations.build
   end
 
 

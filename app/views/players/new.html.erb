@@ -7,6 +7,11 @@
     	<%= form_for(@player) do |player| %>
 			<%= render 'players_form', player: player %>
 
+			<%= fields_for(@player_evaluation) do |player_evaluation| %>
+				<%= render 'player_evaluations_form', player_evaluation: player_evaluation %>
+
+			<% end %>
+
       		<%= player.submit "Save", class: "btn btn-large btn-primary" %>
     	<% end %>
     </div>
