@@ -1,0 +1,18 @@
+<% provide(:title, "Evaluate Player") %>
+<h1>Create an Evaluation for <%= @player.last_name %>, <%= @player.first_name %></h1>
+
+<p>Player Name: <%= @player.last_name %>, <%= @player.first_name %></p>
+<p>Date of Birth: <%= @player.date_of_birth %></p>
+<p>Shoots: <%= @player.shoots %></p>
+
+<p>Enter the Date's information for the Camp:</p>
+
+<div class="row">
+  	<div class="span6 offset3">
+    	<%= form_for [@player, @player_evaluation] do |player_evaluation| %>
+			<%= render 'player_evaluations_form', player_evaluation: player_evaluation %>
+
+      		<%= player_evaluation.submit "Save", class: "btn btn-large btn-primary" %>
+    	<% end %>
+    </div>
+</div>

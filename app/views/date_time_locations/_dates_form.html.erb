@@ -1,7 +1,7 @@
 <%= render 'shared/error_messages', object: date.object %>
 
-<%= date.label :date, 'Date (yyyy-mm-dd):'  %>
-<%= date.date_field :date %>
+<%= date.label :date, 'Date:'  %>
+<%= date.date_select :date %>
 
 <%= date.label :start_time, 'Start Time (hh:mm, Military Time):' %>
 <%= date.time_field :start_time %>	

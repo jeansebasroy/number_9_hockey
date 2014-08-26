@@ -1,0 +1,29 @@
+<% provide(:title, "All Players") %>
+
+<!-- table to show associated dates, times & rinks -->
+<table class="table table-bordered">
+	<tr>
+		<th>Last Name:</th>
+		<th>First Name:</th>
+		<th>Date of Birth:</th>
+		<th>Shoots:</th>
+		<!--<th>Last Evaluation:</th>-->
+		<!-- need to implement this-->
+	</tr>
+	<% @players.each do |player| %>
+		<!-- sort by last name -->
+		<!-- provide ability to sort by DOB -->
+		<tr>
+			<td><%= player.last_name %></td>
+			<td><%= player.first_name %></td>
+			<td><%= player.date_of_birth %></td>
+			<td><%= player.shoots %></td>
+			<!--<td><%#= camp.rink %></td>-->
+			<td><%= link_to 'Evaluate', new_player_player_evaluations_path(player),  class: "btn btn-large btn-primary" %></td>
+			<td><%= link_to 'View', player_path(player),  class: "btn btn-large btn-primary" %></td>
+			<td><%= link_to 'Edit', edit_player_path(player),  class: "btn btn-large btn-primary" %></td>
+			<td><%= link_to 'Delete', player_path(player), class: "btn btn-large btn-primary", :method => :delete %></td>
+		</tr>
+	<% end %>
+</table>
+<%= link_to 'Add Player', new_player_path,  class: "btn btn-large btn-primary" %>

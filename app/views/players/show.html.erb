@@ -1,25 +1,48 @@
-<% provide(:title, "Your Camp") %>
+<% provide(:title, @player.last_name) %>
 
-<p>Camp Name: <%= @camp.name %></p>
-<p>Description: <%= @camp.description %></p>
-<p>Date Published: 
-	<% if @camp.publish_date.nil? %>
-		Under Development
-	<%else%>
-		<%= @camp.publish_date %>
-	<%end%>
-</p>
+<p>Player Name: <%= @player.first_name %> <%= @player.last_name %></p>
+<p>Date of Birth: <%= @player.date_of_birth %></p>
+<p>Shoots: <%= @player.shoots %></p>
 
+<p>Linked user: 
+	User to which this player is linked.
+</p>	
 <div>
-	<%= link_to "Edit",		edit_camp_path(@camp), class: "btn btn-large btn-primary" %>
-	<% if @camp.publish_date.nil? %>
-		<%= link_to "Publish", { action: "publish", id: @camp.id }, class: "btn btn-large btn-primary", :method => :post %>
-	<% else %>
-		<%= link_to "Un-Publish", { action: "unpublish", id: @camp.id }, class: "btn btn-large btn-primary", :method => :post %>
-	<% end %>
+	<%= link_to "Edit",		edit_player_path(@player), class: "btn btn-large btn-primary" %>
+	<%= link_to "Merge",	'#' , class: "btn btn-large btn-primary" %>
 </div>
+
 <br>
+<br>
+<p>Evaluations of this Player:</p>
 <!-- table to show associated dates, times & rinks -->
+<table class="table table-bordered">
+	<tr>
+		<th>Date:</th>
+		<th>Evaluation Type:</th>
+		<th>League:</th>
+		<th>Team:</th>
+		<!--<th>what else?</th>-->
+	</tr>
+	<!-- get to sort by dates-->
+	<% @player_evaluations.each do |evaluation| %>
+		<tr>
+			<td><%= evaluation.date %></td>
+			<td><%= evaluation.evaluation_type %></td>
+			<td><%= evaluation.league %></td>
+			<td><%= evaluation.team %></td>
+			<!--<td><%#= evaluation.something_else %></td>-->
+			<td><%= link_to 'Edit', edit_player_player_evaluations_path(@player, evaluation) %></td>
+			<td><%= link_to 'Delete', player_player_evaluations_path(@player, evaluation), :method => :delete %></td>
+		</tr>
+	<% end %>
+</table>
+<%= link_to 'Add Evaluation', new_player_player_evaluations_path(@player) %>
+
+<br>
+<br>
+<br>
+<p>Camps for which this Player is elegible:</p>
 <table class="table table-bordered">
 	<tr>
 		<th>Date:</th>
@@ -28,16 +51,20 @@
 		<th>Rink:</th>
 		<!--<th>Sheet:</th>-->
 	</tr>
-	<% @dates.each do |date| %>
+	<%# @dates.each do |date| %>
 		<tr>
-			<td><%= date.date %></td>
-			<td><%= date.start_time %></td>
-			<td><%= date.end_time %></td>
-			<td><%= date.rink_id %></td>
+			<td><%#= date.date %></td>
+			<td><%#= date.start_time %></td>
+			<td><%#= date.end_time %></td>
+			<td><%#= date.rink_id %></td>
 			<!--<td><%#= date.sheet %></td>-->
-			<td><%= link_to 'Edit', edit_camp_date_time_location_path(@camp, date) %></td>
-			<td><%= link_to 'Delete', camp_date_time_location_path(@camp, date), :method => :delete %></td>
+			<td>	
+				<%# if @camp.publish_date.nil? %>
+					<%#= link_to "Invite", { action: "invite", id: @player.id }, class: "btn btn-large btn-primary", :method => :post %>
+				<%# else %>
+					<%#= link_to "Un-Invite", { action: "uninvite", id: @player.id }, class: "btn btn-large btn-primary", :method => :post %>
+				<%# end %>
+			</td>
 		</tr>
-	<% end %>
+	<%# end %>
 </table>
-<%= link_to 'Add Date', new_camp_date_time_location_path(@camp) %>

@@ -6,11 +6,11 @@
 <%= player.label :last_name, "First Name:" %>
 <%= player.text_field :last_name %>
 
-<%= player.label :date_of_birth, "Date of Birth (yyyy-mm-dd):" %>
-<%= player.date_field :date_of_birth %>
+<%= player.label :date_of_birth, "Date of Birth:" %>
+<%= player.date_select :date_of_birth %>
 
 <%= player.label :shoots, 'Shoots:' %>
-<%= player.select :shoots, options_for_select([['Left','left'], ['Right', 'right']]) %>
+<%= player.select :shoots, options_for_select([['', ''], ['Left','Left'], ['Right', 'Right']]) %>
 
 <%#= camp.label :skill, 'Select Skills (multiple):' %>
 <%#= camp.select :publish_date, options_from_collection_for_select(Skill.all, :id, :name), :multiple => true %>

@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   resources :camps do
     resources :date_time_locations
   end
+  resources :players do
+    resource :player_evaluations
+  end
   resources :invitations
-  resources :players
+
   
   root 'static_pages#home'
   

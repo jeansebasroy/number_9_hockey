@@ -8,7 +8,7 @@ class PlayersController < ApplicationController
 
   def show
 	@player = Player.find(params[:id])
-   	#@dates = DateTimeLocation.where(camp_id: @camp.id)
+   	@player_evaluations = PlayerEvaluation.where(player_id: @player.id)
   end
 
   def index
