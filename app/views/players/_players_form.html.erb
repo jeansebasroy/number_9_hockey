@@ -10,7 +10,7 @@
 <%= player.date_select :date_of_birth %>
 
 <%= player.label :shoots, 'Shoots:' %>
-<%= player.select :shoots, options_for_select([['', ''], ['Left','Left'], ['Right', 'Right']]) %>
+<%= player.select :shoots, options_for_select([['Select One', ''], ['Left','Left'], ['Right', 'Right']]) %>
 
 <%#= camp.label :skill, 'Select Skills (multiple):' %>
 <%#= camp.select :publish_date, options_from_collection_for_select(Skill.all, :id, :name), :multiple => true %>
