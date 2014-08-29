@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140826163308) do
+ActiveRecord::Schema.define(version: 20140829153301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20140826163308) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "publish_date"
-    t.integer  "age_group"
+    t.integer  "age_group_id"
   end
 
   create_table "date_time_locations", force: true do |t|
@@ -72,6 +72,17 @@ ActiveRecord::Schema.define(version: 20140826163308) do
     t.datetime "updated_at"
   end
 
+  create_table "player_evaluation_to_skills", force: true do |t|
+    t.integer  "player_evaluation_id"
+    t.integer  "player_skill_id"
+    t.integer  "rating"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "player_evaluation_to_skills", ["player_evaluation_id"], name: "index_player_evaluation_to_skills_on_player_evaluation_id", using: :btree
+  add_index "player_evaluation_to_skills", ["player_skill_id"], name: "index_player_evaluation_to_skills_on_player_skill_id", using: :btree
+
   create_table "player_evaluations", force: true do |t|
     t.integer  "player_id"
     t.string   "evaluation_type"
@@ -80,6 +91,17 @@ ActiveRecord::Schema.define(version: 20140826163308) do
     t.date     "date"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "player_skills", force: true do |t|
+    t.string   "name"
+    t.text     "tool_tip"
+    t.string   "section"
+    t.integer  "order"
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "rating"
   end
 
   create_table "players", force: true do |t|
@@ -105,6 +127,10 @@ ActiveRecord::Schema.define(version: 20140826163308) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "tool_tip"
+    t.string   "skill_type"
+    t.integer  "order"
+    t.boolean  "active"
   end
 
   create_table "users", force: true do |t|

@@ -16,7 +16,7 @@ describe "Admin sign in" do
     click_button "Sign In"
   end
 
-  describe "with Admin navigation" do
+  describe "has Admin navigation" do
   
     it { should have_content("My Home") }
    	it { should have_content("Camps") }
@@ -30,13 +30,13 @@ describe "Admin sign in" do
 
   end
 
-  describe "with My Home page" do
+  describe "on My Home page" do
    		
     it { should have_title("#{base_title}") }
 
   end
 
-  describe "with New Camps page" do
+  describe "on New Camps page" do
    	before { click_link "New Camp" }
 
     it { should have_title('Create Camp') }
@@ -50,6 +50,9 @@ describe "Admin sign in" do
         it "should not create a new camp" do
           expect { click_button save }.not_to change(Camp, :count)
         end
+
+# =>  should have error message
+
       end
 
       describe "with valid information" do
@@ -57,6 +60,7 @@ describe "Admin sign in" do
         before do
           fill_in "Name",         with: "Test Camp"
           fill_in "Description",  with: "This camp is for testing."
+
         end
 
         it "should create a new camp" do
