@@ -11,7 +11,7 @@
 </p>
 
 <div>
-	<%= link_to "Edit",		edit_camp_path(@camp), class: "btn btn-large btn-primary" %>
+	<%= link_to "Edit Camp",		edit_camp_path(@camp), class: "btn btn-large btn-primary" %>
 	<% if @camp.publish_date.nil? %>
 		<%= link_to "Publish", { action: "publish", id: @camp.id }, class: "btn btn-large btn-primary", :method => :post %>
 	<% else %>

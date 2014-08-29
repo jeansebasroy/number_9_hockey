@@ -42,7 +42,7 @@ class PlayersController < ApplicationController
 
   def update
     @player = Player.find(params[:id])
-    if @camp.update_attributes(camp_params)
+    if @player.update_attributes(player_params)
       flash[:success] = "Player information updated."
       redirect_to @player
     else

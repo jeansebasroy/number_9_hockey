@@ -81,7 +81,7 @@ describe "Admin sign in" do
 
           describe "edit Camp" do
 
-            before { click_link "Edit" }
+            before { click_link "Edit Camp" }
 
             it { should have_content("Update") }
 
@@ -104,6 +104,8 @@ describe "Admin sign in" do
             end
 
           end
+
+# => test adding date_time_locations to camp
 
           describe "Publish Camp" do
             
@@ -141,8 +143,8 @@ describe "Admin sign in" do
 
   end
 
-
   describe "create new Player" do
+
     before { click_link "New Player" }
 
     it { should have_title('New Player') }
@@ -163,6 +165,8 @@ describe "Admin sign in" do
         it { should have_selector('div.alert.alert-error') }
 
       end
+
+# => test for edge case where player information is valid, but player_evaluation information is not
 
       describe "with valid information" do
         before do
@@ -196,8 +200,33 @@ describe "Admin sign in" do
         describe "show Player page" do
           before { click_button save }
 
+          it { should have_content("Maurice Richard") }
           it { should have_selector('div.alert.alert-success') }
 
+          describe "edit Player" do
+
+            before { click_link "Edit Player" }
+
+            it { should have_content("Update") }
+
+            before do
+              fill_in "First Name:", with: "Henri"
+              select 'Left',         from: 'player[shoots]'
+            end
+
+            it "should not create a new Player" do
+              expect { click_button "Update" }.not_to change(Player, :count)
+            end
+            
+            describe "Update" do
+              
+              before { click_button "Update" }
+          
+              it { should have_content("Henri Richard") }
+              it { should_not have_content("Maurice Richard") }  
+
+            end
+          end
         end
       end
     end
@@ -215,14 +244,69 @@ describe "Admin sign in" do
     
   end
 
+  describe "evaluate exisiting Player"
+    
+    let!(:player) { FactoryGirl.create(:player) }  
+
+    before { click_link "All Players" }
+    before { click_link "Evaluate" }
+    
+    describe "Save" do
+
+      let(:save) { "Save" }
+
+      describe "with invalid information" do
+                
+        it "should not create a new Player Evaluation" do
+          expect { click_button save }.not_to change(PlayerEvaluation, :count)
+        end
+
+        before { click_button save }
+
+        it { should have_selector('div.alert.alert-error') }
+
+      end
+
+      describe "with valid information" do
+        before do   
+          select 'Practice',      from: 'player_evaluation[evaluation_type]'
+          
+          fill_in "League:",      with: "NHL"
+          fill_in "Team:",        with: "Canadiens"
+          
+          select '2014',          from: 'player_evaluation[date(1i)]'
+          select 'August',        from: 'player_evaluation[date(2i)]'
+          select '8',             from: 'player_evaluation[date(3i)]'
+          
+        end
+
+        it "should not create a new Player" do
+          expect { click_button save }.not_to change(Player, :count)
+        end
+
+        it "should create a new Player Evaluation" do
+          expect { click_button save }.to change(PlayerEvaluation, :count).by(1)
+        end
+
+        before { click_button save }
+
+        it { should have_content("Maurice Richard") }
+        it { should have_selector('div.alert.alert-success') }
+
+      end
+    end
+  end
+
   describe "create new Coach" do
 
     	
   end
 
   describe "view All Coaches" do
+
+# =>     let!(:coach) { FactoryGirl.create(:coach) }  
       
-# =>     before { click_link "All Players" }
+# =>     before { click_link "All Coaches" }
 
 # =>     it { should have_link('Evaluate') }
 # =>     it { should have_link('View') }
@@ -237,41 +321,3 @@ describe "Admin sign in" do
 
   end
 end
-
-# => For Saving tests
-#        gives ability to save
-# => creates new camp
-# => takes user to "show" page
-
-#        describe "after Saving" do
-
-#          describe "Edit" do
-# =>         before { click_button 'Edit' }
-
-
-# => allows admin to edit the camp's details
-
-# =>         before { click_button 'Save' }
-
-#          end
-
-#          describe "Publish" do
-# =>         before { click_button 'Publish' }
-
-# => allows admin to "Pulish" camp details so users can see
-
-#          end
-
-
-# => For Reference
-#       it { should have_link('All Camps',    href: user_path(user)) }
-#       it { should have_link('Search Camps', href: user_path(user)) }
-#       it { should have_link('New Camp',   href: user_path(user)) }
-
-#   it { should have_link('All Players',  href: user_path(user)) }
-#       it { should have_link('Search Players', href: user_path(user)) }
-#       it { should have_link('New Player',   href: signout_path) }
-      
-#       it { should have_link('All Coaches',  href: user_path(user)) }
-#       it { should have_link('Search Coaches', href: user_path(user)) }
-#       it { should have_link('New Coach',    href: signout_path) }
