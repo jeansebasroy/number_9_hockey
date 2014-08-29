@@ -13,7 +13,7 @@ describe Camp do
 	it { should respond_to(:name) }
  	it { should respond_to(:description) }
  	#it { should_respond_to(:publish_date) }
- 	#it { should_respond_to(:age_group_id) }
+ 	#it { should_respond_to(:age_group) }
  	
   it { should be_valid }
   	

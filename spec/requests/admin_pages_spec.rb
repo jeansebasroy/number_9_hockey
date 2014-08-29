@@ -64,10 +64,9 @@ describe "Admin sign in" do
       describe "with valid information" do
         
         before do
-          fill_in "Name",               with: "Test Camp"
-          fill_in "Description",        with: "This camp is for testing."
-          select 'Mite', from: "camp[age_group]"
-          #fill_in "Select Age Group:",  with: age_group.name
+          fill_in "Name",         with: "Test Camp"
+          fill_in "Description",  with: "This camp is for testing."
+          select 'Mite',          from: "camp[age_group]"
         end
 
         it "should create a new camp" do
@@ -132,8 +131,11 @@ describe "Admin sign in" do
   end
 
   describe "view All Camps" do
+    let!(:camp) { FactoryGirl.create(:camp) }  
+
     before { click_link "All Camps" }
 
+    it { should have_content('Camp Name:')}
     it { should have_link('View') }
     it { should have_link('Edit') }
 
@@ -164,28 +166,33 @@ describe "Admin sign in" do
 
       describe "with valid information" do
         before do
-          fill_in "First Name:",          with: "First"
-          fill_in "Last Name:",           with: "Last"
-          select '1979', from: 'date_of_birth_1i'
-          select 'April', from: 'date_of_birth_2i'
-          select '12', from: 'date_of_birth_3i'
-          #fill_in "Date of Birth:",       with: "1979-04-12"
-          select 'Right', from: 'shoots'
-          #fill_in "Shoots:",              with: "Right"
-          select 'Practice', from: 'type_of_evaluation'
-          #fill_in "Type of Evaluation:",  with: "Practice"
-          fill_in "League:",              with: "NHL"
-          fill_in "Team:",                with: "Blackhawks"
-          select '2014', from: 'date_of_evaluation_1i'
-          select 'August', from: 'date_of_evaluation_2i'
-          select '8', from: 'date_of_evaluation_3i'
-          #fill_in "Date of Evaluation:",  with: "2014-08-08"
+          fill_in "First Name:",  with: "Maurice"
+          fill_in "Last Name:",   with: "Richard"
+
+          select '2009',          from: 'player[date_of_birth(1i)]'
+          select 'April',         from: 'player[date_of_birth(2i)]'
+          select '12',            from: 'player[date_of_birth(3i)]'
+          select 'Right',         from: 'player[shoots]'
+          
+          select 'Practice',      from: 'player_evaluation[evaluation_type]'
+          
+          fill_in "League:",      with: "NHL"
+          fill_in "Team:",        with: "Canadiens"
+          
+          select '2014',          from: 'player_evaluation[date(1i)]'
+          select 'August',        from: 'player_evaluation[date(2i)]'
+          select '8',             from: 'player_evaluation[date(3i)]'
+          
         end
 
-        it "should create a new camp" do
+        it "should create a new Player" do
           expect { click_button save }.to change(Player, :count).by(1)
         end
       
+        it "should create a new Player Evaluation" do
+          expect { click_button save }.to change(PlayerEvaluation, :count).by(1)
+        end
+
         describe "show Player page" do
           before { click_button save }
 
@@ -197,6 +204,9 @@ describe "Admin sign in" do
   end
 
   describe "view All Players" do
+
+    let!(:player) { FactoryGirl.create(:player) }  
+
     before { click_link "All Players" }
 
     it { should have_link('Evaluate') }

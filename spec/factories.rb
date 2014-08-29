@@ -25,4 +25,19 @@ FactoryGirl.define do
 		age_group		"Mite"
 	end
 
+	factory :player do
+		first_name 		"Maurice"
+		last_name		"Richard"
+		date_of_birth	"1921-08-04"
+		shoots			"Right"
+	end
+
+
+	factory :coach do
+		name 			"Test Camp"
+		description		"This is a testing camp."
+		publish_date	"2014-08-08"
+		age_group		"Mite"
+	end
+
 end

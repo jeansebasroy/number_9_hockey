@@ -28,9 +28,10 @@ class PlayersController < ApplicationController
   	  		redirect_to @player
 
   	  	else
-  	  		render 'new'
+          render 'new'
   	  	end
   	else
+      @player_evaluation = @player.player_evaluations.build
   	  render 'new'
   	end
   end
