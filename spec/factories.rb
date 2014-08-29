@@ -13,6 +13,7 @@ FactoryGirl.define do
 
 	factory :age_group do
 		name 		"Mite"
+		description	"8 or Under"
 		age_start	0
 		age_end		8
 	end
@@ -21,7 +22,7 @@ FactoryGirl.define do
 		name 			"Test Camp"
 		description		"This is a testing camp."
 		publish_date	"2014-08-08"
-		age_group_id	1
+		age_group		"Mite"
 	end
 
 end

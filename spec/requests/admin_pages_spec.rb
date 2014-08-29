@@ -36,31 +36,38 @@ describe "Admin sign in" do
 
   end
 
-  describe "on New Camps page" do
-   	before { click_link "New Camp" }
+  describe "create new Camp" do
+
+    let!(:age_group) { FactoryGirl.create(:age_group) }
+
+    before { click_link "New Camp" }
 
     it { should have_title('Create Camp') }
     it { should have_content('Create Camp') }
 
-    let(:save) { "Save" }
+    describe "Save" do
 
-    describe "Saving" do
+      let(:save) { "Save" }
+
       describe "with invalid information" do
           
         it "should not create a new camp" do
           expect { click_button save }.not_to change(Camp, :count)
         end
 
-# =>  should have error message
+        before { click_button save }
+
+        it { should have_selector('div.alert.alert-error') }
 
       end
 
       describe "with valid information" do
-
+        
         before do
-          fill_in "Name",         with: "Test Camp"
-          fill_in "Description",  with: "This camp is for testing."
-
+          fill_in "Name",               with: "Test Camp"
+          fill_in "Description",        with: "This camp is for testing."
+          select 'Mite', from: "camp[age_group]"
+          #fill_in "Select Age Group:",  with: age_group.name
         end
 
         it "should create a new camp" do
@@ -71,6 +78,7 @@ describe "Admin sign in" do
           before { click_button save }
 
           it { should have_content("Test Camp") }
+          it { should have_selector('div.alert.alert-success') }
 
           describe "edit Camp" do
 
@@ -87,7 +95,7 @@ describe "Admin sign in" do
               expect { click_button "Update" }.not_to change(Camp, :count)
             end
             
-            describe "save" do
+            describe "Update" do
               
               before { click_button "Update" }
           
@@ -117,20 +125,99 @@ describe "Admin sign in" do
 # => check that the database attribute is nil
 
             end
-
           end
-        
         end
       end
     end
   end
 
-  describe "with Players page" do
+  describe "view All Camps" do
+    before { click_link "All Camps" }
+
+    it { should have_link('View') }
+    it { should have_link('Edit') }
+
+  end
+
+
+  describe "create new Player" do
+    before { click_link "New Player" }
+
+    it { should have_title('New Player') }
+    it { should have_content('New Player') }
+
+    describe "Save" do
+
+      let(:save) { "Save" }
+
+      describe "with invalid information" do
+                
+        it "should not create a new Player" do
+          expect { click_button save }.not_to change(Player, :count)
+        end
+
+        before { click_button save }
+
+        it { should have_selector('div.alert.alert-error') }
+
+      end
+
+      describe "with valid information" do
+        before do
+          fill_in "First Name:",          with: "First"
+          fill_in "Last Name:",           with: "Last"
+          select '1979', from: 'date_of_birth_1i'
+          select 'April', from: 'date_of_birth_2i'
+          select '12', from: 'date_of_birth_3i'
+          #fill_in "Date of Birth:",       with: "1979-04-12"
+          select 'Right', from: 'shoots'
+          #fill_in "Shoots:",              with: "Right"
+          select 'Practice', from: 'type_of_evaluation'
+          #fill_in "Type of Evaluation:",  with: "Practice"
+          fill_in "League:",              with: "NHL"
+          fill_in "Team:",                with: "Blackhawks"
+          select '2014', from: 'date_of_evaluation_1i'
+          select 'August', from: 'date_of_evaluation_2i'
+          select '8', from: 'date_of_evaluation_3i'
+          #fill_in "Date of Evaluation:",  with: "2014-08-08"
+        end
+
+        it "should create a new camp" do
+          expect { click_button save }.to change(Player, :count).by(1)
+        end
+      
+        describe "show Player page" do
+          before { click_button save }
+
+          it { should have_selector('div.alert.alert-success') }
+
+        end
+      end
+    end
+  end
+
+  describe "view All Players" do
+    before { click_link "All Players" }
+
+    it { should have_link('Evaluate') }
+    it { should have_link('View') }
+    it { should have_link('Edit') }
+    
+  end
+
+  describe "create new Coach" do
+
     	
   end
 
-  describe "with Coaches page" do
-    	
+  describe "view All Coaches" do
+      
+# =>     before { click_link "All Players" }
+
+# =>     it { should have_link('Evaluate') }
+# =>     it { should have_link('View') }
+# =>     it { should have_link('Edit') }      
+
   end
 
   describe "admin sign out" do

@@ -6,7 +6,7 @@ class Camp < ActiveRecord::Base
 	
 	#VALID_DATE_REGEX = /\A[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}\z/i
 	#validates :publish_date, format: { with: VALID_DATE_REGEX }
-	validates :age_group_id, numericality: { only_integer: true }
+	validates :age_group, presence:true, numericality: { only_integer: true }
 
 
 end

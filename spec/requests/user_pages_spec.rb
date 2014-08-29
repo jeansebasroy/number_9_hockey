@@ -7,13 +7,13 @@ describe "User pages" do
 
 	subject { page }
 
-  	describe "signup page" do
-    	before { visit signup_path }
+  describe "signup page" do
+   	before { visit signup_path }
 
-    	it { should have_content('Sign Up') }
-      it { should have_title("#{base_title} | Sign Up") }
-    	#it { should have_title(full_title('Sign Up')) }
-  	end
+   	it { should have_content('Sign Up') }
+    it { should have_title("#{base_title} | Sign Up") }
+   	#it { should have_title(full_title('Sign Up')) }
+  end
 
 	describe "sign up" do
 

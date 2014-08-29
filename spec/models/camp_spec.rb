@@ -5,7 +5,7 @@ describe Camp do
 	before { @camp = Camp.new(name: "Test Camp", 
 								description: "This is a camp built for testing",
 								publish_date: Date.today, 
-								age_group_id: 1) }
+								age_group: "Mite") }
 	#let(:camp) { FactoryGirl.create(:camp) }
 
 	subject { @camp }
@@ -32,14 +32,14 @@ describe Camp do
   #	it { should_not be_valid }
   #end
   
-  describe "when age_group_id is not a number" do
-  	before { @camp.age_group_id = "a" }
+  describe "when age_group is not present" do
+  	before { @camp.age_group = " " }
   	it { should_not be_valid }
   end
 
-  describe "when age_group_id is not an integer" do
-  	before { @camp.age_group_id = 10.5 }
-  	it { should_not be_valid }
-  end
+  #describe "when age_group_id is not an integer" do
+  #	before { @camp.age_group = 10.5 }
+  #	it { should_not be_valid }
+  #end
 
 end
