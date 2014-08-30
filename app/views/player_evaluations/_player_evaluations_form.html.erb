@@ -1,6 +1,6 @@
 <%= render 'shared/error_messages', object: player_evaluation.object %>
       		
-<%= player_evaluation.label :evaluation_type, 'Type of Evaluation:' %>
+<%= player_evaluation.label :evaluation_type, 'Evaluation Type:' %>
 <%= player_evaluation.select :evaluation_type, options_for_select([['Select One', ''], ['Practice','Practice'], ['Game', 'Game'], ['Post #9 Hockey Camp', 'Post #9 Hockey Camp']]) %>
 
 <%= player_evaluation.label :league, "League:" %>
@@ -9,7 +9,7 @@
 <%= player_evaluation.label :team, "Team:" %>
 <%= player_evaluation.text_field :team %>
 
-<%= player_evaluation.label :date, "Date of Evaluation:" %>
+<%= player_evaluation.label :date, "Evaluation Date:" %>
 <%= player_evaluation.date_select :date %>
 
 <%#= camp.label :skill, 'Select Skills (multiple):' %>

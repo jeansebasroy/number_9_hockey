@@ -244,7 +244,7 @@ describe "Admin sign in" do
     
   end
 
-  describe "evaluate exisiting Player"
+  describe "evaluate existing Player" do
     
     let!(:player) { FactoryGirl.create(:player) }  
 
@@ -253,15 +253,15 @@ describe "Admin sign in" do
     
     describe "Save" do
 
-      let(:save) { "Save" }
+      let(:save_evaluation) { "Save Evaluation" }
 
       describe "with invalid information" do
                 
         it "should not create a new Player Evaluation" do
-          expect { click_button save }.not_to change(PlayerEvaluation, :count)
+          expect { click_button save_evaluation }.not_to change(PlayerEvaluation, :count)
         end
 
-        before { click_button save }
+        before { click_button save_evaluation }
 
         it { should have_selector('div.alert.alert-error') }
 
@@ -281,14 +281,14 @@ describe "Admin sign in" do
         end
 
         it "should not create a new Player" do
-          expect { click_button save }.not_to change(Player, :count)
+          expect { click_button save_evaluation }.not_to change(Player, :count)
         end
 
         it "should create a new Player Evaluation" do
-          expect { click_button save }.to change(PlayerEvaluation, :count).by(1)
+          expect { click_button save_evaluation }.to change(PlayerEvaluation, :count).by(1)
         end
 
-        before { click_button save }
+        before { click_button save_evaluation }
 
         it { should have_content("Maurice Richard") }
         it { should have_selector('div.alert.alert-success') }
