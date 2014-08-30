@@ -303,15 +303,20 @@ describe "Admin sign in" do
 
   describe "edit existing evaluation" do
     
-    let(:player) { FactoryGirl.create(:player) }  
+    let!(:player) { FactoryGirl.create(:player) }  
     let!(:eval1) { FactoryGirl.create(:player_evaluation, player: player) }
 
     before { click_link "All Players" }
+#    before { click_link("View", match: :second) }
     before { click_link "View" }
-    before { first(:link, "Edit").click }
 
+    it { should have_content('Maurice Richard') }
+
+    before { click_link("Edit", match: :first) }
+    #before { first(:link, "Edit Player").click }
+
+    it { should have_content('Maurice Richard')}
     it { should have_content('Richard, Maurice') }
-
 
     describe "Update Evaluation" do
 
