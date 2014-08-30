@@ -246,12 +246,15 @@ describe "Admin sign in" do
 
   describe "evaluate existing Player" do
     
-    let!(:player) { FactoryGirl.create(:player) }  
+    let(:player) { FactoryGirl.create(:player) }  
+    let!(:eval1) { FactoryGirl.create(:player_evaluation, player: player) }
 
     before { click_link "All Players" }
     before { click_link "Evaluate" }
     
-    describe "Save" do
+    it { should have_content('Create an Evaluation for Richard, Maurice')}
+
+    describe "Save Evaluation" do
 
       let(:save_evaluation) { "Save Evaluation" }
 
@@ -280,6 +283,7 @@ describe "Admin sign in" do
           
         end
 
+# => I'm having issues with these
         it "should not create a new Player" do
           expect { click_button save_evaluation }.not_to change(Player, :count)
         end
@@ -292,6 +296,56 @@ describe "Admin sign in" do
 
         it { should have_content("Maurice Richard") }
         it { should have_selector('div.alert.alert-success') }
+
+      end
+    end
+  end
+
+  describe "edit existing evaluation" do
+    
+    let(:player) { FactoryGirl.create(:player) }  
+    let!(:eval1) { FactoryGirl.create(:player_evaluation, player: player) }
+
+    before { click_link "All Players" }
+    before { click_link "View" }
+    before { first(:link, "Edit").click }
+
+    it { should have_content('Richard, Maurice') }
+
+
+    describe "Update Evaluation" do
+
+      let(:update_evaluation) { "Update Evaluation" }
+
+      describe "with invalid information" do
+                
+        before { click_button update_evaluation }
+
+        it { should have_selector('div.alert.alert-error') }
+
+      end
+
+      describe "with valid information" do
+        before do   
+          select 'Practice',      from: 'player_evaluation[evaluation_type]'
+          
+          fill_in "League:",      with: "NHL"
+          fill_in "Team:",        with: "Blackhawks"
+          
+          select '2014',          from: 'player_evaluation[date(1i)]'
+          select 'August',        from: 'player_evaluation[date(2i)]'
+          select '8',             from: 'player_evaluation[date(3i)]'
+          
+        end    
+
+        it "should not create a new Player Evaluation" do
+          expect { click_button update_evaluation }.not_to change(Player, :count)
+        end
+
+        before { click_button update_evaluation }
+
+        it { should have_content("Blackhawks") }
+        it { should have_selector('div.alert.alert-success') } 
 
       end
     end

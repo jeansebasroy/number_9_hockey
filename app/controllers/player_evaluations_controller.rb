@@ -25,7 +25,7 @@ class PlayerEvaluationsController < ApplicationController
 
   def update
   	@player = Player.find(params[:player_id])
-  	@player_evaluation = PlayeEvaluation.find(params[:id])
+  	@player_evaluation = PlayerEvaluation.find(params[:id])
     if @player_evaluation.update_attributes(player_evaluation_params)
       flash[:success] = "Player Evaluation has been updated."
       redirect_to @player
