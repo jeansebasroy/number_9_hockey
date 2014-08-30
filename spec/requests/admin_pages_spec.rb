@@ -310,13 +310,15 @@ describe "Admin sign in" do
 #    before { click_link("View", match: :second) }
     before { click_link "View" }
 
-    it { should have_content('Maurice Richard') }
+    #it { should have_content('Maurice Richard') }
+    it { should have_title('Richard') }
 
-    before { click_link("Edit", match: :first) }
+    before { click_link "Edit" }
+    #before { click_link("Edit", match: :first) }
     #before { first(:link, "Edit Player").click }
 
-    it { should have_content('Maurice Richard')}
-    it { should have_content('Richard, Maurice') }
+    it { should have_title('Evaluate Player') }
+    it { should_not have_title('Richard') }
 
     describe "Update Evaluation" do
 
