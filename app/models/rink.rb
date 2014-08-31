@@ -12,7 +12,7 @@ class Rink < ActiveRecord::Base
 	validates :state, presence: true, 
 				format: { with: VALID_STATE_REGEX }
 	VALID_ZIP_REGEX = /\A^\d{5}(-\d{4})?$\z/i
-	validates :zip, presence: true, 
+	validates :zip_code, presence: true, 
 				format: { with: VALID_ZIP_REGEX } 
 	
 end

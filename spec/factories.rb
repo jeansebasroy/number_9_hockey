@@ -21,14 +21,23 @@ FactoryGirl.define do
 	factory :camp do
 		name 			"Test Camp"
 		description		"This is a testing camp."
-		publish_date	"2014-08-08"
+		publish_date	"2008-08-08"
 		age_group		"Mite"
+	end
+
+	factory :rink do
+		name 			"Skokie Skatium"
+		address			"9300 Weber Park Place"
+		city			"Skokie"
+		state			"IL"
+		zip_code		"60077"
 	end
 
 	factory :player do
 		first_name 		"Maurice"
 		last_name		"Richard"
-		date_of_birth	"1921-08-04"
+		#date_of_birth	"1921-08-04"
+		date_of_birth	"2009-08-04"
 		shoots			"Right"
 	end
 
@@ -36,7 +45,7 @@ FactoryGirl.define do
 		evaluation_type	"Practice"
 		league			"NHL"
 		team			"Canadiens"
-		date 			"2014-08-08"
+		date 			"2008-08-08"
 		player
 	end
 
@@ -44,8 +53,10 @@ FactoryGirl.define do
 	factory :coach do
 		name 			"Test Camp"
 		description		"This is a testing camp."
-		publish_date	"2014-08-08"
+		publish_date	"2008-08-08"
 		age_group		"Mite"
 	end
+
+
 
 end

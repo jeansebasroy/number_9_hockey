@@ -31,9 +31,9 @@ describe "User pages" do
             before { click_button submit }
 
             it { should have_title("Sign Up") }
-            it { should have_content('error') }
-          end
+            it { should have_selector('div.alert.alert-error') }
 
+          end
     	end
 
     	describe "with valid information" do
