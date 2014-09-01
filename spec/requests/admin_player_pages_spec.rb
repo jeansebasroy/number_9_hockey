@@ -3,8 +3,11 @@ require 'rails_helper'
 describe "Admin Player pages" do
 	
   let(:admin_user) { FactoryGirl.create(:admin) }
-  let(:base_title) { "#9 Hockey" }
-  # need to create a 'helper' file to define this for both "Static pages" & "User pages"
+
+  let!(:player) { FactoryGirl.create(:player) }
+  let!(:player_evaluation) { FactoryGirl.create(:player_evaluation, player: player) }
+
+  let(:save) { "Save" }
 
 	subject { page }
 
@@ -18,15 +21,13 @@ describe "Admin Player pages" do
 
   describe "create new Player" do
 
-    before { click_link "New Player" }
+    describe "from New Player link" do
 
-    it { should have_title('New Player') }
-    it { should have_content('New Player') }
+      before { click_link "New Player" }
 
-    describe "Save" do
-
-      let(:save) { "Save" }
-
+      it { should have_title('New Player') }
+      it { should have_content('New Player') }
+      
       describe "with invalid information" do
                 
         it "should not create a new Player" do
@@ -40,7 +41,6 @@ describe "Admin Player pages" do
       end
 
 # => test for edge case where player information is valid, but player_evaluation information is not
-
       describe "with valid information" do
         before do
           fill_in "First Name:",  with: "Maurice"
@@ -69,61 +69,96 @@ describe "Admin Player pages" do
         it "should create a new Player Evaluation" do
           expect { click_button save }.to change(PlayerEvaluation, :count).by(1)
         end
-
-        describe "show Player page" do
-          before { click_button save }
-
-          it { should have_content("Maurice Richard") }
-          it { should have_selector('div.alert.alert-success') }
-
-          describe "edit Player" do
-
-            before { click_link "Edit Player" }
-
-            it { should have_content("Update") }
-
-            before do
-              fill_in "First Name:", with: "Henri"
-              select 'Left',         from: 'player[shoots]'
-            end
-
-            it "should not create a new Player" do
-              expect { click_button "Update" }.not_to change(Player, :count)
-            end
-            
-            describe "Update" do
-              
-              before { click_button "Update" }
-          
-              it { should have_content("Henri Richard") }
-              it { should_not have_content("Maurice Richard") }  
-
-            end
-          end
-        end
       end
+    end
+    describe "from Player index" do
+
     end
   end
 
-  describe "view All Players" do
+  describe "edit existing Player" do
+  
+    describe "from Player view" do
 
-    let!(:player) { FactoryGirl.create(:player) }  
+
+      before { click_link "Edit Player" }
+
+      it { should have_content("Update") }
+
+      before do
+        fill_in "First Name:", with: "Henri"
+        select 'Left',         from: 'player[shoots]'
+      end
+
+      it "should not create a new Player" do
+        expect { click_button "Update" }.not_to change(Player, :count)
+      end
+            
+      describe "Update" do
+              
+        before { click_button "Update" }
+          
+        it { should have_content("Henri Richard") }
+        it { should_not have_content("Maurice Richard") }  
+
+      end
+    end
+
+    describe "from Player index" do
+
+    end
+  end
+
+  describe "view All Players index" do
 
     before { click_link "All Players" }
  
-    it { should have_title("#{base_title} | All Players") }
-    it { should have_link('Evaluate') }
-    it { should have_link('View') }
-    it { should have_link('Edit') }
+    it { should have_title("All Players") }
     
   end
 
+  describe "view Player details" do
+
+    before { click_link "All Players" }
+    before { click_link "View" }
+
+    it { should have_title(player.last_name) }
+
+  end
+
+
+
   describe "evaluate existing Player" do
     
-    let!(:player) { FactoryGirl.create(:player) }  
-    #let!(:eval1) { FactoryGirl.create(:player_evaluation, player: player) }
+    describe "from Player index" do
+      before { click_link "All Players" }
+      before { click_link "Evaluate" }
 
-    it { should have_link("All Players") }
+      it { should have_title("Evaluate Player") }
+
+      describe "with invalid information" do
+      end
+
+      describe "with valid information" do
+      end
+
+    end
+
+    describe "from Player view" do
+      before { click_link "All Players" }
+      before { click_link "View" }
+      before { click_link "Add Evaluation" }
+
+      it { should have_title("Evaluate Player") }
+      
+      describe "with invalid information" do
+      end
+
+      describe "with valid information" do
+      end
+
+    end
+
     before { click_link "All Players" }
 
     it { should have_link("All Players") }
@@ -135,7 +170,7 @@ describe "Admin Player pages" do
     it { should have_link("Evaluate") }
     before { click_link "Evaluate" }
     
-    it { should have_title("#{base_title} | Evaluate Player") }
+    it { should have_title("Evaluate Player") }
     it { should have_content('Create an Evaluation for Richard, Maurice')}
 
     describe "Save Evaluation" do

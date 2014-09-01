@@ -11,18 +11,19 @@ FactoryGirl.define do
 		end
 	end
 
-	factory :age_group do
-		name 			"Mite"
-		description		"8 or Under"
-		age_start		0
-		age_end			8
-	end
-
 	factory :camp do
 		name 			"Test Camp"
 		description		"This is a testing camp."
-		publish_date	"2008-08-08"
-		age_group		"Mite"
+		publish_date	""
+		age_group
+	end
+
+	factory :date_time_location do
+		date 			"2014-08-08"
+		start_time		"18:00"
+		end_time		"19:00"
+		camp
+		rink
 	end
 
 	factory :rink do
@@ -31,6 +32,13 @@ FactoryGirl.define do
 		city			"Skokie"
 		state			"IL"
 		zip_code		"60077"
+	end
+
+	factory :age_group do
+		name 			"Mite"
+		description		"8 or Under"
+		age_start		0
+		age_end			8
 	end
 
 	factory :player do
@@ -49,14 +57,11 @@ FactoryGirl.define do
 		player
 	end
 
-
 	factory :coach do
 		name 			"Test Camp"
 		description		"This is a testing camp."
 		publish_date	"2008-08-08"
-		age_group		"Mite"
+		age_group
 	end
-
-
 
 end
