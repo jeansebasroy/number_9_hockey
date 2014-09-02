@@ -7,9 +7,9 @@ class PlayersController < ApplicationController
   end
 
   def show
-	@player = Player.find(params[:id])
-  @player_evaluations = PlayerEvaluation.where(player_id: @player.id)
-  @camps = Camp.all
+	  @player = Player.find(params[:id])
+    @player_evaluations = PlayerEvaluation.where(player_id: @player.id)
+    @camps = Camp.all
   end
 
   def index
@@ -51,16 +51,20 @@ class PlayersController < ApplicationController
   end
 
   def player_invite
-    #generates an invitation code for the player
-    @player = Player.find(params[:player_id])
-    @camp = Camp.find(params[:camp_id])
-    @player_invitation = PlayerCampInvitation.create(player_invitation_params)
+    @player = Player.find_by(id: params[:players][:player_id])
+    @camp = Camp.find_by(id: params[:players][:camp_id])
 
-    if @player_invitation.save
-      flash[:success] = "Player invitation code is: '12345'"
+    #checks to see if player is invited
+    if PlayerCampInvitations.invited?(@player.id, @camp.id)
+      #if player is invited, un-invited player
+      @un_invite = PlayerCampInvitations.un_invite(@player.id, @camp.id)
+      flash[:success] = 'Player has been Un-Invited.'
       redirect_to @player
     else
-      render 'new'
+      #if player is not invited, invited player
+      @invite = PlayerCampInvitations.invite(@player.id, @camp.id)
+      flash[:success] = 'Player has been Invited.'
+      redirect_to @player
     end
 
     #invites the player to a camp
@@ -69,11 +73,6 @@ class PlayersController < ApplicationController
   	# => (1) triggers email to associated user with link to register\
   	# => (2) shows invitation on user home / sign_in page unless user registers player for camp
 
-  end
-
-  def player_uninvite
-  	#uninvites player to a camp
-  	#if player is already registered for camp, will throw up an error an not allow player to be uninvited
   end
 
   def destroy

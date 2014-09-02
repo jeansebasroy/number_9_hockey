@@ -1,5 +1,6 @@
 class Camp < ActiveRecord::Base
 	has_many :date_time_locations, dependent: :destroy
+	has_many :player_camp_invitations
 
 	validates :name, presence: true
 	validates :description, presence: true

@@ -65,7 +65,22 @@
 			<td><%#= date.rink_id %></td>
 			<!--<td><%#= date.sheet %></td>-->
 			<td>	
-				<%= link_to "Invite", '#' %>
+				<%= form_for(:players, url: "/players/invite") do |invitation| %>
+        
+          			<%= invitation.hidden_field :player_id, value: @player.id %>
+          			<%= invitation.hidden_field :camp_id, value: camp.id %>
+
+          			<% if PlayerCampInvitations.invited?(@player.id, camp.id) %>
+						<%= invitation.submit "Un-Invite", class: "btn btn-large btn-primary" %>
+          			<% else %>
+          				<%= invitation.submit "Invite", class: "btn btn-large btn-primary" %>
+          			<% end %>
+      			<% end %>
+				<%#= link_to "Invite", player_invite_path, player_id: @player.id, camp_id: camp.id, method: :post %>
+				<%#= link_to "Invite", player_invite_path(@player.id, camp_id: camp.id), method: :post %>
+				<%#= link_to "Invite", player_invite_path(@player), method: :post %>
+				<%#{ action: "player_invite", player_id: @player.id}, class: "btn btn-large btn-primary", :method => :post %>
+				<%#= link_to "Publish", { action: "publish", id: @camp.id }, class: "btn btn-large btn-primary", :method => :post %>
 				<%# if camp.invited? %>
 					<%#= link_to "Invite", { action: "player_invite", id: @player.id }, class: "btn btn-large btn-primary", :method => :post %>
 				<%# else %>

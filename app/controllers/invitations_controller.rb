@@ -1,10 +1,10 @@
 class InvitationsController < ApplicationController
   
-  def new_invitation
+  def new_user_invitation
   	#generates a new invitation_code
   end
 
-  def verify_invitation
+  def verify_user_invitation
     valid_code = Invitation.find_by(code: params[:invitations][:invitation_code])
     
     if valid_code.nil?

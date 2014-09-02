@@ -21,9 +21,10 @@ Rails.application.routes.draw do
   match '/signout',   to: 'sessions#destroy',       via: 'delete'
   
   #fix these hacks
-  match '/invitation/verify', to: 'invitations#verify_invitation', via: 'post'
-  match '/camps/publish',     to: 'camps#publish',                 via: 'post'
-  match '/camps/unpublish',   to: 'camps#unpublish',               via: 'post'
+  match '/invitation/verify', to: 'invitations#verify_user_invitation', via: 'post'
+  match '/camps/publish',     to: 'camps#publish',                      via: 'post'
+  match '/camps/unpublish',   to: 'camps#unpublish',                    via: 'post'
+  match '/players/invite',    to: 'players#player_invite',              via: 'post'
   
 
   # The priority is based upon order of creation: first created -> highest priority.
