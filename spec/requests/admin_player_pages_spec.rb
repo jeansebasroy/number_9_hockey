@@ -26,7 +26,6 @@ describe "Admin Player pages" do
       before { click_link "New Player" }
 
       it { should have_title('New Player') }
-      it { should have_content('New Player') }
       
       describe "with invalid information" do
                 
@@ -71,8 +70,60 @@ describe "Admin Player pages" do
         end
       end
     end
+    
     describe "from Player index" do
 
+      before { click_link "All Players" }
+
+      it { should have_title('All Players') }
+
+      before { click_link 'Add Player' }
+
+      it { should have_title('New Player') }
+
+      describe "with invalid information" do
+                
+        it "should not create a new Player" do
+          expect { click_button save }.not_to change(Player, :count)
+        end
+
+        before { click_button save }
+
+        it { should have_selector('div.alert.alert-error') }
+        it { should have_title('New Player') }
+
+      end
+
+# => test for edge case where player information is valid, but player_evaluation information is not
+      describe "with valid information" do
+        before do
+          fill_in "First Name:",  with: "Maurice"
+          fill_in "Last Name:",   with: "Richard"
+
+          select '2009',          from: 'player[date_of_birth(1i)]'
+          select 'April',         from: 'player[date_of_birth(2i)]'
+          select '12',            from: 'player[date_of_birth(3i)]'
+          select 'Right',         from: 'player[shoots]'
+          
+          select 'Practice',      from: 'player_evaluation[evaluation_type]'
+          
+          fill_in "League:",      with: "NHL"
+          fill_in "Team:",        with: "Canadiens"
+          
+          select '2014',          from: 'player_evaluation[date(1i)]'
+          select 'August',        from: 'player_evaluation[date(2i)]'
+          select '8',             from: 'player_evaluation[date(3i)]'
+          
+        end
+
+        it "should create a new Player" do
+          expect { click_button save }.to change(Player, :count).by(1)
+        end
+      
+        it "should create a new Player Evaluation" do
+          expect { click_button save }.to change(PlayerEvaluation, :count).by(1)
+        end
+      end    
     end
   end
 
@@ -80,31 +131,64 @@ describe "Admin Player pages" do
   
     describe "from Player view" do
 
+      before { click_link "All Players" }
+
+      before { click_link "View" }
 
       before { click_link "Edit Player" }
+      
+      it { should have_title('Edit Player') }
 
-      it { should have_content("Update") }
-
-      before do
-        fill_in "First Name:", with: "Henri"
-        select 'Left',         from: 'player[shoots]'
+      describe "with invalid information" do
+# => need to figure out how to test this
       end
+      
+      describe "with valid information" do
 
-      it "should not create a new Player" do
-        expect { click_button "Update" }.not_to change(Player, :count)
-      end
-            
-      describe "Update" do
-              
+        before do
+          fill_in "First Name:", with: "Henri"
+          select 'Left',         from: 'player[shoots]'
+        end
+
+        it "should not create a new Player" do
+          expect { click_button "Update" }.not_to change(Player, :count)
+        end
+                        
         before { click_button "Update" }
           
         it { should have_content("Henri Richard") }
         it { should_not have_content("Maurice Richard") }  
-
       end
     end
 
     describe "from Player index" do
+
+      before { click_link "All Players" }
+
+      before { click_link "Edit" }
+      
+      it { should have_title('Edit Player') }
+
+      describe "with invalid information" do
+# => need to figure out how to test this
+      end
+      
+      describe "with valid information" do
+
+        before do
+          fill_in "First Name:", with: "Henri"
+          select 'Left',         from: 'player[shoots]'
+        end
+
+        it "should not create a new Player" do
+          expect { click_button "Update" }.not_to change(Player, :count)
+        end
+                        
+        before { click_button "Update" }
+          
+        it { should have_content("Henri Richard") }
+        it { should_not have_content("Maurice Richard") }  
+      end
 
     end
   end
@@ -126,24 +210,8 @@ describe "Admin Player pages" do
 
   end
 
-
-
   describe "evaluate existing Player" do
     
-    describe "from Player index" do
-      before { click_link "All Players" }
-      before { click_link "Evaluate" }
-
-      it { should have_title("Evaluate Player") }
-
-      describe "with invalid information" do
-      end
-
-      describe "with valid information" do
-      end
-
-    end
-
     describe "from Player view" do
       before { click_link "All Players" }
       before { click_link "View" }
@@ -151,51 +219,9 @@ describe "Admin Player pages" do
 
       it { should have_title("Evaluate Player") }
       
-      describe "with invalid information" do
-      end
-
       describe "with valid information" do
-      end
-
-    end
-
-    before { click_link "All Players" }
-
-    it { should have_link("All Players") }
-    #it { should have_title("#{base_title} | All Camps") }
-    it { should have_title("All Players") }
-    
-    it { should have_link("Add Player")}
-
-    it { should have_link("Evaluate") }
-    before { click_link "Evaluate" }
-    
-    it { should have_title("Evaluate Player") }
-    it { should have_content('Create an Evaluation for Richard, Maurice')}
-
-    describe "Save Evaluation" do
-
-      let(:save_evaluation) { "Save Evaluation" }
-
-#      describe "with invalid information" do
-                
-#        it "should not create a new Player Evaluation" do
-#          expect { click_button save_evaluation }.not_to change(PlayerEvaluation, :count)
-#        end
-
-#        before { click_button save_evaluation }
-
-#        it { should have_selector('div.alert.alert-error') }
-#        it { should have_title("#{base_title} | Evaluate Player") }
-
-#      end
-
-      describe "with valid information" do
-
-        it { should have_title("#{base_title} | Evaluate Player") }
-
-        before do   
-          select 'Practice',      from: 'player_evaluation[evaluation_type]'
+        before do
+          select 'Game',      from: 'player_evaluation[evaluation_type]'
           
           fill_in "League:",      with: "NHL"
           fill_in "Team:",        with: "Canadiens"
@@ -203,88 +229,134 @@ describe "Admin Player pages" do
           select '2014',          from: 'player_evaluation[date(1i)]'
           select 'August',        from: 'player_evaluation[date(2i)]'
           select '8',             from: 'player_evaluation[date(3i)]'
-          
-        end
 
-# => I'm having issues with these
+        end    
+
         it "should not create a new Player" do
-          expect { click_button save_evaluation }.not_to change(Player, :count)
+          expect { click_button "Save Evaluation" }.not_to change(Player, :count)
         end
-
+      
         it "should create a new Player Evaluation" do
-          expect { click_button save_evaluation }.to change(PlayerEvaluation, :count).by(1)
+          expect { click_button "Save Evaluation" }.to change(PlayerEvaluation, :count).by(1)
         end
 
-        before { click_button save_evaluation }
+        before { click_button "Save Evaluation" }
 
-        it { should have_content("Maurice Richard") }
-        it { should have_title("#{base_title} | Richard") }
         it { should have_selector('div.alert.alert-success') }
+        it { should have_title(player.last_name) }
+
+        it { should have_content("Game") }
+        it { should_not have_content("Practice") }
 
       end
     end
-  end
 
-  describe "edit existing evaluation" do
-    
-    let!(:player) { FactoryGirl.create(:player) }  
-    let!(:eval1) { FactoryGirl.create(:player_evaluation, player: player) }
+    describe "from Player index" do
+      before { click_link "All Players" }
+      before { click_link "Evaluate" }
 
-    before { click_link "All Players" }
-
-# =>     it { should have_title("#{base_title} | All Players") }
-
-#    before { click_link("View", match: :second) }
-    before { click_link "View" }
-
-    #it { should have_content('Maurice Richard') }
-    #it { should have_title('Richard') }
-# =>     it { should have_title("#{base_title} | Richard") }
-# =>     it { should have_title(player.last_name) }
-
-    before { click_link "Edit" }
-    #before { click_link("Edit", match: :first) }
-    #before { first(:link, "Edit Player").click }
-
-    it { should have_title('Evaluate Player') }
-    it { should_not have_title('Richard') }
-
-    describe "Update Evaluation" do
-
-      let(:update_evaluation) { "Update Evaluation" }
+      it { should have_title("Evaluate Player") }
 
       describe "with invalid information" do
-                
-        before { click_button update_evaluation }
+
+        before { click_button "Save Evaluation" }
 
         it { should have_selector('div.alert.alert-error') }
+        it { should have_title('Evaluate Player') }
 
       end
 
       describe "with valid information" do
-        before do   
-          select 'Practice',      from: 'player_evaluation[evaluation_type]'
+        before do
+          select 'Game',      from: 'player_evaluation[evaluation_type]'
           
           fill_in "League:",      with: "NHL"
-          fill_in "Team:",        with: "Blackhawks"
+          fill_in "Team:",        with: "Canadiens"
           
           select '2014',          from: 'player_evaluation[date(1i)]'
           select 'August',        from: 'player_evaluation[date(2i)]'
           select '8',             from: 'player_evaluation[date(3i)]'
-          
-        end    
 
-#        it "should not create a new Player Evaluation" do
-#          expect { click_button update_evaluation }.not_to change(Player, :count)
-#        end
+        end
+      
+        it "should not create a new Player" do
+          expect { click_button "Save Evaluation" }.not_to change(Player, :count)
+        end
+      
+        it "should create a new Player Evaluation" do
+          expect { click_button "Save Evaluation" }.to change(PlayerEvaluation, :count).by(1)
+        end
 
-        before { click_button update_evaluation }
+        before { click_button "Save Evaluation" }
 
-# =>         it { should have_content("Blackhawks") }
-# =>         it { should have_selector('div.alert.alert-success') } 
+        it { should have_selector('div.alert.alert-succes') }
+        it { should have_title('Evaluate Player') }
+
+        it { should have_content("Game") }
+        it { should_not have_content("Practice") }
 
       end
+
     end
+  end
+
+  describe "edit existing evaluation" do
+
+    before { click_link "All Players" }
+
+    before { click_link "View" }
+
+    before { click_link "Edit Eval" }
+
+    it { should have_title('Edit Evaluation') }
+
+#    describe "with invalid information" do
+
+# => default is valid; how to test for non-valid input
+
+#    end
+
+    describe "with valid information" do
+
+      it { should have_title('Edit Evaluation') }
+
+      before do
+        select 'Post #9 Hockey Camp',      from: 'player_evaluation[evaluation_type]'
+          
+        fill_in "League:",      with: "NHL"
+        fill_in "Team:",        with: "Canadiens"
+          
+        select '2014',          from: 'player_evaluation[date(1i)]'
+        select 'August',        from: 'player_evaluation[date(2i)]'
+        select '8',             from: 'player_evaluation[date(3i)]'
+
+      end
+      
+      it "should not create a new Player" do
+        expect { click_button "Save Evaluation" }.not_to change(Player, :count)
+      end
+      
+      it "should create a new Player Evaluation" do
+        expect { click_button "Save Evaluation" }.to change(PlayerEvaluation, :count).by(1)
+      end
+
+      before { click_button "Save Evaluation" }
+
+      it { should have_selector('div.alert.alert-succes') }
+      it { should have_title('Evaluate Player') }
+
+      it { should have_content("Post #9 Hockey Camp") }
+      it { should_not have_content("Practice") }
+
+    end
+  end
+
+  describe "delete Player Evaluation" do
+  
+  end
+
+  describe "delete Player" do
+  
   end
 
   describe "admin sign out" do

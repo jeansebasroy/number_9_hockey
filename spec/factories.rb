@@ -46,6 +46,7 @@ FactoryGirl.define do
 		last_name		"Richard"
 		#date_of_birth	"1921-08-04"
 		date_of_birth	"2009-08-04"
+		#date_of_birth	Time.now.year - 18
 		shoots			"Right"
 	end
 
@@ -58,10 +59,18 @@ FactoryGirl.define do
 	end
 
 	factory :coach do
-		name 			"Test Camp"
+		first_name 		"Scotty"
+		last_name		"Bowman"
 		description		"This is a testing camp."
 		publish_date	"2008-08-08"
 		age_group
+	end
+
+	factory :coach_evaluation do
+		name 			"Test Camp"
+		description		"This is a testing camp."
+		publish_date	"2008-08-08"
+		coach
 	end
 
 end

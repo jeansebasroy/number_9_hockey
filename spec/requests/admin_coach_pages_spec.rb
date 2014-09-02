@@ -1,8 +1,11 @@
 describe "Admin Coach pages" do
 	
   let(:admin_user) { FactoryGirl.create(:admin) }
-  let(:base_title) { "#9 Hockey" }
-  # need to create a 'helper' file to define this for both "Static pages" & "User pages"
+
+  let!(:coach) { FactoryGirl.create(:player) }
+  let!(:coach_evaluation) { FactoryGirl.create(:coach_evaluation, coach: coach) }
+
+  let(:save) { "Save" }
 
 	subject { page }
 

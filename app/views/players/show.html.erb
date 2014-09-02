@@ -14,7 +14,7 @@
 </p>	
 <div>
 	<%= link_to "Edit Player",	edit_player_path(@player), class: "btn btn-large btn-primary" %>
-	<%= link_to "Merge",		'#' , class: "btn btn-large btn-primary" %>
+	<%#= link_to "Merge",		'#' , class: "btn btn-large btn-primary" %>
 </div>
 
 <br>
@@ -37,8 +37,8 @@
 			<td><%= evaluation.league %></td>
 			<td><%= evaluation.team %></td>
 			<!--<td><%#= evaluation.something_else %></td>-->
-			<td><%= link_to 'Edit', edit_player_player_evaluation_path(@player, evaluation) %></td>
-			<td><%= link_to 'Delete', player_player_evaluation_path(@player, evaluation), :method => :delete %></td>
+			<td><%= link_to 'Edit Eval', edit_player_player_evaluation_path(@player, evaluation) %></td>
+			<td><%= link_to 'Delete Eval', player_player_evaluation_path(@player, evaluation), :method => :delete %></td>
 		</tr>
 	<% end %>
 </table>
@@ -48,29 +48,36 @@
 <br>
 <br>
 <br>
-<p>Camps for which this Player is elegible:</p>
+<p>Camps for this Player:</p>
 <table class="table table-bordered">
 	<tr>
-		<th>Date:</th>
-		<th>Time Start:</th>
-		<th>Time End:</th>
-		<th>Rink:</th>
+		<th>Camp Name:</th>
+		<th>Description:</th>
+		<th>Age Group:</th>
+		<th>Dates:</th>
 		<!--<th>Sheet:</th>-->
 	</tr>
-	<%# @dates.each do |date| %>
+	<% @camps.each do |camp| %>
 		<tr>
-			<td><%#= date.date %></td>
-			<td><%#= date.start_time %></td>
-			<td><%#= date.end_time %></td>
+			<td><%= camp.name %></td>
+			<td><%= camp.description %></td>
+			<td><%= camp.age_group %></td>
 			<td><%#= date.rink_id %></td>
 			<!--<td><%#= date.sheet %></td>-->
 			<td>	
-				<%# if @camp.publish_date.nil? %>
+				<%= link_to "Invite", '#' %>
+				<%# if camp.invited? %>
+					<%#= link_to "Invite", { action: "player_invite", id: @player.id }, class: "btn btn-large btn-primary", :method => :post %>
+				<%# else %>
+					<%#= link_to "Un-Invite",'#' %>
+				<%# end %>
+				
+				<%# if camp.invited? %>
 					<%#= link_to "Invite", { action: "invite", id: @player.id }, class: "btn btn-large btn-primary", :method => :post %>
 				<%# else %>
 					<%#= link_to "Un-Invite", { action: "uninvite", id: @player.id }, class: "btn btn-large btn-primary", :method => :post %>
 				<%# end %>
 			</td>
 		</tr>
-	<%# end %>
+	<% end %>
 </table>
