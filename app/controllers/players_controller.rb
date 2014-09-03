@@ -54,17 +54,32 @@ class PlayersController < ApplicationController
     @player = Player.find_by(id: params[:players][:player_id])
     @camp = Camp.find_by(id: params[:players][:camp_id])
 
-    #checks to see if player is invited
+    #checks to see if Player has an associated User
+    @user = UserToPlayer.player_has_user(@player.id)
+
+    #checks to see if Player is invited
     if PlayerCampInvitations.invited(@player.id, @camp.id) == 'invited'
       #if player is invited, un-invited player
       @un_invite = PlayerCampInvitations.un_invite(@player.id, @camp.id)
-      flash[:success] = 'Player has been Un-Invited.'
+            flash[:success] = 'Player has been Un-Invited.'
       redirect_to @player
     else
-      #if player is not invited, invited player
+      #if player is not invited, invites player
       @invite = PlayerCampInvitations.invite(@player.id, @camp.id)
-      flash[:success] = 'Player has been Invited.'
-      redirect_to @player
+
+      if @user.empty? 
+        #if no user is associated, then generates User invitation_ code
+        invitation_code = UserInvitation.invitation_code_for_player(@player.id)
+
+        flash[:success] = "New User Invitation Code: #{invitation_code}"
+        redirect_to @player
+
+      else
+# => generate email for user(s) to alert them of the invitation to the camp 
+        flash[:success] = 'Player has been Invited.'
+        redirect_to @player
+      end
+
     end
 
     #invites the player to a camp

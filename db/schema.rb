@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140902165013) do
+ActiveRecord::Schema.define(version: 20140903172426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,12 +64,11 @@ ActiveRecord::Schema.define(version: 20140902165013) do
 
   create_table "invitations", force: true do |t|
     t.string   "code"
-    t.string   "player_id"
-    t.string   "coach_id"
     t.date     "expiration_date"
     t.date     "use_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "player_id"
   end
 
   create_table "player_camp_invitations", force: true do |t|
@@ -102,17 +101,6 @@ ActiveRecord::Schema.define(version: 20140902165013) do
     t.datetime "updated_at"
   end
 
-  create_table "player_skills", force: true do |t|
-    t.string   "name"
-    t.text     "tool_tip"
-    t.string   "section"
-    t.integer  "order"
-    t.boolean  "active"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "rating"
-  end
-
   create_table "players", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -140,6 +128,23 @@ ActiveRecord::Schema.define(version: 20140902165013) do
     t.string   "skill_type"
     t.integer  "order"
     t.boolean  "active"
+  end
+
+  create_table "user_invitations", force: true do |t|
+    t.string   "invitation_code"
+    t.integer  "player_id"
+    t.integer  "coach_id"
+    t.date     "expiration_date"
+    t.date     "use_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_to_players", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "player_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
