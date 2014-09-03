@@ -6,7 +6,7 @@ describe Rink do
 								address: "111 Madison",
 								city: "Chicago",
 								state: "IL",
-								zip: "60607") }
+								zip_code: "60607") }
   #let(:camp) { FactoryGirl.create(:camp) }
 
   subject { @rink }
@@ -15,7 +15,7 @@ describe Rink do
   it { should respond_to(:address) }
   it { should respond_to(:city) }
   it { should respond_to(:state) }
-  it { should respond_to(:zip) }
+  it { should respond_to(:zip_code) }
  	 	
   it { should be_valid }
   	
@@ -54,18 +54,18 @@ describe Rink do
   	it { should_not be_valid }
   end
 
-  describe "when zip is not present" do
-  	before { @rink.zip = " " }
+  describe "when zip_code is not present" do
+  	before { @rink.zip_code = " " }
   	it { should_not be_valid }
   end
   
-  describe "when zip is not a number" do
-  	before { @rink.zip = "abcde" }
+  describe "when zip_code is not a number" do
+  	before { @rink.zip_code = "abcde" }
   	it { should_not be_valid }
   end
   
-  describe "when zip is not in the right format" do
-  	before { @rink.zip = "123456" }
+  describe "when zip_code is not in the right format" do
+  	before { @rink.zip_code = "123456" }
   	it { should_not be_valid }
   end
 

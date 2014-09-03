@@ -55,7 +55,7 @@ class PlayersController < ApplicationController
     @camp = Camp.find_by(id: params[:players][:camp_id])
 
     #checks to see if player is invited
-    if PlayerCampInvitations.invited?(@player.id, @camp.id)
+    if PlayerCampInvitations.invited(@player.id, @camp.id) == 'invited'
       #if player is invited, un-invited player
       @un_invite = PlayerCampInvitations.un_invite(@player.id, @camp.id)
       flash[:success] = 'Player has been Un-Invited.'

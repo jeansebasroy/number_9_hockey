@@ -351,6 +351,51 @@ describe "Admin Player pages" do
     end
   end
 
+  describe "Invite player to a camp" do
+      
+    let!(:rink) { FactoryGirl.create(:rink) }
+    let!(:age_group) { FactoryGirl.create(:age_group) }
+
+    let!(:camp) { FactoryGirl.create(:camp, age_group: age_group) }
+
+    before { click_link "All Players" }
+    before { click_link "View" }
+
+    it { should have_content("Evaluations of this Player:") }
+
+    it "should create a new Player Camp Invitation" do
+      expect { click_button "Invite" }.to change(PlayerCampInvitations, :count).by(1)
+    end
+
+    before { click_button "Invite" }
+
+    it { should have_button("Un-Invite") }
+
+    describe "then Un-Invite" do
+
+      it "should not create a new Player Camp Invitation" do
+        expect { click_button "Un-Invite" }.not_to change(PlayerCampInvitations, :count)
+      end
+
+      before { click_button "Un-Invite" }
+
+      it { should_not have_button("Un-Invite") }
+
+    end
+
+    describe "and re-Invite" do
+
+      it "should no create a new Player Camp Invitation" do
+        expect { click_button "Invite" }.not_to change(PlayerCampInvitations, :count)
+      end
+
+      before { click_button "Invite" }
+
+      it { should have_button("Un-Invite") }
+
+    end
+  end
+
   describe "delete Player Evaluation" do
   
   end

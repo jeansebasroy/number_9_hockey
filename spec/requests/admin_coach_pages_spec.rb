@@ -3,7 +3,7 @@ describe "Admin Coach pages" do
   let(:admin_user) { FactoryGirl.create(:admin) }
 
   let!(:coach) { FactoryGirl.create(:player) }
-  let!(:coach_evaluation) { FactoryGirl.create(:coach_evaluation, coach: coach) }
+  #let!(:coach_evaluation) { FactoryGirl.create(:coach_evaluation, coach: coach) }
 
   let(:save) { "Save" }
 
