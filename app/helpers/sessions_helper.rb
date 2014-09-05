@@ -26,16 +26,16 @@ module SessionsHelper
 
 	def signed_in_user
 		unless signed_in?
-			store_location
+			#store_location
 			redirect_to signin_url, notice: "Please Sign In."
 		end
 	end
 
-	def signed_in_admin
- 		unless current_user.admin?
-  			redirect_to signin_url, notice: "This section is only accessible to certain users."
-  		end
-  	end
+	#def signed_in_admin
+ 	#	unless current_user.admin?
+  	#		redirect_to signin_url, notice: "This section is only accessible to certain users."
+  	#	end
+  	#end
 
 	def sign_out
 		current_user.update_attribute(:remember_token,

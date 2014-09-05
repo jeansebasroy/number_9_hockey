@@ -7,8 +7,9 @@ class Ability
     if user.admin?
         # provide authorizations for Admins
         can :manage, :all
+        can :create, :player
     
-    elsif :signed_in_user        
+    elsif user.id?
         can :show, User, id: user.id
         can :new, User
         can :create, User
@@ -30,6 +31,8 @@ class Ability
         #can :register, Camp
         #can :unregister, Camp 
 
+    else
+        can :new, User    
     end
 
     # Define abilities for the passed in user here. For example:

@@ -1,8 +1,8 @@
 class CampsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :signed_in_admin, only: [:create, :edit, :update, :destroy]
-  before_action :signed_in_user,  only: [:show]
+  #before_action :signed_in_admin, only: [:create, :edit, :update, :destroy]
+  #before_action :signed_in_user,  only: [:show]
 
   def new
 #  	@camp = Camp.new

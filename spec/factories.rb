@@ -1,8 +1,11 @@
 FactoryGirl.define do 
 	factory :user do
 		first_name		"Phil"
-		last_name		"Argryris"
-		email			"phil@example.com"
+		last_name		"Argyris"
+		#email			"phil@example.com"
+		sequence(:email) do |n|
+			"user#{n}@example.com"
+		end
 		password		"foobar"
 		password_confirmation	"foobar"
 	
@@ -10,6 +13,12 @@ FactoryGirl.define do
 			admin 		true
 		end
 	end
+
+	factory :user_invitation do
+		invitation_code	"12345678"
+		expiration_date	"2114-09-05"
+	end
+
 
 	factory :camp do
 		name 			"Test Camp"

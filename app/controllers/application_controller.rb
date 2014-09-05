@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
   		flash[:error] = "Access Denied."
   		redirect_to user_path(current_user)
   	else
-  		flash[:error] = 'Access Denied.  Must be Signed In to acces.'
-  		redirect_to signin
+  		flash[:error] = 'Access Denied.  Must be Signed In to access.'
+  		redirect_to signin_path
   	end
   end
 end

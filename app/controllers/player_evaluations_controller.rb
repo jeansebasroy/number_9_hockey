@@ -1,5 +1,5 @@
 class PlayerEvaluationsController < ApplicationController
-  before_action :signed_in_admin,  only: [:create, :edit, :update, :destroy]
+  #before_action :signed_in_admin,  only: [:create, :edit, :update, :destroy]
 
   def new
     @player = Player.find(params[:player_id])
