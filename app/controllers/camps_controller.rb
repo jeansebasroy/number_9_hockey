@@ -1,13 +1,15 @@
 class CampsController < ApplicationController
+  load_and_authorize_resource
+
   before_action :signed_in_admin, only: [:create, :edit, :update, :destroy]
   before_action :signed_in_user,  only: [:show]
 
   def new
-  	@camp = Camp.new
+#  	@camp = Camp.new
   end
 
   def show
-	 @camp = Camp.find(params[:id])
+#	 @camp = Camp.find(params[:id])
    @dates = DateTimeLocation.where(camp_id: @camp.id)
   end
 
@@ -16,7 +18,7 @@ class CampsController < ApplicationController
   end
 
   def create
-  	@camp = Camp.new(camp_params)
+#  	@camp = Camp.new(camp_params)
   	if @camp.save
   	  flash[:success] = "Camp information has been saved."
   	  redirect_to @camp
@@ -26,11 +28,11 @@ class CampsController < ApplicationController
   end
 
   def edit
-    @camp = Camp.find(params[:id])
+#    @camp = Camp.find(params[:id])
   end
 
   def update
-    @camp = Camp.find(params[:id])
+#    @camp = Camp.find(params[:id])
     if @camp.update_attributes(camp_params)
       flash[:success] = "Camp information updated."
       redirect_to @camp
@@ -40,7 +42,7 @@ class CampsController < ApplicationController
   end
 
   def publish
-    @camp = Camp.find(params[:id])
+#    @camp = Camp.find(params[:id])
     @camp.update(publish_date: Date.today)
 
 # => show error message if no dates, times & locations are linked to this camp
@@ -57,7 +59,7 @@ class CampsController < ApplicationController
   end
 
   def unpublish
-    @camp = Camp.find(params[:id])
+#    @camp = Camp.find(params[:id])
     @camp.update(publish_date: nil)
 
 # => check to see if players or coaches have registered for this camp.
@@ -75,7 +77,7 @@ class CampsController < ApplicationController
   end
 
   def destroy
-    @camp = Camp.find(params[:id])
+#    @camp = Camp.find(params[:id])
     @camp.destroy
     flash[:success] = "Camp has been deleted."
     redirect_to camps_path

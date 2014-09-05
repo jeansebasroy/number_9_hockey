@@ -1,23 +1,25 @@
 class PlayersController < ApplicationController
+  load_and_authorize_resource
+  
   before_action :signed_in_admin, only: [:create, :edit, :update, :destroy]
 
   def new
-  	@player = Player.new
+#  	@player = Player.new
   	@player_evaluation = @player.player_evaluations.build
   end
 
   def show
-	  @player = Player.find(params[:id])
+#	  @player = Player.find(params[:id])
     @player_evaluations = PlayerEvaluation.where(player_id: @player.id)
     @camps = Camp.all
   end
 
   def index
-    @players = Player.all
+#    @players = Player.all
   end
 
   def create
-  	@player = Player.new(player_params)
+#  	@player = Player.new(player_params)
 
   	if @player.save 
   		@player_evaluation = PlayerEvaluation.create(player_evaluation_params)
@@ -37,11 +39,11 @@ class PlayersController < ApplicationController
   end
 
   def edit
-    @player = Player.find(params[:id])
+#    @player = Player.find(params[:id])
   end
 
   def update
-    @player = Player.find(params[:id])
+#    @player = Player.find(params[:id])
     if @player.update_attributes(player_params)
       flash[:success] = "Player information updated."
       redirect_to @player
@@ -51,7 +53,7 @@ class PlayersController < ApplicationController
   end
 
   def player_invite
-    @player = Player.find_by(id: params[:players][:player_id])
+#    @player = Player.find_by(id: params[:players][:player_id])
     @camp = Camp.find_by(id: params[:players][:camp_id])
 
     #checks to see if Player has an associated User
@@ -91,7 +93,7 @@ class PlayersController < ApplicationController
   end
 
   def destroy
-    @player = Player.find(params[:id])
+#    @player = Player.find(params[:id])
     @player.destroy
     flash[:success] = "Player has been deleted."
     redirect_to players_path

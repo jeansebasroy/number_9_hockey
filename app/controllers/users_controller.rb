@@ -1,12 +1,18 @@
 class UsersController < ApplicationController
+  #load_and_authorize_resource
+
   before_action :signed_in_user,  only: [:edit, :update]
   before_action :correct_user,    only: [:edit, :update]
 
 	def show
 		@user = User.find(params[:id])
+    authorize! :show, @user
 	end
 
 	def new
+    @user = User.new
+    authorize! :new, @user
+    
     #check that an invitation_code has been submitted
     if session[:invitation_code].blank?
       flash[:notice] = "A valid Invitation Code must be submitted before Signing Up."
@@ -19,6 +25,8 @@ class UsersController < ApplicationController
 
   def create
   	@user = User.new(user_params)
+    authorize! :create, @user
+
   	if @user.save
       #sets Use Date for UserInvitation.invitation_code
       @user_invitation = UserInvitation.where(invitation_code: session[:invitation_code]).first
