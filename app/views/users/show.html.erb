@@ -4,7 +4,7 @@
 <p>First Name: <%= @user.first_name %> </p>
 <p>Last Name: <%= @user.last_name %> </p>
 <p>e-mail:  <%= @user.email %> </p>
-<p><%= link_to 'Edit', edit_user_path(@user) %> </p>
+<p><%= link_to 'Edit My Info', edit_user_path(@user) %> </p>
 
 <% if !@players.empty? %>
 	<h1>My Player(s):</h1>

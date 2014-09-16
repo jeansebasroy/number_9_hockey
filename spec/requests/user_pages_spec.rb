@@ -201,8 +201,45 @@ describe "User pages" do
 
       end
 
-    end
+      describe "edit User information" do
+        
+        before { click_link "My Profile" }
+        before { click_link "Edit My Info" }
 
+        describe "edit page" do
+          it { should have_content("Update your profile") }
+          it { should have_title("Edit My Info") }
+        end
+
+        describe "with invalid information" do
+
+          before do
+            fill_in "Email",    with: ''
+            click_button "Save Changes"
+          end
+          
+          it { should have_selector('div.alert.alert-error') }
+          
+        end
+
+        describe "with valid information" do
+          before do
+            fill_in "Email",    with: 'newemail@example.com'
+            fill_in "Password", with: 'foobar'
+            fill_in "Confirm Password", with: 'foobar'
+          end
+
+          it "should not create a user" do
+            expect { click_button "Save Changes" }.not_to change(User, :count)
+          end
+
+          before { click_button "Save Changes" }
+
+          it { should have_selector('div.alert.alert-success', text: "User information updated.") }
+
+        end
+      end
+    end
   end
 end
 
