@@ -48,7 +48,7 @@ describe "User pages" do
 
     before { visit signin_path }
 
-     it { should have_title('Sign In') }
+    it { should have_title('Sign In') }
 
     describe "with expired Invitation Code" do
 
@@ -128,6 +128,81 @@ describe "User pages" do
         end
       end
     end
+  end
+
+  describe "Sign In user" do
+    
+    let!(:user_signin) { FactoryGirl.create(:user) }
+
+    before { visit signin_path }
+
+    before do
+      fill_in "Email",    with: user_signin.email.upcase
+      fill_in "Password", with: user_signin.password
+      click_button "Sign In"
+    end
+
+    it { should have_link('Sign Out') }
+    
+    describe "Home page" do
+
+      it { should have_title(user_signin.first_name) }
+
+    end
+
+    describe "Profile page" do
+
+      before { click_link "My Profile" }
+
+      it { should have_title("Profile for #{user_signin.first_name}") }
+
+      describe "without linked Player" do
+        it { should_not have_content('My Player') }
+        it { should_not have_content("My Coach's Profile") }
+      end
+
+      describe "with one linked Player" do
+        
+        let!(:user_to_player1) { FactoryGirl.create(:user_to_player, 
+                                                    user_id: :user_signin.id, 
+                                                    player_id: :player1.id) }
+        
+        before { click_link "My Profile" }
+
+        it { should have_content('My Player') }
+        it { should have_content(player1.last_name) }
+        it { should_not have_content(player2.last_name) }
+
+      end
+
+      describe "with two linked Players" do
+        
+        let!(:user_to_player2) { FactoryGirl.create(:user_to_player, 
+                                                    user_id: :user_signin.id, 
+                                                    player_id: :player2.id) }
+
+        before { click_link "My Profile" }
+
+        it { should have_content('My Players') }
+        it { should have_content(player2.last_name) }
+
+      end
+
+      describe "with linked Coach" do
+
+        #create the link to the coach's record
+        #let!(:coach1) { FactoryGirl.create(:coach, last_name: 'Player3') }
+        #let!(:user_to_coach) { FactoryGirl.create(:user_to_coach, user_id: user, coach_id: coach) }
+
+        #before { visit user_path(user) } 
+
+        #it { should have_content("My Coach's Profile") }
+        #it { should have_content(coach1.last_name) }
+
+      end
+
+    end
+
   end
 end
 

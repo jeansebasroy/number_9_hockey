@@ -14,6 +14,8 @@ class Ability
         can :new, User
         can :create, User
         can :update, User, id: user.id
+        can :home, User, id: user.id
+        can :profile, User, id: user.id
 
         # need to only allow for Players linked to User
         can :show, Player

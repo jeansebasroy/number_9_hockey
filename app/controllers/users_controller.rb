@@ -7,6 +7,21 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
     authorize! :show, @user
+
+    @player_ids = UserToPlayer.user_has_players(@user.id)
+
+    player_ids_array = Array.new
+
+    @player_ids.each do |player_ids|
+      player_ids_array.push(player_ids.player_id)
+    end
+
+    #player_ids_array = [14,15]
+    
+    @players = Player.find(player_ids_array)
+
+    @coach = []
+
 	end
 
 	def new
@@ -48,6 +63,29 @@ class UsersController < ApplicationController
   	else
   		render 'new'
   	end
+  end
+
+  def edit
+
+  end
+
+  def update
+
+    if @user.update_attributes(user_params)
+      flash[:success] = "User information updated."
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
+
+  def home
+    #@user = User.find(params[:id])
+    #@user = User.find(params[:session][:id])
+    authorize! :home, @user
+    if @user.admin?
+      redirect_to root_url
+    end
   end
 
   	private

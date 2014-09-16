@@ -7,4 +7,12 @@ class UserToPlayer < ActiveRecord::Base
   	user = UserToPlayer.where(player_id: player_id)
   	
   end
+
+  def self.user_has_players(user_id)
+   	#checks to see if Player has a valid User
+  	players = UserToPlayer.where(user_id: user_id)
+  	
+  end
+
+
 end
