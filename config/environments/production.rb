@@ -83,12 +83,14 @@ Rails.application.configure do
   #config.assets.debug = false
 
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.smtp_settings = {
-    address:              'mail.number9hockey.com',
-    port:                 25,
+    address:              'p3plcpnl0595.prod.phx3.secureserver.net',
+    port:                 465,
     domain:               'www.number9hockey.com',
     user_name:            'support@number9hockey.com',
     password:             'GordieHowe17',
-    authentication:       '',
-    enable_starttls_auto: true  }
+    authentication:       'plain',
+    #enable_starttls_auto: true  
+    }
 end
