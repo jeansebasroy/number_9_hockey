@@ -34,7 +34,11 @@ class Ability
         #can :unregister, Camp 
 
     else
-        can :new, User    
+        can :new, User
+        can :create, User    
+
+        #can :new, PasswordReset
+        #can :create, PasswordReset
     end
 
     # Define abilities for the passed in user here. For example:

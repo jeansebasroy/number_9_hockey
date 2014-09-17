@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140903172426) do
+ActiveRecord::Schema.define(version: 20140916223236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,15 +61,6 @@ ActiveRecord::Schema.define(version: 20140903172426) do
   end
 
   add_index "date_time_locations", ["camp_id"], name: "index_date_time_locations_on_camp_id", using: :btree
-
-  create_table "invitations", force: true do |t|
-    t.string   "code"
-    t.date     "expiration_date"
-    t.date     "use_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "player_id"
-  end
 
   create_table "player_camp_invitations", force: true do |t|
     t.integer  "player_id"
@@ -155,7 +146,9 @@ ActiveRecord::Schema.define(version: 20140903172426) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "remember_token"
-    t.boolean  "admin",           default: false
+    t.boolean  "admin",                  default: false
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

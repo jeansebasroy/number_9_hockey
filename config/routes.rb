@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :player_evaluations
   end
   resources :invitations
+  resources :password_resets
   
   root 'static_pages#home'
   

@@ -243,6 +243,8 @@ describe "User pages" do
   end
 end
 
+# => describe "reset user password" do
+
 #   describe "profile page" do
 #     let(:user) { FactoryGirl.create(:user) }
 #     before { visit user_path(user) }

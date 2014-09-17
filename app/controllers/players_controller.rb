@@ -53,7 +53,7 @@ class PlayersController < ApplicationController
   end
 
   def player_invite
-#    @player = Player.find_by(id: params[:players][:player_id])
+    @player = Player.find_by(id: params[:players][:player_id])
     @camp = Camp.find_by(id: params[:players][:camp_id])
 
     #checks to see if Player has an associated User

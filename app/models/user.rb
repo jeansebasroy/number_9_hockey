@@ -10,9 +10,8 @@ class User < ActiveRecord::Base
 	validates :email, presence: true, 
 				format: { with: VALID_EMAIL_REGEX }, 
 				uniqueness: { case_sensitive: false }
-
 	has_secure_password
-	validates :password, length: { minimum: 6 }
+	validates :password, length: { minimum: 6 }, :unless => :resetting_password?
 
   def User.new_remember_token
     SecureRandom.urlsafe_base64
@@ -20,6 +19,19 @@ class User < ActiveRecord::Base
 
   def User.digest(token)
     Digest::SHA1.hexdigest(token.to_s)
+  end
+
+  def send_password_reset
+  	self.password_reset_token = User.new_remember_token
+  	self.password_reset_sent_at = Time.zone.now
+    @password_reset = true
+  	self.save!
+    @password_reset = false
+  	UserMailer.password_reset(self).deliver
+  end
+
+  def resetting_password?
+    @password_reset
   end
 
   private
