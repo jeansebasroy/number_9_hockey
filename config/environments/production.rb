@@ -86,7 +86,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address:              'p3plcpnl0595.prod.phx3.secureserver.net',
     port:                 465,
-    domain:               'example.com',
+    domain:               'www.number9hockey.com',
     user_name:            'support@number9hockey.com',
     password:             'GordieHowe17',
     authentication:       'SSL',
