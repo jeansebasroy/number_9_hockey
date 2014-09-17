@@ -81,4 +81,14 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   #config.assets.debug = false
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'p3plcpnl0595.prod.phx3.secureserver.net',
+    port:                 465,
+    domain:               'example.com',
+    user_name:            'support',
+    password:             'GordieHowe17',
+    authentication:       'plain',
+    enable_starttls_auto: true  }
 end
