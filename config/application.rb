@@ -22,6 +22,6 @@ module Number9Hockey
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
     config.assets.initialize_on_precompile = false
   
-    #config.action_mailer.default_url_options = { host: 'http://www.number9hockey.com' }
+    config.action_mailer.default_url_options = { host: 'http://www.number9hockey.com' }
   end
 end
