@@ -87,7 +87,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'www.number9hockey.com' }
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-    :address => "p3plcpnl0595.prod.phx3.secureserver.nett",
+    :address => "p3plcpnl0595.prod.phx3.secureserver.net",
     :port => 465,
     :user_name => "support@number9hockey.com",
     :password => "GordieHowe17",
