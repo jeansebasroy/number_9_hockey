@@ -90,7 +90,7 @@ Rails.application.configure do
     domain:               'www.number9hockey.com',
     user_name:            'support@number9hockey.com',
     password:             'GordieHowe17',
-    authentication:       'plain',
-    #enable_starttls_auto: true  
+    authentication:       :login,
+    enable_starttls_auto: true  
     }
 end
