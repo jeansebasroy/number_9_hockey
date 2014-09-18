@@ -22,6 +22,8 @@ FactoryGirl.define do
 	end
 
 	factory :user_to_player do
+		user
+		player
 	end
 
 	factory :camp do

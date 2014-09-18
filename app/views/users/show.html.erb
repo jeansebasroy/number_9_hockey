@@ -7,14 +7,14 @@
 <p><%= link_to 'Edit My Info', edit_user_path(@user) %> </p>
 
 <% if !@players.empty? %>
-	<h1>My Player(s):</h1>
+	<h1>My <%= "Player".pluralize(@players.count) %>:</h1>
 
 	<% @players.each do |player| %>
 		<p>First Name: <%= player.first_name %> </p>
 		<p>Last Name: <%= player.last_name %> </p>
 		<p>Date of Birth:  <%= player.date_of_birth %> </p>	
 		<p>Shoots:  <%= player.shoots %> </p>
-		<p><%#= link_to 'Edit', player_path(player) %> </p>
+		<p><%= link_to 'Edit Player Info', edit_player_path(player) %> </p>
 		<br>
 	<% end %>
 <% end %>

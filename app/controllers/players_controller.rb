@@ -44,9 +44,14 @@ class PlayersController < ApplicationController
 
   def update
 #    @player = Player.find(params[:id])
+    @user = current_user
     if @player.update_attributes(player_params)
       flash[:success] = "Player information updated."
-      redirect_to @player
+      if @user.admin?
+        redirect_to @player
+      else
+        redirect_to user_path(@user)
+      end
     else
       render 'edit'
     end
