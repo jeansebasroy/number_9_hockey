@@ -88,10 +88,10 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     :address => "p3plcpnl0595.prod.phx3.secureserver.net",
-    :port => 587,
+    :port => 80,
     :user_name => "support@number9hockey.com",
     :password => "GordieHowe17",
-    #:authentication => :plain
+    #:authentication => :login
   }
 
   #config.action_mailer.delivery_method = :smtp
