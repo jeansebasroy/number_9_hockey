@@ -91,7 +91,7 @@ Rails.application.configure do
     :port => 80,
     :user_name => "support@number9hockey.com",
     :password => "GordieHowe17",
-    #:authentication => :login
+    :authentication => :login
   }
 
   #config.action_mailer.delivery_method = :smtp
