@@ -88,12 +88,12 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     :address => "p3plcpnl0595.prod.phx3.secureserver.net",
-    :port => 465,
+    :port => 80,
     :domain => "www.number9hockey.com",
     :user_name => "support@number9hockey.com",
     :password => "GordieHowe17",
     :authentication => :plain,
-    enable_starttls_auto: true  
+    enable_starttls_auto: false  
   }
 
   #:port 80, 25, 587, 465 (with ssl)
