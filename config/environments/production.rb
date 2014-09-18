@@ -84,7 +84,15 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { host: 'localhost:3000' } 
+  config.action_mailer.default_url_options = { :host => 'www.number9hockey.com' }
+  config.action_mailer.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    :address => "p3plcpnl0595.prod.phx3.secureserver.nett",
+    :port => 80,
+    :user_name => "support@number9hockey.com",
+    :password => "GordieHowe17",
+    :authentication => :plain
+  }
 
   #config.action_mailer.delivery_method = :smtp
   #config.action_mailer.perform_deliveries = true
