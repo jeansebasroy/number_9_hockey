@@ -51,4 +51,15 @@ class PlayerCampInvitations < ActiveRecord::Base
 		invitation.update_attributes(uninvite_date: Date.today)
 	end
 
+	def self.player_has_camp_invitations(player_id)
+		# gets all the camps to which the player has been invited
+		camps = PlayerCampInvitations.where(player_id: player_id)
+	end
+  	
+  	#def self.user_has_players(user_id)
+   	
+  	#players = UserToPlayer.where(user_id: user_id)
+  	
+  	#end
+
 end

@@ -9,10 +9,8 @@ class UserToPlayer < ActiveRecord::Base
   end
 
   def self.user_has_players(user_id)
-   	#checks to see if Player has a valid User
+   	# gets all the players linked to the user
   	players = UserToPlayer.where(user_id: user_id)
   	
   end
-
-
 end

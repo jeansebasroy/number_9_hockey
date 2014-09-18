@@ -1,6 +1,36 @@
-<%# provide(:title, @user.first_name) %>
-<% provide(:title, 'User') %>
+<% provide(:title, "Home of #{@user.first_name}") %>
 <h1><%#= @user.first_name %></h1>
-<h1><%= 'User' %></h1>
 
 <p>This is your home.  Are you too good for your home?</p>
+
+<% if !@players.empty? %>
+	<h1>My <%= "Player".pluralize(@players.count) %>:</h1>
+
+	<% @players.each do |player| %>
+		<p>First Name: <%= player.first_name %> </p>
+		<p>Last Name: <%= player.last_name %> </p>
+		<p>Date of Birth:  <%= player.date_of_birth %> </p>	
+		<p>Shoots:  <%= player.shoots %> </p>
+		<p><%= link_to 'Edit Player Info', edit_player_path(player) %> </p>
+		<br>
+
+		<p>Camp Invitations:</p>
+		<% @camps.each do |camp| %>
+			<p>Camp Name: <%= camp.name %> </p>
+			<p>Camp Description: <%= camp.description %> </p>
+			<p><%= link_to 'View Camp Details', camp_path(camp) %> </p>
+			<br>
+		<% end %>
+	<% end %>
+<% end %>
+
+<% if !@coach.empty? %>
+	<h1>My Coach's Profile:</h1>
+
+	<p>First Name: <%= @coach.first_name %> </p>
+	<p>Last Name: <%= @coach.last_name %> </p>
+	<p>Date of Birth:  <%= @coach.date_of_birth %> </p>	
+	<p>Shoots:  <%= @coach.shoots %> </p>
+	<p><%#= link_to 'Edit', coach_path(@coach) %> </p>
+
+<% end %>

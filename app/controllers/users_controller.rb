@@ -8,18 +8,17 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
     authorize! :show, @user
 
+    # => for related Players
+    # => move this to the User Model
+    # => make it a single call from the controller to get this information
     @player_ids = UserToPlayer.user_has_players(@user.id)
-
     player_ids_array = Array.new
-
     @player_ids.each do |player_ids|
       player_ids_array.push(player_ids.player_id)
     end
-
-    #player_ids_array = [14,15]
-    
     @players = Player.find(player_ids_array)
 
+    # => for related Coaches
     @coach = []
 
 	end
@@ -80,12 +79,37 @@ class UsersController < ApplicationController
   end
 
   def home
-    #@user = User.find(params[:id])
-    #@user = User.find(params[:session][:id])
+    @user = current_user
     authorize! :home, @user
+
     if @user.admin?
       redirect_to root_url
     end
+
+    # => for related Players
+    # => move this to the User Model
+    # => make it a single call from the controller to get this information
+    @player_ids = UserToPlayer.user_has_players(@user.id)
+    player_ids_array = Array.new
+    @player_ids.each do |player_ids|
+      player_ids_array.push(player_ids.player_id)
+    end
+    @players = Player.find(player_ids_array)
+
+    # => for related Coaches
+    @coach = []
+
+    # => for related Camps
+    @player = @players.first
+    @camp_ids = PlayerCampInvitations.player_has_camp_invitations(@player.id)
+    camp_ids_array = Array.new
+    @camp_ids.each do |camp_ids|
+      camp_ids_array.push(camp_ids.camp_id)
+    end
+    @camps = Camp.find(camp_ids_array)
+    # => I need to figure out how to tag the Camp in the @camps array with the player.id
+
+    render 'home'
   end
 
   	private
