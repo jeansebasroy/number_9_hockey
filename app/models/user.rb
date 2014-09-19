@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
 	before_save { email.downcase! }
 	before_create :create_remember_token
+
+  has_many :player_camp_invitations
+  has_many :camps, through: :player_camp_invitations
 	
 	validates :first_name, presence: true, 
 				length: { maximum: 50 }

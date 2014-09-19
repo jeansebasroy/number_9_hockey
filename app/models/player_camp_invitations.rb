@@ -1,6 +1,6 @@
 class PlayerCampInvitations < ActiveRecord::Base
-	belongs_to :camp
-	belongs_to :player
+	belongs_to :camps
+	belongs_to :players
 
 	validates :camp_id, presence: true, numericality: { only_integer: true }
 	validates :player_id, presence: true, numericality: { only_integer: true }
@@ -54,12 +54,12 @@ class PlayerCampInvitations < ActiveRecord::Base
 	def self.player_has_camp_invitations(player_id)
 		# gets all the camps to which the player has been invited
 		camps = PlayerCampInvitations.where(player_id: player_id)
+
+		#PlayerCampInvitations.includes(:camps).where(player_id: player_id)
+  
 	end
   	
-  	#def self.user_has_players(user_id)
-   	
-  	#players = UserToPlayer.where(user_id: user_id)
-  	
-  	#end
-
+  	def self.all_camp_invitations()
+  		PlayerCampInvitations.all.includes(:camps)
+  	end
 end

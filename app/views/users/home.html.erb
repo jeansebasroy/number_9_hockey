@@ -1,7 +1,4 @@
 <% provide(:title, "Home of #{@user.first_name}") %>
-<h1><%#= @user.first_name %></h1>
-
-<p>This is your home.  Are you too good for your home?</p>
 
 <% if !@players.empty? %>
 	<h1>My <%= "Player".pluralize(@players.count) %>:</h1>
@@ -15,11 +12,14 @@
 		<br>
 
 		<p>Camp Invitations:</p>
-		<% @camps.each do |camp| %>
-			<p>Camp Name: <%= camp.name %> </p>
-			<p>Camp Description: <%= camp.description %> </p>
-			<p><%= link_to 'View Camp Details', camp_path(camp) %> </p>
-			<br>
+		<% @camps_array.each do |camp| %>
+			<% if player.id == camp[:player_id] %>
+				<p>Camp Name: <%= camp[:name] %> </p>
+				<p>Camp Description: <%= camp[:description] %> </p>
+				<p><%= link_to 'View Camp Details', camp_path(camp[:camp_id]) %> </p>
+				<p><%#= link_to 'Register for Camp', camp_path(camp) %> </p>
+				<br>
+			<% end %>
 		<% end %>
 	<% end %>
 <% end %>

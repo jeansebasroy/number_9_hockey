@@ -100,14 +100,50 @@ class UsersController < ApplicationController
     @coach = []
 
     # => for related Camps
-    @player = @players.first
-    @camp_ids = PlayerCampInvitations.player_has_camp_invitations(@player.id)
-    camp_ids_array = Array.new
-    @camp_ids.each do |camp_ids|
-      camp_ids_array.push(camp_ids.camp_id)
-    end
-    @camps = Camp.find(camp_ids_array)
+#    @player = @players.first
+#    @camp_ids = PlayerCampInvitations.player_has_camp_invitations(@player.id)
+#    camp_ids_array = Array.new
+#    @camp_ids.each do |camp_ids|
+#      camp_ids_array.push(camp_ids.camp_id)
+#    end
+#    @camps = Camp.find(camp_ids_array)
     # => I need to figure out how to tag the Camp in the @camps array with the player.id
+
+    #player_id = @players.first
+    #@camps = PlayerCampInvitations.player_has_camp_invitations(player_id)
+    #@all_camps = PlayerCampInvitations.all_camp_invitations()
+
+# => array of hashes test
+    #camp1 = Hash.new
+    #camp1[:player_id] = 14
+    #camp1[:id] = 12
+    #camp1[:name] = 'Camp for Player 1'
+    #camp1[:description] = 'Description of camp for Player 1'
+
+    #camp2 = Hash.new
+    #camp2[:player_id] = 15
+    #camp2[:id] = 12
+    #camp2[:name] = 'Camp for Player 2'
+    #camp2[:description] = 'Description of camp for Player 2'
+
+    #@camps_array = Array.new
+    #@camps_array.push(camp1)
+    #@camps_array.push(camp2)
+
+    @camps_array = Array.new
+    @players.each do |player|
+      camp_hash = Hash.new
+      camp_hash[:player_id] = player.id
+
+      camp_id = PlayerCampInvitations.player_has_camp_invitations(player.id).first
+      camp_details = Camp.find(camp_id.camp_id)
+      camp_hash[:camp_id] = camp_details.id
+      camp_hash[:name] = camp_details.name
+      camp_hash[:description] = camp_details.description
+
+      @camps_array.push(camp_hash)
+
+    end
 
     render 'home'
   end
