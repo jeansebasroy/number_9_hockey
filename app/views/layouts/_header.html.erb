@@ -6,7 +6,7 @@
          		<ul class="nav pull-right">
               <% if signed_in? %>
                 <% if current_user.admin? %>
-                  <li><%= link_to "My Home", '/admin' %></li>
+                  <li><%= link_to "My Home", '/home' %></li>
                   <li id="fat-menu" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       Camps <b class="caret"></b>

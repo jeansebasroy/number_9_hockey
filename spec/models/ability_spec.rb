@@ -3,8 +3,7 @@ require 'cancan/matchers'
 
 describe "Abilities" do
   subject(:ability){ Ability.new(user) }
-  #let(:user){ nil }
-    
+      
   let(:age_group){ FactoryGirl.create(:age_group) }
   let(:camp){ FactoryGirl.create(:camp, age_group: age_group) }
     

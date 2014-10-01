@@ -1,5 +1,5 @@
 class DateTimeLocationsController < ApplicationController
-  before_action :signed_in_admin,  only: [:create, :edit, :update, :destroy]
+#  before_action :signed_in_admin,  only: [:create, :edit, :update, :destroy]
 
   def new
     @camp = Camp.find(params[:camp_id])

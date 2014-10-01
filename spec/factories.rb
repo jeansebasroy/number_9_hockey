@@ -56,6 +56,14 @@ FactoryGirl.define do
 		age_end			8
 	end
 
+	factory :player_camp_invitations do
+		player_id		""
+		camp_id			""
+		invite_date		"2014-09-22"
+		uninvite_date	""
+	end
+
+
 	factory :player do
 		first_name 		"Maurice"
 		last_name		"Richard"
@@ -76,9 +84,6 @@ FactoryGirl.define do
 	factory :coach do
 		first_name 		"Scotty"
 		last_name		"Bowman"
-		description		"This is a testing camp."
-		publish_date	"2008-08-08"
-		age_group
 	end
 
 	factory :coach_evaluation do

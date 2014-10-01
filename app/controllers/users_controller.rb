@@ -84,68 +84,42 @@ class UsersController < ApplicationController
 
     if @user.admin?
       redirect_to root_url
+      
+    else
+
+      # => for related Players
+      # => move this to the User Model
+      # => make it a single call from the controller to get this information
+      @player_ids = UserToPlayer.user_has_players(@user.id)
+      player_ids_array = Array.new
+      @player_ids.each do |player_ids|
+        player_ids_array.push(player_ids.player_id)
+      end
+      @players = Player.find(player_ids_array)
+
+      # => for related Coaches
+      @coach = []
+
+      # => for related Camps
+      @camps_array = Array.new
+      @players.each do |player|
+        camp_hash = Hash.new
+        camp_hash[:player_id] = player.id
+
+        # => need to handle multiple camp invitations
+        camp_id = PlayerCampInvitations.player_has_camp_invitations(player.id).first
+        if !camp_id.nil?
+          camp_details = Camp.find(camp_id.camp_id)
+          camp_hash[:camp_id] = camp_details.id
+          camp_hash[:name] = camp_details.name
+          camp_hash[:description] = camp_details.description
+
+          @camps_array.push(camp_hash)
+        end
+      end
+
+      render 'home'
     end
-
-    # => for related Players
-    # => move this to the User Model
-    # => make it a single call from the controller to get this information
-    @player_ids = UserToPlayer.user_has_players(@user.id)
-    player_ids_array = Array.new
-    @player_ids.each do |player_ids|
-      player_ids_array.push(player_ids.player_id)
-    end
-    @players = Player.find(player_ids_array)
-
-    # => for related Coaches
-    @coach = []
-
-    # => for related Camps
-#    @player = @players.first
-#    @camp_ids = PlayerCampInvitations.player_has_camp_invitations(@player.id)
-#    camp_ids_array = Array.new
-#    @camp_ids.each do |camp_ids|
-#      camp_ids_array.push(camp_ids.camp_id)
-#    end
-#    @camps = Camp.find(camp_ids_array)
-    # => I need to figure out how to tag the Camp in the @camps array with the player.id
-
-    #player_id = @players.first
-    #@camps = PlayerCampInvitations.player_has_camp_invitations(player_id)
-    #@all_camps = PlayerCampInvitations.all_camp_invitations()
-
-# => array of hashes test
-    #camp1 = Hash.new
-    #camp1[:player_id] = 14
-    #camp1[:id] = 12
-    #camp1[:name] = 'Camp for Player 1'
-    #camp1[:description] = 'Description of camp for Player 1'
-
-    #camp2 = Hash.new
-    #camp2[:player_id] = 15
-    #camp2[:id] = 12
-    #camp2[:name] = 'Camp for Player 2'
-    #camp2[:description] = 'Description of camp for Player 2'
-
-    #@camps_array = Array.new
-    #@camps_array.push(camp1)
-    #@camps_array.push(camp2)
-
-    @camps_array = Array.new
-    @players.each do |player|
-      camp_hash = Hash.new
-      camp_hash[:player_id] = player.id
-
-      camp_id = PlayerCampInvitations.player_has_camp_invitations(player.id).first
-      camp_details = Camp.find(camp_id.camp_id)
-      camp_hash[:camp_id] = camp_details.id
-      camp_hash[:name] = camp_details.name
-      camp_hash[:description] = camp_details.description
-
-      @camps_array.push(camp_hash)
-
-    end
-
-    render 'home'
   end
 
   	private

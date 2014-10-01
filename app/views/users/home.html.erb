@@ -11,14 +11,16 @@
 		<p><%= link_to 'Edit Player Info', edit_player_path(player) %> </p>
 		<br>
 
-		<p>Camp Invitations:</p>
-		<% @camps_array.each do |camp| %>
-			<% if player.id == camp[:player_id] %>
-				<p>Camp Name: <%= camp[:name] %> </p>
-				<p>Camp Description: <%= camp[:description] %> </p>
-				<p><%= link_to 'View Camp Details', camp_path(camp[:camp_id]) %> </p>
-				<p><%#= link_to 'Register for Camp', camp_path(camp) %> </p>
-				<br>
+		<% if !@camps_array.empty? %>
+			<p>Camp Invitations:</p>
+			<% @camps_array.each do |camp| %>
+				<% if player.id == camp[:player_id] %>
+					<p>Camp Name: <%= camp[:name] %> </p>
+					<p>Camp Description: <%= camp[:description] %> </p>
+					<p><%= link_to 'View Camp Details', camp_path(camp[:camp_id]) %> </p>
+					<p><%#= link_to 'Register for Camp', camp_path(camp) %> </p>
+					<br>
+				<% end %>
 			<% end %>
 		<% end %>
 	<% end %>
