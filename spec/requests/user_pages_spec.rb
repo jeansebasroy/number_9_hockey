@@ -133,6 +133,14 @@ describe "User pages" do
   describe "Sign In user" do
     
     let!(:user_signin) { FactoryGirl.create(:user) }
+    let!(:player4) { FactoryGirl.create(:player, last_name: 'Player4') }
+    let!(:player5) { FactoryGirl.create(:player, last_name: 'Player5') }
+
+    let!(:rink) { FactoryGirl.create(:rink) }
+    let!(:age_group) { FactoryGirl.create(:age_group) }
+
+    let!(:camp1) { FactoryGirl.create(:camp, name: 'Camp1', age_group: age_group) }
+    let!(:camp2) { FactoryGirl.create(:camp, name: 'Camp2', age_group: age_group) }
 
     before { visit signin_path }
 
@@ -148,6 +156,54 @@ describe "User pages" do
 
       it { should have_title(user_signin.first_name) }
 
+      describe "without a linked Player" do
+
+        it { should_not have_content "My Player" }
+
+      end
+
+      describe "with one linked Player" do
+        let!(:user_to_player1) { FactoryGirl.create(:user_to_player, user_id: user_signin.id, 
+                                                player_id: player4.id) }
+
+        before { click_link 'My Home' }
+
+        it { should have_content "My Player:" }
+        it { should have_content player4.last_name }
+
+        describe "without a camp invitation" do
+
+          it { should_not have_content "Camp Invitations:" }
+
+        end
+
+        describe "with a Camp invitation" do
+          let!(:player_camp_invitations) { FactoryGirl.create(:player_camp_invitations, player_id: player4.id,
+                                                              camp_id: camp1.id) }
+
+          before { click_link 'My Home' }
+
+          it { should have_content player4.last_name }
+          it { should have_content camp1.name }
+          it { should_not have_content camp2.name }
+
+        end
+      end
+
+      describe "with two linked Players" do
+        let!(:user_to_player2) { FactoryGirl.create(:user_to_player, user_id: user_signin.id, 
+                                                player_id: player4.id) }
+        
+        let!(:user_to_player3) { FactoryGirl.create(:user_to_player, user_id: user_signin.id, 
+                                                player_id: player5.id) }
+        
+        before { click_link 'My Home' }
+
+        it { should have_content "My Players:" }
+        it { should have_content player4.last_name }
+        it { should have_content player5.last_name }    
+
+      end
     end
 
     describe "Profile page" do
@@ -164,35 +220,96 @@ describe "User pages" do
         describe "edit page" do
           it { should have_content("Update your profile") }
           it { should have_title("Edit My Info") }
-        end
 
-        describe "with invalid information" do
 
-          before do
-            fill_in "Email",    with: ''
-            click_button "Save Changes"
+          describe "with invalid information" do
+
+            before do
+              fill_in "Email",    with: ''
+              click_button "Save Changes"
+            end
+            
+            it { should have_selector('div.alert.alert-error') }
+            it { should have_title("Edit My Info") }
+            
           end
-          
-          it { should have_selector('div.alert.alert-error') }
-          
-        end
 
-        describe "with valid information" do
-          before do
-            fill_in "Email",    with: 'newemail@example.com'
-            fill_in "Password", with: 'foobar'
-            fill_in "Confirm Password", with: 'foobar'
-          end
+          describe "with valid information" do
+            before do
+              fill_in "Email",    with: 'newemail@example.com'
+              fill_in "Password", with: 'foobar'
+              fill_in "Confirm Password", with: 'foobar'
+            end
 
 # => fix this
 #          it "should not create a user" do
 #            expect { click_button "Save Changes" }.not_to change(User, :count)
 #          end
 
-          before { click_button "Save Changes" }
+            before { click_button "Save Changes" }
 
-          it { should have_selector('div.alert.alert-success', text: "User information updated.") }
+            it { should have_selector('div.alert.alert-success', text: "User information updated.") }
 
+          end
+        end
+      end
+      
+      describe "with linked Player" do
+        let!(:player6) { FactoryGirl.create(:player, last_name: 'Player6') }
+        let!(:user_to_player4) { FactoryGirl.create(:user_to_player, user_id: user_signin.id, 
+                                                      player_id: player6.id) }
+      
+        before { click_link "My Profile" }
+
+        it { should have_content "My Player:" }
+        it { should have_content player6.last_name }
+
+        describe "edit Player information" do
+
+          before { click_link "Edit Player Info" }
+
+          it { should have_title "Edit Player" }
+
+          describe "with invalid information" do
+
+            before do
+              fill_in "First Name:",  with: ""
+            end
+
+# => fix this
+#            it "should not create a Player" do
+#              expect { click_button "Save Changes" }.not_to change(Player, :count)
+#            end
+
+            before { click_button "Update" }
+
+            it { should have_selector('div.alert.alert-error') }
+            it { should have_title('Edit Player') }
+
+          end
+
+          describe "with valid information" do
+            before do
+              fill_in "First Name:",  with: "Maurice"
+              fill_in "Last Name:",   with: "Richard"
+
+              select '2009',          from: 'player[date_of_birth(1i)]'
+              select 'April',         from: 'player[date_of_birth(2i)]'
+              select '12',            from: 'player[date_of_birth(3i)]'
+              select 'Right',         from: 'player[shoots]'
+            end
+
+# => fix this
+#            it "should not create a Player" do
+#              expect { click_button "Save Changes" }.not_to change(Player, :count)
+#            end
+
+            before { click_button "Update" }
+
+            it { should have_selector('div.alert.alert-success') }
+            it { should have_title("Profile for #{user_signin.first_name}") }
+
+          end
         end
       end
     end

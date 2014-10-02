@@ -12,7 +12,7 @@
 		<br>
 
 		<% if !@camps_array.empty? %>
-			<p>Camp Invitations:</p>
+			<p><%= "Camp Invitation".pluralize(@camps_array.count) %>:</p>
 			<% @camps_array.each do |camp| %>
 				<% if player.id == camp[:player_id] %>
 					<p>Camp Name: <%= camp[:name] %> </p>
