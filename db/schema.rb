@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140916223236) do
+ActiveRecord::Schema.define(version: 20141003130454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,18 @@ ActiveRecord::Schema.define(version: 20140916223236) do
     t.integer  "camp_id"
     t.date     "invite_date"
     t.date     "uninvite_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.date     "invite_use_date"
+  end
+
+  create_table "player_camp_registrations", force: true do |t|
+    t.integer  "player_id"
+    t.integer  "camp_id"
+    t.string   "jersey_size"
+    t.date     "register_date"
+    t.date     "un_register_date"
+    t.string   "terms_agreement"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

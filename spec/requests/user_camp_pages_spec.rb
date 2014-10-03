@@ -85,6 +85,10 @@ describe "User Camp pages" do
       describe "through Registration page" do
 
         it { should have_title "Register" }
+        
+        it { should have_button 'Register' }
+        it { should_not have_link 'Update' }
+        it { should_not have_link 'Un-Register' }
 
         describe "with invalid information" do
 
@@ -93,7 +97,7 @@ describe "User Camp pages" do
 #            expect { click_button "Submit Registration" }.not_to change(Camp Registration, :count)
 #          end
 
-            before { click_link 'Submit Registration' }
+            before { click_button 'Register' }
 
             it { should have_selector('div.alert.alert-error') }
             it { should have_title("Register") }
@@ -102,12 +106,44 @@ describe "User Camp pages" do
 
         describe "with valid information" do
 
-            it { should have_selector('div.alert.alert-success') }
-            it { should have_title(user_signin.first_name) }
+          before do
+            select 'Youth S/M',   from: 'player_camp_registration[jersey_size]'
+            
+            fill_in "Initial:",   with: "rm"
+          end
 
+# => fix this
+#          it "should not create a Registration" do
+#            expect { click_button "Submit Registration" }.not_to change(Camp Registration, :count)
+#          end
 
+          before { click_button 'Register' }
+
+          it { should have_selector('div.alert.alert-success') }
+          it { should have_title 'Register' }
+          
+          it { should_not have_link 'Register' }
+          it { should have_link 'Update' }
+          it { should have_link 'Un-Register' }
+
+          describe "and back to Home page" do
+
+            before { click_link "My Home" }
+
+            it { should_not have_content 'Camp Invitations:' }
+            it { should have_content 'Camp Registrations:' }
+
+          end
         end
       end
+    end
+
+    describe "Update Camp Registration" do
+    
+    end
+
+    describe "Un-Register from Camp" do
+    
     end
   end
 end

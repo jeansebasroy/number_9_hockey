@@ -1,0 +1,2 @@
+module PlayerCampRegistrationHelper
+end

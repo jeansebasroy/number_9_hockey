@@ -33,6 +33,15 @@ class Ability
         #can :register, Camp
         #can :unregister, Camp 
 
+        # need to only allow for Player to which the User is linked
+        # and to Camps to which the Player has been invited
+        can :new, PlayerCampRegistration
+        can :create, PlayerCampRegistration
+        can :edit, PlayerCampRegistration
+        can :update, PlayerCampRegistration
+        can :show, PlayerCampRegistration
+        can :un_register, PlayerCampRegistration
+
     else
         can :new, User
         can :create, User    

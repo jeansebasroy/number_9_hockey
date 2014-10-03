@@ -114,6 +114,18 @@ class UsersController < ApplicationController
           camp_hash[:name] = camp_details.name
           camp_hash[:description] = camp_details.description
 
+          registration = PlayerCampRegistration.where(player_id: player.id, camp_id: camp_id.camp_id).first
+          if registration.nil? 
+            camp_hash[:registration_id] = ''
+          elsif !registration.un_register_date.blank?
+            camp_hash[:registration_id] = ''
+          else
+            camp_hash[:registration_id] = registration.id
+
+#          registration_id(player.id, camp_id.camp_id)
+#          where(player_id: player_id, camp_id: camp_id)
+          end
+          
           @camps_array.push(camp_hash)
         end
       end

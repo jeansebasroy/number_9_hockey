@@ -18,7 +18,13 @@
 					<p>Camp Name: <%= camp[:name] %> </p>
 					<p>Camp Description: <%= camp[:description] %> </p>
 					<p><%= link_to 'View Camp Details', camp_path(camp[:camp_id]) %> </p>
-					<p><%#= link_to 'Register for Camp', camp_path(camp) %> </p>
+					<p>	<% if camp[:registration_id].blank? %>
+							<%= link_to 'Register', new_player_camp_registration_path(camp) %> 
+						<% else %>
+							<%= link_to 'Update Registration', edit_player_camp_registration_path(id: camp[:registration_id]) %> 
+							<%= link_to 'Un-Register', player_unregister_path(id: camp[:registration_id]), :method => :post %>
+						<% end %>
+					</p>
 					<br>
 				<% end %>
 			<% end %>

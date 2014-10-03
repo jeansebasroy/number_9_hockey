@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
   resources :invitations
   resources :password_resets
+  resources :player_camp_registrations
   
   root 'static_pages#home'
   
@@ -25,7 +26,9 @@ Rails.application.routes.draw do
   match '/camps/publish',     to: 'camps#publish',                      via: 'post'
   match '/camps/unpublish',   to: 'camps#unpublish',                    via: 'post'
   match '/players/invite',    to: 'players#player_invite',              via: 'post'
+  match '/player_unregister', to: 'player_camp_registrations#un_register', via: 'post'
   match '/home',              to: 'users#home',                         via: 'get'
+  #match '/admin_home',        to: 'users#admin_home',                   via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
