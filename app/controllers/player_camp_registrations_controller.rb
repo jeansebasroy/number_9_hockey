@@ -47,11 +47,15 @@ class PlayerCampRegistrationsController < ApplicationController
   end
 
   def update
+    @player = Player.find(params[:player_camp_registration][:player_id])
+    @camp = Camp.find(params[:player_camp_registration][:camp_id])
     @registration = PlayerCampRegistration.find(params[:id])
+
     if @registration.update_attributes(player_camp_registration_params)
-      flash[:success] = "Registration has been updated."
+      flash[:success] = "Registration has been successfully updated."
       redirect_to '/home'
     else
+    #  flash[:error] = "What's up?"
       render 'edit'
     end
   end

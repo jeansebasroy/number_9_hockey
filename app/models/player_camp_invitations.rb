@@ -51,11 +51,38 @@ class PlayerCampInvitations < ActiveRecord::Base
 		invitation.update_attributes(uninvite_date: Date.today)
 	end
 
-	def self.player_has_camp_invitations(player_id)
-		# gets all the camps to which the player has been invited
-		camps = PlayerCampInvitations.where(player_id: player_id)
+	def self.players_with_camp_invitations(players)
+		# returns an array of hashes containing the details of every Camp to which the array of Players have been Invited
+		@invited_camps_array = Array.new
 
-		#PlayerCampInvitations.includes(:camps).where(player_id: player_id)
+		# cycles through all the players
+		players.each do |player| 
+			# find all the player_camp_invitations that have that player_id
+			# and haven't been used
+			player_camp_invitations = PlayerCampInvitations.where(player_id: player.id,
+																	uninvite_date: nil, 
+																	invite_use_date: nil)
+			
+			# cycles through all the player_camp_invitations
+			player_camp_invitations.each do |invitations|
+				# gets the details of the associated camp
+				camp_details = Camp.find(invitations.camp_id)
+
+				# creates a hash for the details of each camp
+				camp_hash = Hash.new
+				camp_hash[:player_id] = player.id
+
+				camp_hash[:camp_id] = camp_details.id
+				camp_hash[:name] = camp_details.name
+				camp_hash[:description] = camp_details.description
+
+				# adds the camp hash to the array of camps
+				@invited_camps_array.push(camp_hash)
+
+			end
+		end
+
+		@invited_camps_array
   
 	end
   	

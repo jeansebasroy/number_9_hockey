@@ -87,9 +87,8 @@ class UsersController < ApplicationController
       
     else
 
-      # => for related Players
-      # => move this to the User Model
-      # => make it a single call from the controller to get this information
+      # => gets all the players linked to this user
+        # => move to User model
       @player_ids = UserToPlayer.user_has_players(@user.id)
       player_ids_array = Array.new
       @player_ids.each do |player_ids|
@@ -97,38 +96,14 @@ class UsersController < ApplicationController
       end
       @players = Player.find(player_ids_array)
 
+      # => gets Camps to which Player has been Invited
+      @invited_camps_array = PlayerCampInvitations.players_with_camp_invitations(@players)
+
+      # => gets Camps for which Player has been Registered
+      @registered_camps_array = PlayerCampRegistration.players_with_camp_registrations(@players)
+
       # => for related Coaches
       @coach = []
-
-      # => for related Camps
-      @camps_array = Array.new
-      @players.each do |player|
-        camp_hash = Hash.new
-        camp_hash[:player_id] = player.id
-
-        # => need to handle multiple camp invitations
-        camp_id = PlayerCampInvitations.player_has_camp_invitations(player.id).first
-        if !camp_id.nil?
-          camp_details = Camp.find(camp_id.camp_id)
-          camp_hash[:camp_id] = camp_details.id
-          camp_hash[:name] = camp_details.name
-          camp_hash[:description] = camp_details.description
-
-          registration = PlayerCampRegistration.where(player_id: player.id, camp_id: camp_id.camp_id).first
-          if registration.nil? 
-            camp_hash[:registration_id] = ''
-          elsif !registration.un_register_date.blank?
-            camp_hash[:registration_id] = ''
-          else
-            camp_hash[:registration_id] = registration.id
-
-#          registration_id(player.id, camp_id.camp_id)
-#          where(player_id: player_id, camp_id: camp_id)
-          end
-          
-          @camps_array.push(camp_hash)
-        end
-      end
 
       render 'home'
     end
