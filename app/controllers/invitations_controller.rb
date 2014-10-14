@@ -9,18 +9,18 @@ class InvitationsController < ApplicationController
     
     if valid_code.nil?
       flash[:error] = "The Invitation Code submitted did not match our records. Try again."
-      redirect_to "/signin"
+      redirect_to "/home"
 
   	#checks that valid_code has not expired
     elsif valid_code.expiration_date < Date.today
       flash[:error] = "This Invitation Code has expired. Contact support@number9hockey.com if you believe there has been an error."
-      redirect_to "/signin"
+      redirect_to "/home"
 
     #checks that valid_code has not been used
     elsif valid_code.use_date.nil? == false
       #provides notice that the invitation_code has been used
       flash[:error] = "This Invitation Code has already been used. Only one Invitation Code per person."
-      redirect_to "/signin"
+      redirect_to "/home"
     
     #invitation code checks out
     else 

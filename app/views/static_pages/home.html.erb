@@ -1,6 +1,36 @@
-<h1>#9 Hockey</h1>
-<p>At #9 Hockey we merge the integrity and values of old-school hockey with today's latest advancements in physiology, athlete development, and education.</p>
-<p>Our program targets specific skills development accelerating a player's understanding of the game of hockey, and their ability to execute fundamental these skills in game situations.</p>
-<p>Those who choose to accept our 
-<%= link_to "invitation", about_us_path %> 
-will not only skate away from the pack, improving their skills, but will gain a greater sense of hockey.</p>
+<div>
+  <br>
+  <br>
+  <div align="center">"A good hockey player plays where the puck is.</div>
+  <div align="center">A great hockey player plays where the puck is going to be."</div>
+  <div align="center">- Wayne Gretzky</div>
+  <br>
+  <br>
+</div>
+
+<div align="center">
+	<%=image_tag("home_greatness.jpg", alt: "Hockey Greatness")%>
+</div>
+
+<div align="center">
+  <br>
+  <p>Invited to Forge Greatness? Submit Invitation Code below:</p>
+</div>
+
+<div class="row">
+  <br>
+  <div class="span6 offset1" align="center">
+      <%= form_for(:invitations, url: "/invitation/verify") do |g| %>
+        
+          <%#= render 'shared/error_messages', object: g.object %>
+        
+          <%= g.label :invitation_code, "Invitation Code:" %>
+          <%= g.text_field :invitation_code %>
+          <br>
+
+          <%= g.submit "Submit to Forge Greatness", class: "btn btn-primary" %>
+      <% end %>
+  </div>
+  <br>
+  <p align="center">Already have an account?  Click here to <%= link_to "Sign In", signin_path %>.</p>
+</div>
