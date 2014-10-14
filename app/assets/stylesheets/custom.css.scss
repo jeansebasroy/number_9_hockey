@@ -144,7 +144,7 @@ footer {
 
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
-  width: 300px;
+  width: 40%;
   margin-bottom: 15px;
   @include box_sizing;
 }
@@ -169,5 +169,11 @@ input {
 .btn {
   /* button: primary; */
   size: large;
-  width: 200px;
+  width: 30%;
+}
+
+img { 
+  /* align: center; */
+  max-width: 100%; 
+  height: auto
 }
