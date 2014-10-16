@@ -1,13 +1,16 @@
 <% provide(:title, "Edit Player") %>
 <h1>Update Player</h1>
-<p>Update the Player's information below:</p>
 
-<div class="row">
-  	<div class="span6 offset3">
-    	<%= form_for(@player) do |player| %>
-			<%= render 'players_form', player: player %>
+<div align="center">
+	<p>Update the Player's information below:</p>
 
-      		<%= player.submit "Update", class: "btn btn-large btn-primary" %>
-    	<% end %>
-    </div>
+	<div class="row">
+	  	<div class="span6 offset3">
+	    	<%= form_for(@player) do |player| %>
+				<%= render 'players_form', player: player %>
+
+	      		<%= player.submit "Update", class: "btn btn-large btn-primary" %>
+	    	<% end %>
+	    </div>
+	</div>
 </div>
