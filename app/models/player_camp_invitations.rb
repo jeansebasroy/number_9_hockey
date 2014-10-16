@@ -94,4 +94,9 @@ class PlayerCampInvitations < ActiveRecord::Base
   		invitation = PlayerCampInvitations.where(player_id: player_id, camp_id: camp_id).first!
 		invitation.update_attributes(invite_use_date: Date.today)
   	end
+
+  	 def self.invitation_un_used(player_id, camp_id)
+  		invitation = PlayerCampInvitations.where(player_id: player_id, camp_id: camp_id).first!
+		invitation.update_attributes(invite_use_date: nil)
+  	end
 end

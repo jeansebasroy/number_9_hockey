@@ -4,57 +4,64 @@
 	<h1>My <%= "Player".pluralize(@players.count) %>:</h1>
 
 	<% @players.each do |player| %>
-		<p>First Name: <%= player.first_name %> </p>
-		<p>Last Name: <%= player.last_name %> </p>
-		<p>Date of Birth:  <%= player.date_of_birth %> </p>	
-		<p>Shoots:  <%= player.shoots %> </p>
-		<p><%= link_to 'Edit Player Info', edit_player_path(player) %> </p>
+		<div id="box">
+			<div id="left">
+				<p>First Name: <%= player.first_name %> </p>
+				<p>Last Name: <%= player.last_name %> </p>
+				<p>Date of Birth:  <%= player.date_of_birth %> </p>	
+				<p>Shoots:  <%= player.shoots %> </p>
+				<p><%= link_to 'Edit Player Info', edit_player_path(player) %> </p>
+				<br>
+			</div>
+
+			<div id="right">
+				<% camp_invitation_count = 0 %>
+				<% @invited_camps_array.each do |invited_camp| %>
+					<% if invited_camp[:player_id] == player.id %>
+						<% camp_invitation_count += 1 %>
+					<% end %>
+				<% end %>
+
+				<% if camp_invitation_count > 0 %>
+					<p><%= "Camp Invitation".pluralize(camp_invitation_count) %>:</p>
+					<% @invited_camps_array.each do |invited_camp| %>
+						<% if player.id == invited_camp[:player_id] %>
+							<p>Camp Name: <%= invited_camp[:name] %> </p>
+							<p>Camp Description: <%= invited_camp[:description] %> </p>
+							<p><%= link_to 'View Camp Details', camp_path(invited_camp[:camp_id]) %> </p>
+							<p>	
+								<%= link_to 'Register', new_player_camp_registration_path(invited_camp) %> 
+							</p>
+							<br>
+						<% end %>
+					<% end %>
+				<% end %>
+			
+				<% camp_registration_count = 0 %>
+				<% @registered_camps_array.each do |registered_camp| %>
+					<% if registered_camp[:player_id] == player.id %>
+						<% camp_registration_count += 1 %>
+					<% end %>
+				<% end %>
+
+				<% if camp_registration_count > 0 %>
+					<p><%= "Camp Registration".pluralize(camp_registration_count) %>:</p>
+					<% @registered_camps_array.each do |registered_camp| %>
+						<% if player.id == registered_camp[:player_id] %>
+							<p>Camp Name: <%= registered_camp[:name] %> </p>
+							<p>Camp Description: <%= registered_camp[:description] %> </p>
+							<p><%= link_to 'View Camp Details', camp_path(registered_camp[:camp_id]) %> </p>
+							<p>	
+								<%= link_to 'Update Registration', edit_player_camp_registration_path(id: registered_camp[:registration_id]) %> 
+								<%= link_to 'Un-Register', player_unregister_path(id: registered_camp[:registration_id]), :method => :post %>
+							</p>
+							<br>
+						<% end %>
+					<% end %>
+				<% end %>
+			</div>
+		</div>
 		<br>
-
-		<% camp_invitation_count = 0 %>
-		<% @invited_camps_array.each do |invited_camp| %>
-			<% if invited_camp[:player_id] == player.id %>
-				<% camp_invitation_count += 1 %>
-			<% end %>
-		<% end %>
-
-		<% if camp_invitation_count > 0 %>
-			<p><%= "Camp Invitation".pluralize(camp_invitation_count) %>:</p>
-			<% @invited_camps_array.each do |invited_camp| %>
-				<% if player.id == invited_camp[:player_id] %>
-					<p>Camp Name: <%= invited_camp[:name] %> </p>
-					<p>Camp Description: <%= invited_camp[:description] %> </p>
-					<p><%= link_to 'View Camp Details', camp_path(invited_camp[:camp_id]) %> </p>
-					<p>	
-						<%= link_to 'Register', new_player_camp_registration_path(invited_camp) %> 
-					</p>
-					<br>
-				<% end %>
-			<% end %>
-		<% end %>
-
-		<% camp_registration_count = 0 %>
-		<% @registered_camps_array.each do |registered_camp| %>
-			<% if registered_camp[:player_id] == player.id %>
-				<% camp_registration_count += 1 %>
-			<% end %>
-		<% end %>
-
-		<% if camp_registration_count > 0 %>
-			<p><%= "Camp Registration".pluralize(camp_registration_count) %>:</p>
-			<% @registered_camps_array.each do |registered_camp| %>
-				<% if player.id == registered_camp[:player_id] %>
-					<p>Camp Name: <%= registered_camp[:name] %> </p>
-					<p>Camp Description: <%= registered_camp[:description] %> </p>
-					<p><%= link_to 'View Camp Details', camp_path(registered_camp[:camp_id]) %> </p>
-					<p>	
-						<%= link_to 'Update Registration', edit_player_camp_registration_path(id: registered_camp[:registration_id]) %> 
-						<%= link_to 'Un-Register', player_unregister_path(id: registered_camp[:registration_id]), :method => :post %>
-					</p>
-					<br>
-				<% end %>
-			<% end %>
-		<% end %>
 	<% end %>
 <% end %>
 

@@ -72,6 +72,9 @@ class PlayerCampRegistrationsController < ApplicationController
 
     @registration.update_attributes(un_register_date: Date.today)
 
+    # => this is a hack to get camps that have been un-registered back on the "invitation" list
+    @invitation = PlayerCampInvitations.invitation_un_used(@player.id, @camp.id)
+
     flash[:success] = "#{@player.first_name} has been Un-Registered from #{@camp.name}."
     redirect_to '/home'
   end

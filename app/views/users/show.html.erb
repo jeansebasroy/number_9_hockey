@@ -1,23 +1,35 @@
 <% provide(:title, "Profile for #{@user.first_name}") %>
 <%# provide(:title, @user.last_name, @user.first_name) %>
-<h1>My Profile</h1>
-<p>First Name: <%= @user.first_name %> </p>
-<p>Last Name: <%= @user.last_name %> </p>
-<p>e-mail:  <%= @user.email %> </p>
-<p><%= link_to 'Edit My Info', edit_user_path(@user) %> </p>
 
-<% if !@players.empty? %>
-	<h1>My <%= "Player".pluralize(@players.count) %>:</h1>
+<div id="left">
+	<h1>My Profile:</h1>
 
-	<% @players.each do |player| %>
-		<p>First Name: <%= player.first_name %> </p>
-		<p>Last Name: <%= player.last_name %> </p>
-		<p>Date of Birth:  <%= player.date_of_birth %> </p>	
-		<p>Shoots:  <%= player.shoots %> </p>
-		<p><%= link_to 'Edit Player Info', edit_player_path(player) %> </p>
-		<br>
+	<div id="box">
+		<p>First Name: <%= @user.first_name %> </p>
+		<p>Last Name: <%= @user.last_name %> </p>
+		<p>e-mail:  <%= @user.email %> </p>
+		<p><%= link_to 'Edit My Info', edit_user_path(@user) %> </p>
+	</div>
+
+</div>
+
+<div id="right">
+	<% if !@players.empty? %>
+		<h1>My <%= "Player".pluralize(@players.count) %>:</h1>
+	
+		<% @players.each do |player| %>
+			<div id="box">
+				<p>First Name: <%= player.first_name %> </p>
+				<p>Last Name: <%= player.last_name %> </p>
+				<p>Date of Birth:  <%= player.date_of_birth %> </p>	
+				<p>Shoots:  <%= player.shoots %> </p>
+				<p><%= link_to 'Edit Player Info', edit_player_path(player) %> </p>
+				<br>
+			</div>
+			<br>
+		<% end %>
 	<% end %>
-<% end %>
+</div>
 
 <% if !@coach.empty? %>
 	<h1>My Coach's Profile:</h1>

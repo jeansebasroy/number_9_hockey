@@ -1,13 +1,15 @@
 <% provide(:title, 'Update Registration') %>
 <h1><%= @camp.name %>: Camp Registration</h1>
 
-<div class="row">
-  <div class="span6 offset3">
-  	<li>For: <%= @player.first_name %> <%= @player.last_name %></li>
-   	<%= form_for(@player_camp_registration) do |registration| %>
-       	<%= render 'registration_form', player_camp_registration: registration %>
+<div align="center">
+	<div class="row">
+	  <div class="span6 offset3">
+	  	<p>Camp Registration for: <%= @player.first_name %> <%= @player.last_name %></p>
+	   	<%= form_for(@player_camp_registration) do |registration| %>
+	       	<%= render 'registration_form', player_camp_registration: registration %>
 
-    	<%= registration.submit "Update", class: "btn btn-large btn-primary" %>
-    <% end %>
-  </div>
+	    	<%= registration.submit "Update", class: "btn btn-large btn-primary" %>
+	    <% end %>
+	  </div>
+	</div>
 </div>

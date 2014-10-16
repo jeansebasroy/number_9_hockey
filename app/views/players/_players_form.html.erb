@@ -2,15 +2,19 @@
       		
 <%= player.label :first_name, "First Name:" %>
 <%= player.text_field :first_name %>
+<br>
 
 <%= player.label :last_name, "Last Name:" %>
 <%= player.text_field :last_name %>
+<br>
 
 <%= player.label :date_of_birth, "Date of Birth:" %>
-<%= player.date_select :date_of_birth, :start_year => Time.now.year - 18, :end_year => Time.now.year - 5 %>
+<span class="datetime"><%= player.date_select :date_of_birth, :start_year => Time.now.year - 18, :end_year => Time.now.year - 5 %></span>
+<br>
 
 <%= player.label :shoots, 'Shoots:' %>
 <%= player.select :shoots, options_for_select([['Select One', ''], ['Left','Left'], ['Right', 'Right']]) %>
+<br>
 
 <%#= camp.label :skill, 'Select Skills (multiple):' %>
 <%#= camp.select :publish_date, options_from_collection_for_select(Skill.all, :id, :name), :multiple => true %>

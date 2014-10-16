@@ -1,18 +1,21 @@
 <% provide(:title, "New Player") %>
 <h1>New Player</h1>
-<p>Enter the Player's details below:</p>
 
-<div class="row">
-  	<div class="span6 offset3">
-    	<%= form_for(@player) do |player| %>
-			<%= render 'players_form', player: player %>
+<div align="center">
+	<p>Enter the Player's details below:</p>
+	
+	<div class="row">
+	  	<div class="span6 offset3">
+	    	<%= form_for(@player) do |player| %>
+				<%= render 'players_form', player: player %>
 
-			<%= fields_for(@player_evaluation) do |player_evaluation| %>
-				<%= render 'player_evaluations_form', player_evaluation: player_evaluation %>
+				<%= fields_for(@player_evaluation) do |player_evaluation| %>
+					<%= render 'player_evaluations_form', player_evaluation: player_evaluation %>
 
-			<% end %>
+				<% end %>
 
-      		<%= player.submit "Save", class: "btn btn-large btn-primary" %>
-    	<% end %>
-    </div>
+	      		<%= player.submit "Save", class: "btn btn-large btn-primary" %>
+	    	<% end %>
+	    </div>
+	</div>
 </div>
