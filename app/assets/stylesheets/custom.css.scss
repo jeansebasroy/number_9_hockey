@@ -214,6 +214,17 @@ input {
   text-indent: 10px;
 }
 
+.datetime select:nth-child(4){
+  width: 125px;
+  text-indent: 5px; 
+}
+
+.datetime select:nth-child(5) {
+  width: 125px;
+  text-indent: 10px;
+}
+
+
 #error_explanation {
   color: #f00;
   ul {

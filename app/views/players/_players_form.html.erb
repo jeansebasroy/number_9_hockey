@@ -1,18 +1,18 @@
 <%= render 'shared/error_messages', object: player.object %>
       		
-<%= player.label :first_name, "First Name:" %>
+<%= player.label :first_name, "First Name" %>
 <%= player.text_field :first_name %>
 <br>
 
-<%= player.label :last_name, "Last Name:" %>
+<%= player.label :last_name, "Last Name" %>
 <%= player.text_field :last_name %>
 <br>
 
-<%= player.label :date_of_birth, "Date of Birth:" %>
+<%= player.label :date_of_birth, "Date of Birth" %>
 <span class="datetime"><%= player.date_select :date_of_birth, :start_year => Time.now.year - 18, :end_year => Time.now.year - 5 %></span>
 <br>
 
-<%= player.label :shoots, 'Shoots:' %>
+<%= player.label :shoots, 'Shoots' %>
 <%= player.select :shoots, options_for_select([['Select One', ''], ['Left','Left'], ['Right', 'Right']]) %>
 <br>
 

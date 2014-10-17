@@ -1,6 +1,7 @@
 <% provide(:title, "Add Date") %>
 <h1>Edit a Date to Camp</h1>
 
+
 <p>Camp Name: <%= @camp.name %></p>
 <p>Description: <%= @camp.description %></p>
 <p>Date Published: 
@@ -11,14 +12,16 @@
 	<%end%>
 </p>
 
-<p>Update Date and Information for the Camp:</p>
+<div align="center">
+	<p>Update Date and Information for the Camp:</p>
 
-<div class="row">
-  	<div class="span6 offset3">
-    	<%= form_for [@camp, @date] do |date| %>
-			<%= render 'dates_form', date: date %>
+	<div class="row">
+  		<div class="span6 offset3">
+    		<%= form_for [@camp, @date] do |date| %>
+				<%= render 'dates_form', date: date %>
 
-      		<%= date.submit "Update", class: "btn btn-large btn-primary" %>
-    	<% end %>
-    </div>
+	      		<%= date.submit "Update", class: "btn btn-large btn-primary" %>
+    		<% end %>
+    	</div>
+	</div>
 </div>

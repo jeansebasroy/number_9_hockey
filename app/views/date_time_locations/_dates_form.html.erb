@@ -1,15 +1,19 @@
 <%= render 'shared/error_messages', object: date.object %>
 
-<%= date.label :date, 'Date:'  %>
-<%= date.date_select :date %>
+<%= date.label :date, 'Date'  %>
+<span class="datetime"><%= date.date_select :date %></span>
+<br>
 
-<%= date.label :start_time, 'Start Time:' %>
-<%= date.time_select :start_time %>	
+<%= date.label :start_time, 'Start Time' %>
+<span class="datetime"><%= date.time_select :start_time %></span>
+<br>
 
-<%= date.label :end_time, 'End Time:' %>
-<%= date.time_select :end_time %>
+<%= date.label :end_time, 'End Time' %>
+<span class="datetime"><%= date.time_select :end_time %></span>
+<br>
 
-<%= date.label :rink_id, 'Select Rink:' %>
+<%= date.label :rink_id, 'Select Rink' %>
 <%= date.select :rink_id, options_from_collection_for_select(Rink.all, :id, :name) %>
+<br>
 
 <%= date.hidden_field :camp_id, value: @camp.id %>

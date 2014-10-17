@@ -1,13 +1,16 @@
 <% provide(:title, "Edit Camp") %>
 <h1>Edit Camp</h1>
-<p>Edit the Camp's details below:</p>
 
-<div class="row">
-  	<div class="span6 offset3">
-    	<%= form_for(@camp) do |camp| %>
-			<%= render 'camps_form', camp: camp %>
+<div align="center">
+	<p>Edit the Camp's details below:</p>
 
-      		<%= camp.submit "Update", class: "btn btn-large btn-primary" %>
-    	<% end %>
-    </div>
+	<div class="row">
+  		<div class="span6 offset3">
+    		<%= form_for(@camp) do |camp| %>
+				<%= render 'camps_form', camp: camp %>
+
+      			<%= camp.submit "Update", class: "btn btn-large btn-primary" %>
+    		<% end %>
+    	</div>
+	</div>
 </div>
