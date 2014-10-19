@@ -1,14 +1,16 @@
-<% provide(:title, "Your Camp") %>
+<% provide(:title, @camp.name) %>
 
 <p>Camp Name: <%= @camp.name %></p>
 <p>Description: <%= @camp.description %></p>
-<p>Date Published: 
-	<% if @camp.publish_date.nil? %>
-		Under Development
-	<%else%>
-		<%= @camp.publish_date %>
-	<%end%>
-</p>
+<% if current_user.admin? %>
+	<p>Date Published: 
+		<% if @camp.publish_date.nil? %>
+			Under Development
+		<%else%>
+			<%= @camp.publish_date %>
+		<%end%>
+	</p>
+<% end %>
 
 <div>
 	<% if current_user.admin? %>
@@ -37,8 +39,10 @@
 			<td><%= details[:end_time] %></td>
 			<td><%= details[:rink_name] %></td>
 			<!--<td><%#= details.rink_name %></td>-->
-			<td><%= link_to 'Edit', edit_camp_date_time_location_path(@camp, details[:id]) %></td>
-			<td><%= link_to 'Delete', camp_date_time_location_path(@camp, details[:id]), :method => :delete %></td>
+			<% if current_user.admin? %>
+				<td><%= link_to 'Edit', edit_camp_date_time_location_path(@camp, details[:id]) %></td>
+				<td><%= link_to 'Delete', camp_date_time_location_path(@camp, details[:id]), :method => :delete %></td>
+			<% end %>
 		</tr>
 	<% end %>
 </table>
