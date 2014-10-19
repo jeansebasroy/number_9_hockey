@@ -28,6 +28,7 @@
 						<% if player.id == invited_camp[:player_id] %>
 							<p>Camp Name: <%= invited_camp[:name] %> </p>
 							<p>Camp Description: <%= invited_camp[:description] %> </p>
+							<p>Camp Dates: <%= invited_camp[:dates] %></p>
 							<p><%= link_to 'View Camp Details', camp_path(invited_camp[:camp_id]) %> </p>
 							<p>	
 								<%= link_to 'Register', new_player_camp_registration_path(invited_camp) %> 
@@ -50,6 +51,7 @@
 						<% if player.id == registered_camp[:player_id] %>
 							<p>Camp Name: <%= registered_camp[:name] %> </p>
 							<p>Camp Description: <%= registered_camp[:description] %> </p>
+							<p>Camp Dates: <%= registered_camp[:dates] %></p>
 							<p><%= link_to 'View Camp Details', camp_path(registered_camp[:camp_id]) %> </p>
 							<p>	
 								<%= link_to 'Update Registration', edit_player_camp_registration_path(id: registered_camp[:registration_id]) %> 

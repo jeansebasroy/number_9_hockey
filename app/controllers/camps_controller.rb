@@ -10,7 +10,8 @@ class CampsController < ApplicationController
 
   def show
 #	 @camp = Camp.find(params[:id])
-   @dates = DateTimeLocation.where(camp_id: @camp.id)
+   @camp_dates_times_rinks = Camp.camp_dates_times_rinks(@camp.id)
+  
   end
 
   def index

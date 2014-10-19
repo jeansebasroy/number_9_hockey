@@ -30,15 +30,15 @@
 		<th>Rink:</th>
 		<!--<th>Sheet:</th>-->
 	</tr>
-	<% @dates.each do |date| %>
+	<% @camp_dates_times_rinks.each do |details| %>
 		<tr>
-			<td><%= date.date %></td>
-			<td><%= date.start_time %></td>
-			<td><%= date.end_time %></td>
-			<td><%= date.rink_id %></td>
-			<!--<td><%#= date.sheet %></td>-->
-			<td><%= link_to 'Edit', edit_camp_date_time_location_path(@camp, date) %></td>
-			<td><%= link_to 'Delete', camp_date_time_location_path(@camp, date), :method => :delete %></td>
+			<td><%= details[:date] %></td>
+			<td><%= details[:start_time] %></td>
+			<td><%= details[:end_time] %></td>
+			<td><%= details[:rink_name] %></td>
+			<!--<td><%#= details.rink_name %></td>-->
+			<td><%= link_to 'Edit', edit_camp_date_time_location_path(@camp, details[:id]) %></td>
+			<td><%= link_to 'Delete', camp_date_time_location_path(@camp, details[:id]), :method => :delete %></td>
 		</tr>
 	<% end %>
 </table>

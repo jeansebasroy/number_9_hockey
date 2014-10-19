@@ -76,6 +76,16 @@ class PlayerCampInvitations < ActiveRecord::Base
 				camp_hash[:name] = camp_details.name
 				camp_hash[:description] = camp_details.description
 
+				# gets all the Dates for the Camp
+				date_array = Array.new
+				camp_dates = DateTimeLocation.where(camp_id: camp_details.id)
+
+				camp_dates.each do |date|
+					date_array.push(date.date.strftime('%v'))
+				end
+
+				camp_hash[:dates] = date_array
+
 				# adds the camp hash to the array of camps
 				@invited_camps_array.push(camp_hash)
 

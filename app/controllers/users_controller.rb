@@ -58,7 +58,7 @@ class UsersController < ApplicationController
   		
       sign_in @user
       flash[:success] = "Welcome to #9 Hockey!"
-  		redirect_to @user
+      redirect_to '/home'
   	else
   		render 'new'
   	end
@@ -101,6 +101,7 @@ class UsersController < ApplicationController
 
       # => gets Camps for which Player has been Registered
       @registered_camps_array = PlayerCampRegistration.players_with_camp_registrations(@players)
+
 
       # => for related Coaches
       @coach = []
