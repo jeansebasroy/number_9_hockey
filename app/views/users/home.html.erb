@@ -29,7 +29,7 @@
 							<p>Camp Name: <%= invited_camp[:name] %> </p>
 							<p>Camp Description: <%= invited_camp[:description] %> </p>
 							<p><%= "Camp Date".pluralize(invited_camp[:dates]) %>: 
-								<%= invited_camp[:dates].map{|date| date}.join(",") %>
+								<%= invited_camp[:dates].map{|date| date}.join(", ") %>
 							</p>
 							<p><%= link_to 'View Camp Details', camp_path(invited_camp[:camp_id]) %> </p>
 							<p>	
@@ -54,7 +54,7 @@
 							<p>Camp Name: <%= registered_camp[:name] %> </p>
 							<p>Camp Description: <%= registered_camp[:description] %> </p>
 							<p><%= "Camp Date".pluralize(registered_camp[:dates]) %>: 
-								<%= registered_camp[:dates].map{|date| date}.join(",") %>
+								<%= registered_camp[:dates].map{|date| date}.join(", ") %>
 							</p>
 							<p><%= link_to 'View Camp Details', camp_path(registered_camp[:camp_id]) %> </p>
 							<p>	
