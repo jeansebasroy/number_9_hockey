@@ -7,8 +7,9 @@
       		<a href= <%= root_path %>>© #9 Hockey, LLC</a>    
     	</small>
     	<ul class="nav pull-right">
+          <li><%= mail_to "info@number9hockey.com", "Contact Us", subject: "Request for Info" %></li>
       		<li><%= mail_to "scouting@number9hockey.com", "Scouting", subject: "Request for Scouting" %></li>
-      		<li><%= mail_to "info@number9hockey.com", "Contact Us", subject: "Request for Info" %></li>
+          <li><%= mail_to "support@number9hockey.com", "Support", subject: "Website Support" %></li>
     	</ul>
     </div>
   	</div>

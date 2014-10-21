@@ -53,7 +53,9 @@
 						<% if player.id == registered_camp[:player_id] %>
 							<p>Camp Name: <%= registered_camp[:name] %> </p>
 							<p>Camp Description: <%= registered_camp[:description] %> </p>
-							<p>Camp Dates: <%= registered_camp[:dates] %></p>
+							<p><%= "Camp Date".pluralize(registered_camp[:dates]) %>: 
+								<%= registered_camp[:dates].map{|date| date}.join(",") %>
+							</p>
 							<p><%= link_to 'View Camp Details', camp_path(registered_camp[:camp_id]) %> </p>
 							<p>	
 								<%= link_to 'Update Registration', edit_player_camp_registration_path(id: registered_camp[:registration_id]) %> 

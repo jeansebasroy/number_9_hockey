@@ -1,15 +1,46 @@
 <% provide(:title, 'Update Registration') %>
-<h1><%= @camp.name %>: Camp Registration</h1>
 
-<div align="center">
-	<div class="row">
-	  <div class="span6 offset3">
-	  	<p>Camp Registration for: <%= @player.first_name %> <%= @player.last_name %></p>
-	   	<%= form_for(@player_camp_registration) do |registration| %>
-	       	<%= render 'registration_form', player_camp_registration: registration %>
+<h1>Update Registration for Camp</h1>
 
-	    	<%= registration.submit "Update", class: "btn btn-large btn-primary" %>
-	    <% end %>
-	  </div>
-	</div>
+<div id="left_registration_box">
+	<h1><%= @camp.name %></h1>
+	<p align="center"><%= @camp.description %></p>
+	<p align="center">Registration for: <%= @player.first_name %> <%= @player.last_name %></p>
+	<br>
+	<br>
+	<br>
+	<!-- table to show associated dates, times & rinks -->
+	<table class="table table-bordered">
+		<tr>
+			<th>Date:</th>
+			<th>Time Start:</th>
+			<th>Time End:</th>
+			<th>Rink:</th>
+			<!--<th>Sheet:</th>-->
+		</tr>
+		<% @camp_dates_times_rinks.each do |details| %>
+			<tr>
+				<td><%= details[:date] %></td>
+				<td><%= details[:start_time] %></td>
+				<td><%= details[:end_time] %></td>
+				<td><%= details[:rink_name] %></td>
+				<!--<td><%#= details.rink_name %></td>-->
+				<% if current_user.admin? %>
+					<td><%= link_to 'Edit', edit_camp_date_time_location_path(@camp, details[:id]) %></td>
+					<td><%= link_to 'Delete', camp_date_time_location_path(@camp, details[:id]), :method => :delete %></td>
+				<% end %>
+			</tr>
+		<% end %>
+	</table>
+</div>
+
+<div id="right_registration_box">
+	<h1>Registration Form:</h1>	
+	<%= form_for(@player_camp_registration) do |registration| %>
+       	<%= render 'registration_form', player_camp_registration: registration %>
+
+    	<div align="center">
+    		<%= registration.submit "Update", class: "btn btn-large btn-primary" %>
+    	</div>
+    <% end %>	
 </div>

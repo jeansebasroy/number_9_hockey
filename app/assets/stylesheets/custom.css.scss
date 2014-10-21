@@ -93,6 +93,27 @@ p {
   padding-left: 5%;
 }
 
+#left_registration_box{
+  height: 250px;
+  width: 45%;
+  float: left;
+  border: 2px solid $grayMediumLight;
+  border-radius:2px;
+  padding-top: 2%;
+  padding-left: 0%;
+}
+
+#right_registration_box{
+  height: 250px;
+  width: 45%;
+  float: right;
+  border: 2px solid $grayMediumLight;
+  border-radius:2px;
+  padding-top: 2%;
+  padding-left: 0%;
+}
+
+
 #left{
   width: 20%;
   float: left; 

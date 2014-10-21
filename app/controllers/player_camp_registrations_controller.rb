@@ -4,9 +4,12 @@ class PlayerCampRegistrationsController < ApplicationController
   def new
   	@player = Player.find_by(id: params[:player_id])
   	@camp = Camp.find_by(id: params[:camp_id])
+
+    @camp_dates_times_rinks = Camp.camp_dates_times_rinks(@camp.id)
   end
 
   def create
+    @user = current_user
   	@player = Player.find(params[:player_camp_registration][:player_id])
   	@camp = Camp.find(params[:player_camp_registration][:camp_id])
 
@@ -21,6 +24,9 @@ class PlayerCampRegistrationsController < ApplicationController
         # marks PlayerCampInvitation as Used
         PlayerCampInvitations.invitation_used(@player.id, @camp.id)
 
+        # sends confirmation email to user
+        UserMailer.camp_registration_confirmation(@user, @player, @camp).deliver
+
         flash[:success] = "#{@player.first_name} has been Registered for #{@camp.name} Camp."
         redirect_to '/home'
       else
@@ -31,6 +37,12 @@ class PlayerCampRegistrationsController < ApplicationController
       @player_camp_registration.un_register_date = ''
 
       if @player_camp_registration.update_attributes(player_camp_registration_params)
+        # marks PlayerCampInvitation as Used
+        PlayerCampInvitations.invitation_used(@player.id, @camp.id)
+
+        # sends confirmation email to user
+        UserMailer.camp_registration_confirmation(@user, @player, @camp).deliver
+
 
         flash[:success] = "#{@player.first_name} has been Registered for #{@camp.name} Camp."
         redirect_to '/home'
@@ -44,12 +56,14 @@ class PlayerCampRegistrationsController < ApplicationController
     @registration = PlayerCampRegistration.find(params[:id])
     @player = Player.find(@registration.player_id)
     @camp = Camp.find(@registration.camp_id)
+    @camp_dates_times_rinks = Camp.camp_dates_times_rinks(@camp.id)
   end
 
   def update
     @player = Player.find(params[:player_camp_registration][:player_id])
     @camp = Camp.find(params[:player_camp_registration][:camp_id])
     @registration = PlayerCampRegistration.find(params[:id])
+    @camp_dates_times_rinks = Camp.camp_dates_times_rinks(@camp.id)
 
     if @registration.update_attributes(player_camp_registration_params)
       flash[:success] = "Registration has been successfully updated."
