@@ -44,7 +44,8 @@ class Ability
 
     else
         can :new, User
-        can :create, User    
+        can :create, User
+        #can :all, StaticPages
 
         #can :new, PasswordReset
         #can :create, PasswordReset

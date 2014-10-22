@@ -12,6 +12,7 @@ class PlayerCampRegistrationsController < ApplicationController
     @user = current_user
   	@player = Player.find(params[:player_camp_registration][:player_id])
   	@camp = Camp.find(params[:player_camp_registration][:camp_id])
+    @camp_dates_times_rinks = Camp.camp_dates_times_rinks(@camp.id)
 
     # checks to see if there's an existing registration for this player for this camp
     @player_camp_registration = PlayerCampRegistration.player_registered?(@player.id, @camp.id)
@@ -69,7 +70,7 @@ class PlayerCampRegistrationsController < ApplicationController
       flash[:success] = "Registration has been successfully updated."
       redirect_to '/home'
     else
-    #  flash[:error] = "What's up?"
+      #flash[:error] = "What's up?"
       render 'edit'
     end
   end

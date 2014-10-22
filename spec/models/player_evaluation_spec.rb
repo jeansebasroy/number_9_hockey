@@ -6,7 +6,11 @@ describe PlayerEvaluation do
 							evaluation_type: "Practice", 
 							league: "NHL", 
 							team: "Blackhawks", 
-							date: Date.today) }
+							date: Date.today,
+              jersey_number: "9",
+              age_group: "Mite",
+              level: "Elite F",
+              notes: "Something about the player") }
 
   subject { @player_evaluation }
 
@@ -15,7 +19,11 @@ describe PlayerEvaluation do
   it { should respond_to(:league) }
   it { should respond_to(:team) }
   it { should respond_to(:date) }
-  
+  it { should respond_to(:jersey_number) }
+  it { should respond_to(:age_group) }
+  it { should respond_to(:level) }
+  it { should respond_to(:notes) }
+
   it { should be_valid }
   
   describe "when player_id is not present" do
@@ -40,7 +48,7 @@ describe PlayerEvaluation do
   end
 
   describe "when date is not present" do
-  	before { @player_evaluation.evaluation_type = " " }
+  	before { @player_evaluation.date = " " }
   	it { should_not be_valid }
   end
 
@@ -48,5 +56,25 @@ describe PlayerEvaluation do
   #	before { @player_evaluation.date = " " }
   #	it { should_not be_valid }
   #end
+
+  describe "when jersey_number is not present" do
+    before { @player_evaluation.jersey_number = " " }
+    it { should be_valid }
+  end
+
+  describe "when age_group is not present" do
+    before { @player_evaluation.age_group = " " }
+    it { should_not be_valid }
+  end
+
+  describe "when level is not present" do
+    before { @player_evaluation.level = " " }
+    it { should be_valid }
+  end
+
+  describe "when notes is not present" do
+    before { @player_evaluation.notes = " " }
+    it { should be_valid }
+  end
 
 end

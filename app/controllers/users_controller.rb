@@ -83,7 +83,7 @@ class UsersController < ApplicationController
     authorize! :home, @user
 
     if @user.admin?
-      redirect_to root_url
+      render 'admin_home'
       
     else
 

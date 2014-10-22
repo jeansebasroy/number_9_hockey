@@ -23,7 +23,7 @@ describe Player do
   
   describe "when last_name is not present" do
   	before { @player.last_name = " " }
-  	it { should_not be_valid }
+  	it { should be_valid }
   end
 
   describe "when date_of_birth is not present" do

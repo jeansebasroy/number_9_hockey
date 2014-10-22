@@ -4,7 +4,6 @@ describe "Admin sign in" do
 	
   let(:base_title) { "#9 Hockey" }
   let(:admin_user) { FactoryGirl.create(:admin) }
-  let(:base_title) { "#9 Hockey" }
   # need to create a 'helper' file to define this for both "Static pages" & "User pages"
 
 	subject { page }

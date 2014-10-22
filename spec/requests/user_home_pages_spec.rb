@@ -18,7 +18,7 @@ describe "User pages" do
                                                   invitation_code: 'C1234567', 
                                                   player_id: player3.id) }
 
-  let(:submit_code) { "Submit Code" }
+  let(:submit_code) { "Submit to Forge Greatness" }
   let(:submit) { "Submit" }
 
 	subject { page }
@@ -36,9 +36,9 @@ describe "User pages" do
 
     describe "without Invitation Code" do
 
-      before { visit signin_path }
+      before { visit root_url }
 
-      it { should have_title('Sign In') }
+      it { should have_title('#9 Hockey') }
 
       before { click_button submit_code }
 
@@ -46,9 +46,9 @@ describe "User pages" do
 
     end
 
-    before { visit signin_path }
+    before { visit root_url }
 
-    it { should have_title('Sign In') }
+    it { should have_title('#9 Hockey') }
 
     describe "with expired Invitation Code" do
 
