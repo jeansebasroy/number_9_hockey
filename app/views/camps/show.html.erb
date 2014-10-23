@@ -1,7 +1,10 @@
 <% provide(:title, @camp.name) %>
 
-<p>Camp Name: <%= @camp.name %></p>
-<p>Description: <%= @camp.description %></p>
+<p><em>Camp Name: </em><%= @camp.name %></p>
+<p><em>Description: </em><%= @camp.description %></p>
+<p><em>Age Group: </em><%= @age_group.name %></p>
+<p><em>Price: </em><%= number_to_currency(@camp.price, :unit => "$") %></p>
+<p><em>Highlights: </em><%= @camp.highlights %></p>
 <% if current_user.admin? %>
 	<p>Date Published: 
 		<% if @camp.publish_date.nil? %>

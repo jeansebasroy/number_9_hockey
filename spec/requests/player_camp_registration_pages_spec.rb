@@ -4,8 +4,8 @@ describe "Player Camp Registration pages" do
 
   let!(:rink) { FactoryGirl.create(:rink) }
   let!(:age_group) { FactoryGirl.create(:age_group) }
-  let!(:camp) { FactoryGirl.create(:camp, age_group: age_group) }    
-  let!(:date_time_location_register) { FactoryGirl.create(:date_time_location,
+  let!(:camp) { FactoryGirl.create(:camp, age_group: age_group.id) }    
+  let!(:date_time_location) { FactoryGirl.create(:date_time_location,
                                   camp_id: camp.id, 
                                   rink_id: rink.id) }
 

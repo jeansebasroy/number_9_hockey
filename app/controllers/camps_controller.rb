@@ -9,8 +9,9 @@ class CampsController < ApplicationController
   end
 
   def show
-#	 @camp = Camp.find(params[:id])
-   @camp_dates_times_rinks = Camp.camp_dates_times_rinks(@camp.id)
+#	  @camp = Camp.find(params[:id])
+    @camp_dates_times_rinks = Camp.camp_dates_times_rinks(@camp.id)
+    @age_group = AgeGroup.find_by(id: @camp.age_group)
   
   end
 
@@ -86,7 +87,7 @@ class CampsController < ApplicationController
 
     private
       def camp_params
-        params.require(:camp).permit(:name, :description, :publish_date, :age_group)
+        params.require(:camp).permit(:name, :description, :publish_date, :age_group, :price, :highlights)
       end
 
 end

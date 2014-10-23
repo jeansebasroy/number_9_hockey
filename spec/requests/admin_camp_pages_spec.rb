@@ -51,7 +51,11 @@ describe "Admin Camp pages" do
         before do
           fill_in 'Name',         with: 'Test Camp'
           fill_in 'Description',  with: 'This camp is for testing.'
+          
           select 'Mite',          from: 'camp[age_group]'
+
+          fill_in 'Price',        with: '1'
+          fill_in 'Highlights',   with: 'This thing is awesome!'
         end
 
 # => need to fix
@@ -64,6 +68,7 @@ describe "Admin Camp pages" do
         it { should have_selector('div.alert.alert-success') }
         it { should have_title("Test Camp") }
         it { should have_content("Camp Name: Test Camp") }
+        it { should have_content("$1") }
 
       end
     end

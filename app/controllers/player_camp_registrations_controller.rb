@@ -4,8 +4,10 @@ class PlayerCampRegistrationsController < ApplicationController
   def new
   	@player = Player.find_by(id: params[:player_id])
   	@camp = Camp.find_by(id: params[:camp_id])
-
+    @age_group = AgeGroup.find_by(id: @camp.age_group)
     @camp_dates_times_rinks = Camp.camp_dates_times_rinks(@camp.id)
+
+
   end
 
   def create
@@ -57,6 +59,7 @@ class PlayerCampRegistrationsController < ApplicationController
     @registration = PlayerCampRegistration.find(params[:id])
     @player = Player.find(@registration.player_id)
     @camp = Camp.find(@registration.camp_id)
+    @age_group = AgeGroup.find_by(id: @camp.age_group)
     @camp_dates_times_rinks = Camp.camp_dates_times_rinks(@camp.id)
   end
 

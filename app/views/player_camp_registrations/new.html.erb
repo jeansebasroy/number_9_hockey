@@ -4,11 +4,12 @@
 
 <div id="left_registration_box">
 	<h1><%= @camp.name %></h1>
-	<p align="center"><%= @camp.description %></p>
-	<p align="center">Registration for: <%= @player.first_name %> <%= @player.last_name %></p>
-	<br>
-	<br>
-	<br>
+
+	<p><strong>Age Group: </strong><%= @age_group.name %></p>
+	<p><strong>Price: </strong><%= number_to_currency(@camp.price, :unit => "$") %></p>
+	<p><strong>Camp Highlights: </strong></p>
+	<p><%= @camp.highlights %></p>
+	
 	<!-- table to show associated dates, times & rinks -->
 	<table class="table table-bordered">
 		<tr>
@@ -38,6 +39,9 @@
 
 <div id="right_registration_box">
 	<h1>Registration Form:</h1>	
+
+	<p align="center">Registration for: <%= @player.first_name %> <%= @player.last_name %></p>
+	
 	<%= form_for(@player_camp_registration) do |registration| %>
        	<%= render 'registration_form', player_camp_registration: registration %>
 

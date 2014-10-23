@@ -9,7 +9,15 @@
 <br>
 
 <%= camp.label :age_group, 'Select Age Group:' %>
-<%= camp.select :age_group, options_from_collection_for_select(AgeGroup.all, :id, :name) %>
+<%= camp.select :age_group, options_from_collection_for_select(AgeGroup.all, :id, :name), :prompt => 'Select Age Group' %>
+<br>
+
+<%= camp.label :price, "Price" %>
+<%= camp.text_field :price %>
+<br>
+
+<%= camp.label :highlights, "Highlights" %>
+<%= camp.text_area :highlights %>
 <br>
 
 <%#= camp.label :skill, 'Select Skills (multiple):' %>

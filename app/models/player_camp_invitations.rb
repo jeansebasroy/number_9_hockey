@@ -75,6 +75,11 @@ class PlayerCampInvitations < ActiveRecord::Base
 				camp_hash[:camp_id] = camp_details.id
 				camp_hash[:name] = camp_details.name
 				camp_hash[:description] = camp_details.description
+				camp_hash[:highlights] = camp_details.highlights
+				
+				#finds the name of the age_group
+				age_group = AgeGroup.find(camp_details.age_group)
+				camp_hash[:age_group] = age_group.name
 
 				# gets all the Dates for the Camp
 				date_array = Array.new

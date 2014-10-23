@@ -50,9 +50,11 @@ describe "User Camp pages" do
           it { should have_content("Camp Name") }
           it { should have_content("Description") }
           it { should_not have_link("Add Date") }
+          it { should have_content("#{camp1.price}") }
 
         end
       end
+
 
       describe "with two Camp invitations" do
         let!(:player1_camp1_invitation2) { FactoryGirl.create(:player_camp_invitations, 

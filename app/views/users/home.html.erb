@@ -6,10 +6,10 @@
 	<% @players.each do |player| %>
 		<div id="box">
 			<div id="left">
-				<p>First Name: <%= player.first_name %> </p>
-				<p>Last Name: <%= player.last_name %> </p>
-				<p>Date of Birth:  <%= player.date_of_birth %> </p>	
-				<p>Shoots:  <%= player.shoots %> </p>
+				<p><em>First Name: </em><%= player.first_name %> </p>
+				<p><em>Last Name: </em><%= player.last_name %> </p>
+				<p><em>Date of Birth:  </em><%= player.date_of_birth %> </p>	
+				<p><em>Shoots:  </em><%= player.shoots %> </p>
 				<p><%= link_to 'Edit Player Info', edit_player_path(player) %> </p>
 				<br>
 			</div>
@@ -23,16 +23,20 @@
 				<% end %>
 
 				<% if camp_invitation_count > 0 %>
-					<p><%= "Camp Invitation".pluralize(camp_invitation_count) %>:</p>
+					<p><strong><%= "Camp Invitation".pluralize(camp_invitation_count) %>:</strong></p>
 					<% @invited_camps_array.each do |invited_camp| %>
 						<% if player.id == invited_camp[:player_id] %>
-							<p>Camp Name: <%= invited_camp[:name] %> </p>
-							<p>Camp Description: <%= invited_camp[:description] %> </p>
-							<p><%= "Camp Date".pluralize(invited_camp[:dates]) %>: 
+							<p><em>Camp Name: </em><%= invited_camp[:name] %> </p>
+							<p><em>Age Group: </em><%= invited_camp[:age_group] %> </p>
+							<p><em>Camp Highlights: </em><%= invited_camp[:highlights] %> </p>
+							<p><em><%= "Camp Date".pluralize(invited_camp[:dates]) %>: </em>
 								<%= invited_camp[:dates].map{|date| date}.join(", ") %>
 							</p>
-							<p><%= link_to 'View Camp Details', camp_path(invited_camp[:camp_id]) %> </p>
-							<p>	
+							<p>
+								<%= link_to 'View Camp Details', camp_path(invited_camp[:camp_id]) %>
+								&nbsp;
+								&nbsp;
+								&nbsp;
 								<%= link_to 'Register', new_player_camp_registration_path(invited_camp) %> 
 							</p>
 							<br>
@@ -48,17 +52,24 @@
 				<% end %>
 
 				<% if camp_registration_count > 0 %>
-					<p><%= "Camp Registration".pluralize(camp_registration_count) %>:</p>
+					<p><strong><%= "Camp Registration".pluralize(camp_registration_count) %>:</strong></p>
 					<% @registered_camps_array.each do |registered_camp| %>
 						<% if player.id == registered_camp[:player_id] %>
-							<p>Camp Name: <%= registered_camp[:name] %> </p>
-							<p>Camp Description: <%= registered_camp[:description] %> </p>
-							<p><%= "Camp Date".pluralize(registered_camp[:dates]) %>: 
+							<p><em>Camp Name:</em> <%= registered_camp[:name] %> </p>
+							<p><em>Age Group:</em> <%= registered_camp[:age_group] %> </p>
+							<p><em>Camp Highlights:</em> <%= registered_camp[:highlights] %> </p>
+							<p><em><%= "Camp Date".pluralize(registered_camp[:dates]) %>: </em> 
 								<%= registered_camp[:dates].map{|date| date}.join(", ") %>
 							</p>
-							<p><%= link_to 'View Camp Details', camp_path(registered_camp[:camp_id]) %> </p>
-							<p>	
+							<p>
+								<%= link_to 'View Camp Details', camp_path(registered_camp[:camp_id]) %>
+								&nbsp;
+								&nbsp;
+								&nbsp;
 								<%= link_to 'Update Registration', edit_player_camp_registration_path(id: registered_camp[:registration_id]) %> 
+								&nbsp;
+								&nbsp;
+								&nbsp;
 								<%= link_to 'Un-Register', player_unregister_path(id: registered_camp[:registration_id]), :method => :post %>
 							</p>
 							<br>

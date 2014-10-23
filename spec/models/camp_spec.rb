@@ -5,15 +5,19 @@ describe Camp do
 	before { @camp = Camp.new(name: "Test Camp", 
 								description: "This is a camp built for testing",
 								publish_date: Date.today, 
-								age_group: "Mite") }
+								age_group: "1",
+                price: "$1",
+                highlights: "This thing is awesome!") }
 	#let(:camp) { FactoryGirl.create(:camp) }
 
 	subject { @camp }
 
 	it { should respond_to(:name) }
  	it { should respond_to(:description) }
- 	#it { should_respond_to(:publish_date) }
- 	#it { should_respond_to(:age_group) }
+ 	it { should respond_to(:publish_date) }
+ 	it { should respond_to(:age_group) }
+  it { should respond_to(:price) }
+  it { should respond_to(:highlights)}
  	
   it { should be_valid }
   	
@@ -41,5 +45,16 @@ describe Camp do
   #	before { @camp.age_group = 10.5 }
   #	it { should_not be_valid }
   #end
+
+  describe "when price is not present" do
+    before { @camp.price = " " }
+    it { should be_valid }
+  end
+
+  describe "when highlights are not present" do
+    before { @camp.highlights = " " }
+    it { should be_valid }
+  end
+
 
 end

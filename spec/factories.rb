@@ -25,7 +25,9 @@ FactoryGirl.define do
 		name 			"Test Camp"
 		description		"This is a testing camp."
 		publish_date	""
-		age_group
+		price 			1 
+		highlights		"This thing is awesome!"
+		#age_group
 	end
 
 	factory :date_time_location do
@@ -79,7 +81,7 @@ FactoryGirl.define do
 		publish_date	"2008-08-08"
 		coach
 		jersey_number	"9"
-		age_group_id
+		age_group
 		level			"Tin"
 		Notes			"Something in the notes"
 	end

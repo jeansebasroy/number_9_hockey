@@ -5,6 +5,8 @@
 	<tr>
 		<th>Camp Name:</th>
 		<th>Description:</th>
+		<th>Age Group:</th>
+		<th>Price:</th>
 		<th>Start Date:</th>
 		<th>End Date:</th>
 		<!--<th>Rinks:</th>-->
@@ -13,6 +15,8 @@
 		<tr>
 			<td><%= camp.name %></td>
 			<td><%= camp.description %></td>
+			<td><%= camp.age_group %></td>
+			<td><%= number_to_currency(camp.price, :unit => "$") %></td>
 			<td><%#= camp.start_date %></td>
 			<td><%#= camp.end_date %></td>
 			<!--<td><%#= camp.rink %></td>-->
