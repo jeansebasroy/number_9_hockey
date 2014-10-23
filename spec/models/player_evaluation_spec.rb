@@ -8,7 +8,7 @@ describe PlayerEvaluation do
 							team: "Blackhawks", 
 							date: Date.today,
               jersey_number: "9",
-              age_group: "Mite",
+              age_group_id: 1,
               level: "Elite F",
               notes: "Something about the player") }
 
@@ -20,7 +20,7 @@ describe PlayerEvaluation do
   it { should respond_to(:team) }
   it { should respond_to(:date) }
   it { should respond_to(:jersey_number) }
-  it { should respond_to(:age_group) }
+  it { should respond_to(:age_group_id) }
   it { should respond_to(:level) }
   it { should respond_to(:notes) }
 
@@ -62,10 +62,10 @@ describe PlayerEvaluation do
     it { should be_valid }
   end
 
-  describe "when age_group is not present" do
-    before { @player_evaluation.age_group = " " }
-    it { should_not be_valid }
-  end
+#  describe "when age_group is not present" do
+#    before { @player_evaluation.age_group = " " }
+#    it { should_not be_valid }
+#  end
 
   describe "when level is not present" do
     before { @player_evaluation.level = " " }

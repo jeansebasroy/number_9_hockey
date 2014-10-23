@@ -62,7 +62,7 @@ describe "Admin Camp pages" do
         before { click_button save }
 
         it { should have_selector('div.alert.alert-success') }
-        it { should have_title("Your Camp") }
+        it { should have_title("Test Camp") }
         it { should have_content("Camp Name: Test Camp") }
 
       end
@@ -102,7 +102,7 @@ describe "Admin Camp pages" do
           before { click_button save }
 
           it { should have_selector('div.alert.alert-success') }
-          it { should have_title("Your Camp") }
+          it { should have_title("Test Camp") }
           it { should have_content("Camp Name: Test Camp") }
 
         end
@@ -155,7 +155,7 @@ describe "Admin Camp pages" do
         before { click_button save }
 
         it { should have_selector('div.alert.alert-success') }
-        it { should have_title("Your Camp") }
+        it { should have_title("Test Camp") }
         it { should have_content("Camp Name: Test Camp") }
 
       end

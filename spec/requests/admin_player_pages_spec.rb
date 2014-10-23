@@ -4,7 +4,10 @@ describe "Admin Player pages" do
 	
   let!(:admin_user) { FactoryGirl.create(:admin) }
   let!(:player) { FactoryGirl.create(:player) }
-  let!(:player_evaluation) { FactoryGirl.create(:player_evaluation, player: player) }
+  let!(:age_group) { FactoryGirl.create(:age_group) }
+  let!(:player_evaluation) { FactoryGirl.create(:player_evaluation, player: player,
+                                                age_group_id: age_group.id) }
+
 
   let(:save) { "Save" }
 
@@ -86,6 +89,8 @@ describe "Admin Player pages" do
 
     describe "from Player index" do
 
+      let!(:age_group) { FactoryGirl.create(:age_group) }
+
       before { click_link "All Players" }
 
 # =>       it { should have_title("All Players") }
@@ -109,19 +114,25 @@ describe "Admin Player pages" do
 
 # => test for edge case where player information is valid, but player_evaluation information is not
       describe "with valid information" do
+
         before do
-          fill_in "First Name:",  with: "Maurice"
-          fill_in "Last Name:",   with: "Richard"
+          fill_in "First Name",  with: "Maurice"
+          fill_in "Last Name",   with: "Richard"
 
           select '2009',          from: 'player[date_of_birth(1i)]'
           select 'April',         from: 'player[date_of_birth(2i)]'
           select '12',            from: 'player[date_of_birth(3i)]'
           select 'Right',         from: 'player[shoots]'
           
+          fill_in "Jersey No.",   with: "9"
+
           select 'Practice',      from: 'player_evaluation[evaluation_type]'
+          select 'Mite',          from: 'player_evaluation[age_group_id]'
           
-          fill_in "League:",      with: "NHL"
-          fill_in "Team:",        with: "Canadiens"
+          fill_in "League",       with: "NHL"
+          fill_in "Level",        with: "Tin"
+          fill_in "Team",         with: "Canadiens"
+          fill_in "Notes",        with: "Something about the player"
           
           select '2014',          from: 'player_evaluation[date(1i)]'
           select 'August',        from: 'player_evaluation[date(2i)]'
@@ -165,7 +176,7 @@ describe "Admin Player pages" do
       describe "with valid information" do
 
         before do
-          fill_in "First Name:", with: "Henri"
+          fill_in "First Name", with: "Henri"
           select 'Left',         from: 'player[shoots]'
         end
 
@@ -195,8 +206,8 @@ describe "Admin Player pages" do
       describe "with valid information" do
 
         before do
-          fill_in "First Name:", with: "Henri"
-          select 'Left',         from: 'player[shoots]'
+          fill_in "First Name",   with: "Henri"
+          select 'Left',          from: 'player[shoots]'
         end
 
 # =>         it "should not create a new Player" do
@@ -240,10 +251,14 @@ describe "Admin Player pages" do
       
       describe "with valid information" do
         before do
+          fill_in "Jersey No.",   with: "9"
+
           select 'Game',      from: 'player_evaluation[evaluation_type]'
-          
-          fill_in "League:",      with: "NHL"
-          fill_in "Team:",        with: "Canadiens"
+          select 'Mite',          from: 'player_evaluation[age_group_id]'
+
+          fill_in "League",      with: "NHL"
+          fill_in "Level",        with: "Tin"
+          fill_in "Team",        with: "Canadiens"
           
           select '2014',          from: 'player_evaluation[date(1i)]'
           select 'August',        from: 'player_evaluation[date(2i)]'
@@ -288,10 +303,14 @@ describe "Admin Player pages" do
 
       describe "with valid information" do
         before do
-          select 'Game',      from: 'player_evaluation[evaluation_type]'
+          fill_in "Jersey No.",   with: "9"
+
+          select 'Game',          from: 'player_evaluation[evaluation_type]'
+          select 'Mite',          from: 'player_evaluation[age_group_id]'
           
-          fill_in "League:",      with: "NHL"
-          fill_in "Team:",        with: "Canadiens"
+          fill_in "League",       with: "NHL"
+          fill_in "Level",        with: "Tin"
+          fill_in "Team",         with: "Canadiens"
           
           select '2014',          from: 'player_evaluation[date(1i)]'
           select 'August',        from: 'player_evaluation[date(2i)]'

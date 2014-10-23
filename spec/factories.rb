@@ -78,6 +78,10 @@ FactoryGirl.define do
 		description		"This is a testing camp."
 		publish_date	"2008-08-08"
 		coach
+		jersey_number	"9"
+		age_group_id
+		level			"Tin"
+		Notes			"Something in the notes"
 	end
 
 

@@ -5,6 +5,6 @@ class PlayerEvaluation < ActiveRecord::Base
 	validates :evaluation_type, presence: true
 	validates :league, presence: true
 	validates :date, presence: true
-	validates :age_group, presence: true
+	#validates :age_group_id, presence: true
 	
 end

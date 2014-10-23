@@ -57,7 +57,7 @@ describe "User pages" do
         click_button submit_code
       end
 
-      it { should have_title('Sign In') }
+      it { should have_title('#9 Hockey') }
       it { should have_selector('div.alert.alert-error', text: 'This Invitation Code has expired. Contact support@number9hockey.com if you believe there has been an error.') }    
 
     end
@@ -69,7 +69,7 @@ describe "User pages" do
         click_button submit_code
       end
 
-      it { should have_title('Sign In') }
+      it { should have_title('#9 Hockey') }
       it { should have_selector('div.alert.alert-error', text: 'This Invitation Code has already been used. Only one Invitation Code per person.') }  
 
     end
@@ -273,7 +273,7 @@ describe "User pages" do
           describe "with invalid information" do
 
             before do
-              fill_in "First Name:",  with: ""
+              fill_in "First Name",  with: ""
             end
 
 # => fix this
@@ -290,8 +290,8 @@ describe "User pages" do
 
           describe "with valid information" do
             before do
-              fill_in "First Name:",  with: "Maurice"
-              fill_in "Last Name:",   with: "Richard"
+              fill_in "First Name",  with: "Maurice"
+              fill_in "Last Name",   with: "Richard"
 
               select '2009',          from: 'player[date_of_birth(1i)]'
               select 'April',         from: 'player[date_of_birth(2i)]'

@@ -14,6 +14,8 @@ describe "Static pages" do
 		it { should have_title("#{base_title}") }
 		it { should_not have_title('| Home') }
 		it { should have_content("#9 Hockey") }
+
+		it { should have_content('Invitation Code') }
 		
 	end
 
@@ -49,7 +51,6 @@ describe "Static pages" do
 		it { should have_title("#{base_title} | Sign In") }
 
 		it { should have_content('Sign In') }
-		it { should have_content('Submit Invitation Code') }
 						
 	end
   	

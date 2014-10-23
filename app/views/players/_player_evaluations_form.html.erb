@@ -1,34 +1,34 @@
 <%= render 'shared/error_messages', object: player_evaluation.object %>
 
-<%= player_evaluation.label :jersey_number, "Jersey No.:" %>
+<%= player_evaluation.label :jersey_number, "Jersey No." %>
 <%= player_evaluation.text_field :jersey_number %>
 <br>
       		
-<%= player_evaluation.label :evaluation_type, 'Evaluation Type:' %>
-<%= player_evaluation.select :evaluation_type, options_for_select([['Select One', ''], ['Practice','Practice'], ['Game', 'Game'], ['Post #9 Hockey Camp', 'Post #9 Hockey Camp']]) %>
+<%= player_evaluation.label :evaluation_type, 'Evaluation Type' %>
+<%= player_evaluation.select :evaluation_type, options_for_select([['Select Eval Type', ''], ['Practice','Practice'], ['Game', 'Game'], ['Post #9 Hockey Camp', 'Post #9 Hockey Camp']]) %>
 <br>
 
-<%= player_evaluation.label :age_group, "Age Group:" %>
-<%= player_evaluation.select :age_group, options_from_collection_for_select(AgeGroup.all, :id, :name) %>
+<%= player_evaluation.label :age_group_id, "Age Group" %>
+<%= player_evaluation.select :age_group_id, options_from_collection_for_select(AgeGroup.all, :id, :name), :prompt => 'Select Age Group' %>
 <br>
 
-<%= player_evaluation.label :league, "League:" %>
+<%= player_evaluation.label :league, "League" %>
 <%= player_evaluation.text_field :league %>
 <br>
 
-<%= player_evaluation.label :level, "Level:" %>
+<%= player_evaluation.label :level, "Level" %>
 <%= player_evaluation.text_field :level %>
 <br>
 
-<%= player_evaluation.label :team, "Team:" %>
+<%= player_evaluation.label :team, "Team" %>
 <%= player_evaluation.text_field :team %>
 <br>
 
-<%= player_evaluation.label :notes, "Notes:" %>
+<%= player_evaluation.label :notes, "Notes" %>
 <%= player_evaluation.text_area :notes %>
 <br>
 
-<%= player_evaluation.label :date, "Evaluation Date:" %>
+<%= player_evaluation.label :date, "Evaluation Date" %>
 <span class="datetime"><%= player_evaluation.date_select :date %><span>
 <br>
 

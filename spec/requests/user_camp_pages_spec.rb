@@ -46,7 +46,7 @@ describe "User Camp pages" do
         
           before { click_link('View Camp Details') } 
 
-          it { should have_title("Your Camp") }
+          it { should have_title("#{camp1.name}") }
           it { should have_content("Camp Name") }
           it { should have_content("Description") }
           it { should_not have_link("Add Date") }
