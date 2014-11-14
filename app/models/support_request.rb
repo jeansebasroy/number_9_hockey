@@ -5,8 +5,11 @@ class SupportRequest < ActiveRecord::Base
 				length: { maximum: 50 }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
 	validates :email, presence: true, 
-				format: { with: VALID_EMAIL_REGEX }, 
-				uniqueness: { case_sensitive: false }
+				format: { with: VALID_EMAIL_REGEX }
 	validates :message, presence: true
+
+  def send_support_request(support_request)
+  	SupportMailer.support_request(support_request).deliver
+  end
 
 end
