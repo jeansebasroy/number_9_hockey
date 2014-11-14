@@ -1,0 +1,14 @@
+<% provide(:title, 'Scouting') %>
+<h1>Scouting Request</h1>
+
+<div align="center">
+	<div class="row">
+	  <div class="span6 offset3">
+	   	<%= form_for(@scouting_request) do |scouting_request| %>
+	      <%= render 'scouting_form', scouting_request: scouting_request %>
+	      
+	     	<%= scouting_request.submit "Submit", class: "btn btn-large btn-primary" %>
+	    <% end %>
+	  </div>
+	</div>
+</div>

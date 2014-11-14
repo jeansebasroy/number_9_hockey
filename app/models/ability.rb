@@ -41,7 +41,9 @@ class Ability
         can :update, PlayerCampRegistration
         can :show, PlayerCampRegistration
         can :un_register, PlayerCampRegistration
-
+        
+        can :manage, InfoRequest
+        can :manage, ScoutingRequest
         can :manage, SupportRequest
 
     else
@@ -51,7 +53,9 @@ class Ability
 
         #can :new, PasswordReset
         #can :create, PasswordReset
-
+        
+        can :manage, InfoRequest
+        can :manage, ScoutingRequest
         can :manage, SupportRequest
 
     end

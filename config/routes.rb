@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'static_pages#home'
+
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :camps do
@@ -10,9 +12,10 @@ Rails.application.routes.draw do
   resources :invitations
   resources :password_resets
   resources :player_camp_registrations
-  resources :support_requests
   
-  root 'static_pages#home'
+  resources :info_requests
+  resources :scouting_requests
+  resources :support_requests
   
   match '/why_9',     to: 'static_pages#why_9',     via: 'get'
   match '/about_us',  to: 'static_pages#about_us',  via: 'get'

@@ -1,0 +1,2 @@
+module ScoutingRequestsHelper
+end

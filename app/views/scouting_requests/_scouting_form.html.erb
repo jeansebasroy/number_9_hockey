@@ -1,0 +1,17 @@
+<%= render 'shared/error_messages', object: scouting_request.object %>
+
+<%= scouting_request.label :first_name, "First Name" %>
+<%= scouting_request.text_field :first_name %>
+<br>
+
+<%= scouting_request.label :last_name, "Last Name" %>
+<%= scouting_request.text_field :last_name %>
+<br>
+
+<%= scouting_request.label :email %>
+<%= scouting_request.text_field :email %>
+<br>
+
+<%= scouting_request.label :message, "Message" %>
+<%= scouting_request.text_area :message, cols: 3, rows: 5 %>
+<br>

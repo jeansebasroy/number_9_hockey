@@ -7,11 +7,15 @@ class SupportMailer < ActionMailer::Base
   #   en.user_mailer.password_reset.subject
   #
   def info_request(info_request)
+    @info_request = info_request
+
     mail(:to => "js@number9hockey.com; phil@number9hockey.com", :subject => "Info Request",
           :from => "support@number9hockey.com")
   end
 
   def scouting_request(scouting_request)
+    @scouting_request = scouting_request
+
     mail(:to => "js@number9hockey.com; phil@number9hockey.com", :subject => "Scouting Request",
           :from => "support@number9hockey.com")
   end

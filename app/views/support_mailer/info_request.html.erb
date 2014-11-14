@@ -1,0 +1,13 @@
+<p>First Name:  <%= @info_request.first_name %></p>
+<p>Last Name:	<%= @info_request.last_name %></p>
+<p>Email:		<%= @info_request.email %></p>
+<br>
+
+<p>Support Message:</p>
+<p><%= @info_request.message %></p>
+<br>
+
+<p>Reference Page:</p>
+<p><%#= session[:return_to] %></p>
+
+<p>Date / Time Created: <%= @info_request.created_at %></p>

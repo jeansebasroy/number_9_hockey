@@ -1,5 +1,4 @@
 class SupportRequestsController < ApplicationController
-  #load_and_authorize_resource
 
   def new
   	session[:return_to] = request.referrer
@@ -10,7 +9,6 @@ class SupportRequestsController < ApplicationController
 
   def create
   	@support_request = SupportRequest.new(support_request_params)
-    #authorize! :create, @support_request
 
   	if @support_request.save
 

@@ -1,0 +1,14 @@
+<% provide(:title, 'Info Request') %>
+<h1>Info Request</h1>
+
+<div align="center">
+	<div class="row">
+	  <div class="span6 offset3">
+	   	<%= form_for(@info_request) do |info_request| %>
+	      <%= render 'info_form', info_request: info_request %>
+	      
+	     	<%= info_request.submit "Submit", class: "btn btn-large btn-primary" %>
+	    <% end %>
+	  </div>
+	</div>
+</div>

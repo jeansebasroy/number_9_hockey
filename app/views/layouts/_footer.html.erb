@@ -3,16 +3,15 @@
   <!--<nav class="navbar navbar-fixed-bottom">-->
     <div class= "navbar-inner">
     	<div class="container">
-    	<small>
+    	  <small>
       		<a href= <%= root_path %>>© #9 Hockey LLC</a>    
-    	</small>
-    	<ul class="nav pull-right">
-          <li><%= mail_to('info@number9hockey.com', "Contact Us", subject: "Request for Info") %></li>
-      		<li><%= mail_to("scouting@number9hockey.com", "Scouting", subject: "Request for Scouting") %></li>
-          <!--<li><%#= mail_to("support@number9hockey.com", "Support", subject: "Website Support") %></li>-->
-          <li><%= link_to "Support", new_support_request_path %></li>
-    	</ul>
-    </div>
+    	  </small>
+    	  <ul class="nav pull-right">
+          <li><%= link_to "Contact Us", new_info_request_path %></li>
+      		<li><%= link_to "Scouting",   new_scouting_request_path %></li>
+          <li><%= link_to "Support",    new_support_request_path %></li>
+    	  </ul>
+      </div>
   	</div>
   </nav>
 </footer>

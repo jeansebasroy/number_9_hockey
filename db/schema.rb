@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141114142218) do
+ActiveRecord::Schema.define(version: 20141114191533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,15 @@ ActiveRecord::Schema.define(version: 20141114142218) do
   end
 
   add_index "date_time_locations", ["camp_id"], name: "index_date_time_locations_on_camp_id", using: :btree
+
+  create_table "info_requests", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.text     "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "player_camp_invitations", force: true do |t|
     t.integer  "player_id"
@@ -125,6 +134,15 @@ ActiveRecord::Schema.define(version: 20141114142218) do
     t.string   "city"
     t.string   "state"
     t.string   "zip_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "scouting_requests", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.text     "message"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
