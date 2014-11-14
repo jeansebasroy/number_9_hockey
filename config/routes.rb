@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   match '/why_9',     to: 'static_pages#why_9',     via: 'get'
   match '/about_us',  to: 'static_pages#about_us',  via: 'get'
   #match '/signin',    to: 'static_pages#signin',    via: 'get'
-  
+  match '/privacy_policy',  to: 'static_pages#privacy_policy',  via: 'get'
+  match '/refund_policy',   to: 'static_pages#refund_policy',   via: 'get'
+
   match '/signup',    to: 'users#new',              via: 'get'
   match '/signin',    to: 'sessions#new',           via: 'get'
   match '/signout',   to: 'sessions#destroy',       via: 'delete'
