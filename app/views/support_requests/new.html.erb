@@ -1,0 +1,14 @@
+<% provide(:title, 'Request Support') %>
+<h1>Request Support</h1>
+
+<div align="center">
+	<div class="row">
+	  <div class="span6 offset3">
+	   	<%= form_for(@support_request) do |support_request| %>
+	      <%= render 'support_form', support_request: support_request %>
+	      
+	     	<%= support_request.submit "Submit", class: "btn btn-large btn-primary" %>
+	    <% end %>
+	  </div>
+	</div>
+</div>

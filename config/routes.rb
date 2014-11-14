@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :invitations
   resources :password_resets
   resources :player_camp_registrations
+  resources :support_requests
   
   root 'static_pages#home'
   

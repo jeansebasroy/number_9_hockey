@@ -42,6 +42,9 @@ class Ability
         can :show, PlayerCampRegistration
         can :un_register, PlayerCampRegistration
 
+        can :new, SupportRequest
+        can :create, SupportRequest
+
     else
         can :new, User
         can :create, User
@@ -49,6 +52,10 @@ class Ability
 
         #can :new, PasswordReset
         #can :create, PasswordReset
+
+        can :new, SupportRequest
+        can :create, SupportRequest
+
     end
 
     # Define abilities for the passed in user here. For example:
