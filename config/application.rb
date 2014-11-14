@@ -24,7 +24,7 @@ module Number9Hockey
   
     config.action_mailer.default_url_options = { host: 'http://www.number9hockey.com' }
     config.action_mailer.delivery_method = :smtp
-    config.action_mailer.perform_deliveries = true
+    #config.action_mailer.perform_deliveries = :test
     config.action_mailer.smtp_settings = {
         address:              'p3plcpnl0595.prod.phx3.secureserver.net',
         port:                 465,
