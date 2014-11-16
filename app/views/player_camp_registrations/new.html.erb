@@ -40,13 +40,13 @@
 <div id="right_registration_box">
 	<h1>Registration Form:</h1>	
 
-	<p align="center">Registration for: <%= @player.first_name %> <%= @player.last_name %></p>
+	<div align="center">
+		<p>Registration for: <%= @player.first_name %> <%= @player.last_name %></p>
 	
-	<%= form_for(@player_camp_registration) do |registration| %>
-       	<%= render 'registration_form', player_camp_registration: registration %>
-
-    	<div align="center">
+		<%= form_for(@player_camp_registration) do |registration| %>
+       		<%= render 'registration_form', player_camp_registration: registration %>
     		<%= registration.submit "Register", class: "btn btn-large btn-primary" %>
-    	</div>
-    <% end %>	
+    	<% end %>	
+    	<p><%= link_to "Refund Policy", refund_policy_path %></p>
+	</div>
 </div>
