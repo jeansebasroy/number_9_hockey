@@ -58,7 +58,25 @@ class UsersController < ApplicationController
   		
       sign_in @user
       flash[:success] = "Welcome to #9 Hockey!"
-      redirect_to '/home'
+      
+      #redirect_to '/home'
+      # redirects the user to the camp registration page
+
+      # => gets all the players linked to this user
+        # => move to User model
+      @player_ids = UserToPlayer.user_has_players(@user.id)
+      player_ids_array = Array.new
+      @player_ids.each do |player_ids|
+        player_ids_array.push(player_ids.player_id)
+      end
+      @players = Player.find(player_ids_array)
+
+      # => gets Camps to which Player has been Invited
+      @invited_camps_array = PlayerCampInvitations.players_with_camp_invitations(@players)
+      
+      # => will need to adjust when multiple invited camps
+      redirect_to new_player_camp_registration_path(@invited_camps_array.first)
+
   	else
   		render 'new'
   	end
