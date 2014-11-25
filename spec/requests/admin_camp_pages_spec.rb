@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 describe "Admin Camp pages" do
 	
   let(:admin_user) { FactoryGirl.create(:admin) }

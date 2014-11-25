@@ -27,7 +27,7 @@ FactoryGirl.define do
 		publish_date	""
 		price 			1 
 		highlights		"This thing is awesome!"
-		#age_group
+		age_group
 	end
 
 	factory :date_time_location do
@@ -68,6 +68,7 @@ FactoryGirl.define do
 		team			"Canadiens"
 		date 			"2008-08-08"
 		player
+		age_group
 	end
 
 	factory :coach do

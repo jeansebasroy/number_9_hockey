@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 describe "Requests pages" do
 	
   let(:user) { FactoryGirl.create(:user) }

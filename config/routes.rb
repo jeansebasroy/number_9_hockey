@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   #match '/signin',    to: 'static_pages#signin',    via: 'get'
   match '/privacy_policy',  to: 'static_pages#privacy_policy',  via: 'get'
   match '/refund_policy',   to: 'static_pages#refund_policy',   via: 'get'
+  match '/player_camp_agreement',   to: 'static_pages#player_camp_agreement',   via: 'get'
 
   match '/signup',    to: 'users#new',              via: 'get'
   match '/signin',    to: 'sessions#new',           via: 'get'

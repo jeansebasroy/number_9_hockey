@@ -47,6 +47,9 @@
        		<%= render 'registration_form', player_camp_registration: registration %>
     		<%= registration.submit "Register", class: "btn btn-large btn-primary" %>
     	<% end %>	
+    	
+    	<p><%= link_to "Player Camp Agreement", player_camp_agreement_path %></p>
     	<p><%= link_to "Refund Policy", refund_policy_path %></p>
+
 	</div>
 </div>

@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe "Admin Coach pages" do
 	
   let(:admin_user) { FactoryGirl.create(:admin) }

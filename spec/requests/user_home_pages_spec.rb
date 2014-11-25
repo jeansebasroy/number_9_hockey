@@ -119,8 +119,11 @@ describe "User pages" do
             let(:user) { User.find_by(email: "user@example.com") }
 
             it { should have_link('Sign Out') }
-            it { should have_title(user.first_name) }
             it { should have_selector('div.alert.alert-success', text: "Welcome") }
+
+            # => checks that user is sent to Registration page on on first sign-up
+            it { should have_title('Register') }
+
           end
 
 # => need to check that Player is correctly linked to User

@@ -7,7 +7,6 @@ class PlayerCampRegistrationsController < ApplicationController
     @age_group = AgeGroup.find_by(id: @camp.age_group)
     @camp_dates_times_rinks = Camp.camp_dates_times_rinks(@camp.id)
 
-
   end
 
   def create
