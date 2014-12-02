@@ -7,9 +7,10 @@ describe "User Camp pages" do
   let!(:user_to_player1) { FactoryGirl.create(:user_to_player, 
                                                 user_id: user.id, 
                                                 player_id: player1.id) }
-
-  let!(:camp1) { FactoryGirl.create(:camp, name: "Camp 1") }
-  let!(:camp2) { FactoryGirl.create(:camp, name: "Camp 2") }
+  
+  let!(:age_group) { FactoryGirl.create(:age_group) }
+  let!(:camp1) { FactoryGirl.create(:camp, name: "Camp 1", age_group: age_group.id) }
+  let!(:camp2) { FactoryGirl.create(:camp, name: "Camp 2", age_group: age_group.id) }
 
 	subject { page }
 

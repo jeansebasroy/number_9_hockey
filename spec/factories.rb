@@ -67,7 +67,7 @@ FactoryGirl.define do
 		team			"Canadiens"
 		date 			"2008-08-08"
 		player
-		age_group
+		#age_group
 	end
 
 	factory :coach do
@@ -79,11 +79,11 @@ FactoryGirl.define do
 		name 			"Test Camp"
 		description		"This is a testing camp."
 		publish_date	"2008-08-08"
-		coach
+		#coach
 		jersey_number	"9"
-		age_group
+		#age_group
 		level			"Tin"
-		Notes			"Something in the notes"
+		notes			"Something in the notes"
 	end
 
 

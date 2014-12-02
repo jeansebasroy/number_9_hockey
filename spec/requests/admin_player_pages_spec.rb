@@ -4,7 +4,7 @@ describe "Admin Player pages" do
 	
   let!(:admin_user) { FactoryGirl.create(:admin) }
   let!(:player) { FactoryGirl.create(:player) }
-  let!(:age_group) { FactoryGirl.create(:age_group) }
+  let!(:age_group) { FactoryGirl.create(:age_group, name: "Squirt") }
   let!(:player_evaluation) { FactoryGirl.create(:player_evaluation, player: player,
                                                 age_group_id: age_group.id) }
 
@@ -89,7 +89,7 @@ describe "Admin Player pages" do
 
     describe "from Player index" do
 
-      let!(:age_group) { FactoryGirl.create(:age_group) }
+#      let!(:age_group) { FactoryGirl.create(:age_group) }
 
       before { click_link "All Players" }
 
@@ -177,7 +177,7 @@ describe "Admin Player pages" do
 
         before do
           fill_in "First Name", with: "Henri"
-          select 'Left',         from: 'player[shoots]'
+          select 'Left',        from: 'player[shoots]'
         end
 
 # =>         it "should not create a new Player" do
@@ -253,12 +253,12 @@ describe "Admin Player pages" do
         before do
           fill_in "Jersey No.",   with: "9"
 
-          select 'Game',      from: 'player_evaluation[evaluation_type]'
+          select 'Game',          from: 'player_evaluation[evaluation_type]'
           select 'Mite',          from: 'player_evaluation[age_group_id]'
 
-          fill_in "League",      with: "NHL"
+          fill_in "League",       with: "NHL"
           fill_in "Level",        with: "Tin"
-          fill_in "Team",        with: "Canadiens"
+          fill_in "Team",         with: "Canadiens"
           
           select '2014',          from: 'player_evaluation[date(1i)]'
           select 'August',        from: 'player_evaluation[date(2i)]'
@@ -401,9 +401,8 @@ describe "Admin Player pages" do
   describe "Invite player to a camp" do
       
     let!(:rink) { FactoryGirl.create(:rink) }
-    let!(:age_group) { FactoryGirl.create(:age_group) }
 
-    let!(:camp) { FactoryGirl.create(:camp, age_group: age_group) }
+    let!(:camp) { FactoryGirl.create(:camp, age_group: age_group.id) }
 
     before { click_link "All Players" }
     before { click_link "View" }
@@ -414,7 +413,7 @@ describe "Admin Player pages" do
 # =>       expect { click_button "Invite" }.to change(PlayerCampInvitations, :count).by(1)
 # =>     end
 
-    before { click_button "Invite" }
+    before { click_button "Invite", :match => :first }
 
     it { should have_button("Un-Invite") }
 
@@ -434,7 +433,7 @@ describe "Admin Player pages" do
   # =>         expect { click_button "Invite" }.not_to change(PlayerCampInvitations, :count)
   # =>       end
 
-        before { click_button "Invite" }
+        before { click_button "Invite", :match => :first }
 
         it { should have_button("Un-Invite") }
 

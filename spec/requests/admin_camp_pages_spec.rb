@@ -5,9 +5,11 @@ describe "Admin Camp pages" do
   let(:admin_user) { FactoryGirl.create(:admin) }
 
   let!(:rink) { FactoryGirl.create(:rink) }
-  let!(:age_group) { FactoryGirl.create(:age_group) }
+# => age_group is created once somewhere, but I don't know where?
+  #let!(:age_group) { FactoryGirl.create(:age_group) }
 
-  let!(:camp) { FactoryGirl.create(:camp, age_group: age_group) }
+
+  #let!(:camp) { FactoryGirl.create(:camp, age_group: age_group.id) }
   #let!(:date_time_location) { FactoryGirl.create(:date_time_location, camp: camp, rink: rink) }
 
   let(:save) { "Save" }

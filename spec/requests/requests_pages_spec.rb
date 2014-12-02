@@ -12,7 +12,7 @@ describe "Requests pages" do
 
     before { click_link "Contact Us" }
 
-    it { should have_title("Info Request") }
+    it { should have_title("Contact Us") }
     
     describe "with invalid information" do
 
@@ -74,7 +74,7 @@ describe "Requests pages" do
 
   describe "submit Support request from Sign In path" do
 
-    before { visit sign_in_path }
+    before { visit signin_path }
 
     before { click_link "Support" }
 
