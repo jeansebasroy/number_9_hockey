@@ -13,6 +13,7 @@ class PlayerCampRegistrationsController < ApplicationController
     @user = current_user
   	@player = Player.find(params[:player_camp_registration][:player_id])
   	@camp = Camp.find(params[:player_camp_registration][:camp_id])
+    @age_group = AgeGroup.find_by(id: @camp.age_group)
     @camp_dates_times_rinks = Camp.camp_dates_times_rinks(@camp.id)
 
     # checks to see if there's an existing registration for this player for this camp
@@ -65,10 +66,11 @@ class PlayerCampRegistrationsController < ApplicationController
   def update
     @player = Player.find(params[:player_camp_registration][:player_id])
     @camp = Camp.find(params[:player_camp_registration][:camp_id])
-    @registration = PlayerCampRegistration.find(params[:id])
+    @age_group = AgeGroup.find_by(id: @camp.age_group)
+    @player_camp_registration = PlayerCampRegistration.find(params[:id])
     @camp_dates_times_rinks = Camp.camp_dates_times_rinks(@camp.id)
 
-    if @registration.update_attributes(player_camp_registration_params)
+    if @player_camp_registration.update_attributes(player_camp_registration_params)
       flash[:success] = "Registration has been successfully updated."
       redirect_to '/home'
     else

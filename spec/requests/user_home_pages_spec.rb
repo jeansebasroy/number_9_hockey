@@ -85,6 +85,14 @@ describe "User pages" do
 
       describe 'Sign Up' do
 
+        let!(:rink) { FactoryGirl.create(:rink) }
+        let!(:age_group) { FactoryGirl.create(:age_group) }
+
+        let!(:camp1) { FactoryGirl.create(:camp, name: 'Camp1', age_group: age_group) }
+
+        let!(:player_camp_invitations1) { FactoryGirl.create(:player_camp_invitations, player_id: player3.id,
+                                                              camp_id: camp1.id) }
+
         describe 'with invalid information' do
 
           it "should not create a user" do
@@ -136,14 +144,14 @@ describe "User pages" do
   describe "Sign In user" do
     
     let!(:user_signin) { FactoryGirl.create(:user) }
-    let!(:player4) { FactoryGirl.create(:player, last_name: 'Player4') }
     let!(:player5) { FactoryGirl.create(:player, last_name: 'Player5') }
+    let!(:player6) { FactoryGirl.create(:player, last_name: 'Player6') }
 
     let!(:rink) { FactoryGirl.create(:rink) }
     let!(:age_group) { FactoryGirl.create(:age_group) }
 
-    let!(:camp1) { FactoryGirl.create(:camp, name: 'Camp1', age_group: age_group) }
     let!(:camp2) { FactoryGirl.create(:camp, name: 'Camp2', age_group: age_group) }
+    let!(:camp3) { FactoryGirl.create(:camp, name: 'Camp3', age_group: age_group) }
 
     before { visit signin_path }
 
@@ -167,12 +175,12 @@ describe "User pages" do
 
       describe "with one linked Player" do
         let!(:user_to_player1) { FactoryGirl.create(:user_to_player, user_id: user_signin.id, 
-                                                player_id: player4.id) }
+                                                player_id: player5.id) }
 
         before { click_link 'My Home' }
 
         it { should have_content "My Player:" }
-        it { should have_content player4.last_name }
+        it { should have_content player5.last_name }
 
         describe "without a camp invitation" do
 
@@ -181,30 +189,30 @@ describe "User pages" do
         end
 
         describe "with a Camp invitation" do
-          let!(:player_camp_invitations) { FactoryGirl.create(:player_camp_invitations, player_id: player4.id,
-                                                              camp_id: camp1.id) }
+          let!(:player_camp_invitations2) { FactoryGirl.create(:player_camp_invitations, player_id: player5.id,
+                                                              camp_id: camp2.id) }
 
           before { click_link 'My Home' }
 
-          it { should have_content player4.last_name }
-          it { should have_content camp1.name }
-          it { should_not have_content camp2.name }
+          it { should have_content player5.last_name }
+          it { should have_content camp2.name }
+          it { should_not have_content camp3.name }
 
         end
       end
 
       describe "with two linked Players" do
         let!(:user_to_player2) { FactoryGirl.create(:user_to_player, user_id: user_signin.id, 
-                                                player_id: player4.id) }
+                                                player_id: player5.id) }
         
         let!(:user_to_player3) { FactoryGirl.create(:user_to_player, user_id: user_signin.id, 
-                                                player_id: player5.id) }
+                                                player_id: player6.id) }
         
         before { click_link 'My Home' }
 
         it { should have_content "My Players:" }
-        it { should have_content player4.last_name }
-        it { should have_content player5.last_name }    
+        it { should have_content player5.last_name }
+        it { should have_content player6.last_name }    
 
       end
     end
@@ -258,14 +266,14 @@ describe "User pages" do
       end
       
       describe "with linked Player" do
-        let!(:player6) { FactoryGirl.create(:player, last_name: 'Player6') }
+        let!(:player7) { FactoryGirl.create(:player, last_name: 'Player6') }
         let!(:user_to_player4) { FactoryGirl.create(:user_to_player, user_id: user_signin.id, 
-                                                      player_id: player6.id) }
+                                                      player_id: player7.id) }
       
         before { click_link "My Profile" }
 
         it { should have_content "My Player:" }
-        it { should have_content player6.last_name }
+        it { should have_content player7.last_name }
 
         describe "edit Player information" do
 
