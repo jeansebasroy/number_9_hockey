@@ -37,7 +37,7 @@ describe "Admin Player pages" do
 
         before { click_button save }
 
-        it { should have_selector('div.alert.alert-error') }
+        it { should have_selector('div#error_explanation') }
         it { should have_title('New Player') }
 
       end
@@ -107,7 +107,7 @@ describe "Admin Player pages" do
 
         before { click_button save }
 
-        it { should have_selector('div.alert.alert-error') }
+        it { should have_selector('div#error_explanation') }
         it { should have_title('New Player') }
 
       end
@@ -296,7 +296,7 @@ describe "Admin Player pages" do
 
         before { click_button "Save Evaluation" }
 
-        it { should have_selector('div.alert.alert-error') }
+        it { should have_selector('div#error_explanation') }
         it { should have_title('Evaluate Player') }
 
       end

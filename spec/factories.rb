@@ -24,7 +24,7 @@ FactoryGirl.define do
 	factory :camp do
 		name 			"Test Camp"
 		description		"This is a testing camp."
-		publish_date	""
+		publish_date	"2014-12-07"
 		price 			1 
 		highlights		"This thing is awesome!"
 	end

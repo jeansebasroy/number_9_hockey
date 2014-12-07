@@ -45,7 +45,7 @@ describe "Player Camp Registration pages" do
 
       before { click_button 'Register' }
 
-      it { should have_selector('div.alert.alert-error') }
+      it { should have_selector('div#error_explanation') }
       it { should have_title("Register") }
 
     end
@@ -109,7 +109,7 @@ describe "Player Camp Registration pages" do
 
       before { click_button "Update" }
 
-      it { should have_selector('div.alert.alert-error') }
+      it { should have_selector('div#error_explanation') }
       it { should have_title("Update Registration") }
 
 # => fix this
@@ -171,6 +171,32 @@ describe "Player Camp Registration pages" do
     it { should have_link "Register" }
     it { should have_content "Camp Invitation" }
     it { should_not have_content "Camp Registration" }
+
+  end
+
+  describe "Un-Published Camp" do
+
+    let!(:user_un_published) { FactoryGirl.create(:user) }
+    let!(:player_un_published) { FactoryGirl.create(:player) }
+    let!(:user_to_player_un_published) { FactoryGirl.create(:user_to_player, 
+                                              user_id: user_un_published.id,
+                                              player_id: player_un_published.id) }
+  
+    let!(:camp_un_published) { FactoryGirl.create(:camp, age_group: age_group.id, publish_date: '') }    
+
+    let!(:camp_registration_un_published) { FactoryGirl.create(:player_camp_registration,
+                                                        player_id: player_un_published.id,
+                                                        camp_id: camp_un_published.id) }
+    
+    before { visit signin_path }
+
+    before do
+      fill_in "Email",    with: user_un_published.email.upcase
+      fill_in "Password", with: user_un_published.password
+      click_button "Sign In"
+    end
+
+    it { should_not have_content camp_un_published.name }
 
   end
 end  

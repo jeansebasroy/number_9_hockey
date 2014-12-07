@@ -103,7 +103,7 @@ describe "User pages" do
             before { click_button submit }
 
             it { should have_title("Sign Up") }
-            it { should have_selector('div.alert.alert-error') }
+            it { should have_selector('div#error_explanation') }
 
           end
         end
@@ -198,6 +198,14 @@ describe "User pages" do
           it { should have_content camp2.name }
           it { should_not have_content camp3.name }
 
+          describe "to an Un-Published Camp" do
+            let!(:camp2) { FactoryGirl.create(:camp, name: 'Camp2', age_group: age_group, publish_date: '') }
+            
+            before { click_link 'My Home' }
+
+            it { should_not have_content camp2.name }
+
+          end
         end
       end
 
@@ -240,7 +248,7 @@ describe "User pages" do
               click_button "Save Changes"
             end
             
-            it { should have_selector('div.alert.alert-error') }
+            it { should have_selector('div#error_explanation') }
             it { should have_title("Edit My Info") }
             
           end
@@ -294,7 +302,7 @@ describe "User pages" do
 
             before { click_button "Update" }
 
-            it { should have_selector('div.alert.alert-error') }
+            it { should have_selector('div#error_explanation') }
             it { should have_title('Edit Player') }
 
           end

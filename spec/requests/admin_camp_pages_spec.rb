@@ -40,7 +40,7 @@ describe "Admin Camp pages" do
 
         before { click_button save }
 
-        it { should have_selector('div.alert.alert-error') }
+        it { should have_selector('div#error_explanation') }
         it { should have_title("Create Camp") }
 
       end
@@ -89,7 +89,7 @@ describe "Admin Camp pages" do
 
         before { click_button save }
 
-        it { should have_selector('div.alert.alert-error') }
+        it { should have_selector('div#error_explanation') }
         it { should have_title("Create Camp") }
 
         describe "with valid information" do

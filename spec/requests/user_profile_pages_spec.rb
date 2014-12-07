@@ -59,7 +59,7 @@ describe "User Player pages" do
               click_button "Update"
             end
             
-            it { should have_selector('div.alert.alert-error') }
+            it { should have_selector('div#error_explanation') }
             
           end
 

@@ -28,29 +28,33 @@ class PlayerCampRegistration < ActiveRecord::Base
 				# gets the details of the associated camp
 				camp_details = Camp.find(registrations.camp_id)
 
-				# creates a hash for the details of each camp
-				camp_hash = Hash.new
-				camp_hash[:player_id] = player.id
-				camp_hash[:registration_id] = registrations.id
+				# checks to see if camp has been published
+				if !camp_details.publish_date.nil?
+					# creates a hash for the details of each camp
+					camp_hash = Hash.new
+					camp_hash[:player_id] = player.id
+					camp_hash[:registration_id] = registrations.id
 
-				camp_hash[:camp_id] = camp_details.id
-				camp_hash[:name] = camp_details.name
-				camp_hash[:description] = camp_details.description
-				camp_hash[:highlights] = camp_details.highlights
-				
-				#finds the name of the age_group
-				age_group = AgeGroup.find(camp_details.age_group)
-				camp_hash[:age_group] = age_group.name
+					camp_hash[:camp_id] = camp_details.id
+					camp_hash[:name] = camp_details.name
+					camp_hash[:description] = camp_details.description
+					camp_hash[:highlights] = camp_details.highlights
+					
+					#finds the name of the age_group
+					age_group = AgeGroup.find(camp_details.age_group)
+					camp_hash[:age_group] = age_group.name
 
-				# gets all the Dates for the Camp
-				date_array = Array.new
-				camp_dates = DateTimeLocation.where(camp_id: camp_details.id)
+					# gets all the Dates for the Camp
+					date_array = Array.new
+					camp_dates = DateTimeLocation.where(camp_id: camp_details.id)
 
-				camp_dates.each do |date|
-					date_array.push(date.date.strftime('%v'))
+					camp_dates.each do |date|
+						date_array.push(date.date.strftime('%v'))
+					end
+
+					camp_hash[:dates] = date_array
+
 				end
-
-				camp_hash[:dates] = date_array
 
 				# adds the camp hash to the array of camps
 				@registered_camps_array.push(camp_hash)

@@ -16,9 +16,11 @@
 
 			<div id="right">
 				<% camp_invitation_count = 0 %>
-				<% @invited_camps_array.each do |invited_camp| %>
-					<% if invited_camp[:player_id] == player.id %>
-						<% camp_invitation_count += 1 %>
+				<% if @invited_camps_array.any? %>
+					<% @invited_camps_array.each do |invited_camp| %>
+						<% if invited_camp[:player_id] == player.id %>
+							<% camp_invitation_count += 1 %>
+						<% end %>
 					<% end %>
 				<% end %>
 
@@ -45,9 +47,11 @@
 				<% end %>
 			
 				<% camp_registration_count = 0 %>
-				<% @registered_camps_array.each do |registered_camp| %>
-					<% if registered_camp[:player_id] == player.id %>
-						<% camp_registration_count += 1 %>
+				<% if @registered_camps_array.any? %>
+					<% @registered_camps_array.each do |registered_camp| %>
+						<% if registered_camp[:player_id] == player.id %>
+							<% camp_registration_count += 1 %>
+						<% end %>
 					<% end %>
 				<% end %>
 

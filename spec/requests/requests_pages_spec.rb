@@ -18,7 +18,7 @@ describe "Requests pages" do
 
       before { click_button "Submit" }
 
-      it { should have_selector('div.alert.alert-error') }
+      it { should have_selector('div#error_explanation') }
 
     end
 
@@ -52,7 +52,7 @@ describe "Requests pages" do
       
       before { click_button "Submit" }
 
-      it { should have_selector('div.alert.alert-error') }
+      it { should have_selector('div#error_explanation') }
 
     end
 
@@ -84,7 +84,7 @@ describe "Requests pages" do
       
       before { click_button "Submit" }
 
-      it { should have_selector('div.alert.alert-error') }
+      it { should have_selector('div#error_explanation') }
 
     end
 
