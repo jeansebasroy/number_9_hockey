@@ -30,8 +30,9 @@ class PlayerCampRegistrationsController < ApplicationController
         # sends confirmation email to user
         UserMailer.camp_registration_confirmation(@user, @player, @camp).deliver
 
-        flash[:success] = "#{@player.first_name} has been Registered for #{@camp.name} Camp."
-        redirect_to '/home'
+        #flash[:success] = "#{@player.first_name} has been Registered for #{@camp.name} Camp."
+        #redirect_to '/home'
+        redirect_to paymentspaymentspath
       else
         render 'new'
       end
@@ -47,8 +48,9 @@ class PlayerCampRegistrationsController < ApplicationController
         UserMailer.camp_registration_confirmation(@user, @player, @camp).deliver
 
 
-        flash[:success] = "#{@player.first_name} has been Registered for #{@camp.name} Camp."
-        redirect_to '/home'
+        #flash[:success] = "#{@player.first_name} has been Registered for #{@camp.name} Camp."
+        #redirect_to '/home'
+        redirect_to paymentspayment_path
       else
         render 'new'
       end

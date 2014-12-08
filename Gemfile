@@ -11,6 +11,8 @@ gem 'bcrypt', '3.1.7'
 
 gem 'cancancan', '~> 1.9'
 
+gem 'authorizenet', '~> 1.8.2'
+
 group :development, :test do
 	gem 'rspec-rails'
 end

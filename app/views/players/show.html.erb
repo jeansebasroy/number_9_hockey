@@ -65,17 +65,21 @@
 			<td><%#= date.rink_id %></td>
 			<!--<td><%#= date.sheet %></td>-->
 			<td>	
-				<%= form_for(:players, url: "/players/invite") do |invitation| %>
-        
-          			<%= invitation.hidden_field :player_id, value: @player.id %>
-          			<%= invitation.hidden_field :camp_id, value: camp.id %>
+				<% if camp.publish_date.nil? %>
+					Camp is not published.
+				<% else %>
+					<%= form_for(:players, url: "/players/invite") do |invitation| %>
+	        
+	          			<%= invitation.hidden_field :player_id, value: @player.id %>
+	          			<%= invitation.hidden_field :camp_id, value: camp.id %>
 
-          			<% if PlayerCampInvitations.invited(@player.id, camp.id) == 'invited' %>
-						<%= invitation.submit "Un-Invite", class: "btn btn-large btn-primary" %>
-          			<% else %>
-          				<%= invitation.submit "Invite", class: "btn btn-large btn-primary" %>
-          			<% end %>
-      			<% end %>
+	          			<% if PlayerCampInvitations.invited(@player.id, camp.id) == 'invited' %>
+							<%= invitation.submit "Un-Invite", class: "btn btn-large btn-primary" %>
+	          			<% else %>
+	          				<%= invitation.submit "Invite", class: "btn btn-large btn-primary" %>
+	          			<% end %>
+	      			<% end %>
+	      		<% end %>
 			</td>
 		</tr>
 	<% end %>
