@@ -1,6 +1,81 @@
-<%= form_for :sim_transaction, :url => AuthorizeNet::SIM::Transaction::Gateway::TEST do |f| %>
-  <%= sim_fields(@sim_transaction) %>
-  <%= label_tag 'x_amount', "Total: #{number_to_currency(@amount)}" %>
-  <br />
-  <%= f.submit 'Purchase'%>
-<% end %>
+<% provide(:title, 'Register for Camp')%>
+
+<h1>Registration for <%= @camp.name %> Camp</h1>
+
+<div id="left_registration_box">
+	<h1><%= @camp.name %></h1>
+
+	<p><strong>Age Group: </strong><%= @age_group.name %></p>
+	<!--<p><strong>Price: </strong><%#= number_to_currency(@camp.price, :unit => "$") %></p>-->
+	<p><strong>Camp Highlights: </strong></p>
+	<p><%= @camp.highlights %></p>
+	
+	<!-- table to show associated dates, times & rinks -->
+	<table class="table table-bordered">
+		<tr>
+			<th>Date:</th>
+			<th>Time Start:</th>
+			<th>Time End:</th>
+			<th>Rink:</th>
+			<!--<th>Sheet:</th>-->
+		</tr>
+		<% @camp_dates_times_rinks.each do |details| %>
+			<tr>
+				<td><%= details[:date] %></td>
+				<td><%= details[:start_time] %></td>
+				<td><%= details[:end_time] %></td>
+				<td><%= details[:rink_name] %></td>
+				<!--<td><%#= details.rink_name %></td>-->
+				<% if current_user.admin? %>
+					<td><%= link_to 'Edit', edit_camp_date_time_location_path(@camp, details[:id]) %></td>
+					<td><%= link_to 'Delete', camp_date_time_location_path(@camp, details[:id]), :method => :delete %></td>
+				<% end %>
+			</tr>
+		<% end %>
+	</table>
+	<br>
+	<br>
+</div>
+
+<div id="right_registration_box">
+	<h1>Registration Form</h1>	
+
+	<div align="center">
+		<p>Registration for: <%= @player.first_name %> <%= @player.last_name %></p>
+
+		<%#= form_for(@player_camp_registration) do |registration| %>
+    		<%#= render 'registration_form', player_camp_registration: registration %>
+    		<%#= registration.submit "Register", class: "btn btn-large btn-primary" %>
+    	<%# end %>
+	
+		<%= form_for :sim_transaction, :url => AuthorizeNet::SIM::Transaction::Gateway::TEST do |f| %>
+  			<%= sim_fields(@sim_transaction) %> 			
+			
+			<%= label_tag :x_jersey_size, 'Jersey Size:' %>
+			<%= select_tag :x_jersey_size, options_for_select([['Select One', ''], ['Youth S/M','Youth S/M'], ['Youth L/XL', 'Youth L/XL'], ['Adult S', 'Adult S'], ['Adult M', 'Adult M'], ['Adult L', 'Adult L'], ['Adult XL', 'Adult XL'], ['Adult XXL', 'Adult XXL']]) %>
+
+			<%= label_tag :x_terms_agreement, "Initials:" %>
+			<%= text_field_tag :x_terms_agreement %>
+  			
+  			<%= label_tag 'x_amount', "Price: #{number_to_currency(@amount)}" %>
+  			<br />
+  			</pre>
+			
+			<%#= hidden_field_tag("x_invoice_num", 9, {:id => "x_invoice_num"}) %>
+			
+			<%= hidden_field_tag("x_cust_id", @user.id, {:id => "x_cust_id"}) %>
+			<%= hidden_field_tag("x_first_name", @user.first_name, {:id => "x_first_name"}) %>
+			<%= hidden_field_tag("x_last_name", @user.last_name, {:id => "x_last_name"}) %>
+			<%= hidden_field_tag("x_email", @user.email, {:id => "x_email"}) %>
+			
+			<%= hidden_field_tag("x_player_id", @player.id, {:id => "x_player_id"}) %>
+			<%= hidden_field_tag("x_camp_id", @camp.id, {:id => "x_camp_id"}) %>
+  			
+  			<%= f.submit 'Register & Pay', class: "btn btn-large btn-primary" %>
+		<% end %>	
+    	    	
+    	<p><%= link_to "Player Camp Agreement", player_camp_agreement_path %></p>
+    	<p><%= link_to "Refund Policy", refund_policy_path %></p>
+
+	</div>
+</div>

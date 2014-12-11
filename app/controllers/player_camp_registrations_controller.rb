@@ -2,11 +2,13 @@ class PlayerCampRegistrationsController < ApplicationController
   load_and_authorize_resource
 
   def new
-  	@player = Player.find_by(id: params[:player_id])
-  	@camp = Camp.find_by(id: params[:camp_id])
-    @age_group = AgeGroup.find_by(id: @camp.age_group)
-    @camp_dates_times_rinks = Camp.camp_dates_times_rinks(@camp.id)
+  	#@player = Player.find_by(id: params[:player_id])
+  	#@camp = Camp.find_by(id: params[:camp_id])
+    #@age_group = AgeGroup.find_by(id: @camp.age_group)
+    #@camp_dates_times_rinks = Camp.camp_dates_times_rinks(@camp.id)
 
+    redirect_to paymentspayment_path({player_id: params[:player_id], camp_id: params[:camp_id]})
+    #redirect_to paymentspayment_path
   end
 
   def create
@@ -32,7 +34,7 @@ class PlayerCampRegistrationsController < ApplicationController
 
         #flash[:success] = "#{@player.first_name} has been Registered for #{@camp.name} Camp."
         #redirect_to '/home'
-        redirect_to paymentspaymentspath
+        redirect_to paymentspayment_path
       else
         render 'new'
       end

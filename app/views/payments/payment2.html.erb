@@ -1,12 +1,21 @@
-<% provide(:title, 'Register') %>
+<% provide(:title, 'Register for Camp')%>
 
-<h1>Registration for Camp</h1>
+<h1>Registration for <%= @camp.name %> Camp</h1>
+
+<%= form_for :sim_transaction, :url => AuthorizeNet::SIM::Transaction::Gateway::TEST do |f| %>
+  			<%= sim_fields(@sim_transaction) %>
+  			
+  			<%= label_tag 'x_amount', "Price: #{number_to_currency(@amount)}" %>
+  			<br />
+  			<%= f.submit 'Purchase', class: "btn btn-large btn-primary" %>
+		<% end %>
+
 
 <div id="left_registration_box">
 	<h1><%= @camp.name %></h1>
 
 	<p><strong>Age Group: </strong><%= @age_group.name %></p>
-	<p><strong>Price: </strong><%= number_to_currency(@camp.price, :unit => "$") %></p>
+	<!--<p><strong>Price: </strong><%#= number_to_currency(@camp.price, :unit => "$") %></p>-->
 	<p><strong>Camp Highlights: </strong></p>
 	<p><%= @camp.highlights %></p>
 	
@@ -43,10 +52,8 @@
 	<div align="center">
 		<p>Registration for: <%= @player.first_name %> <%= @player.last_name %></p>
 	
-		<%= form_for(@player_camp_registration) do |registration| %>
-       		<%= render 'registration_form', player_camp_registration: registration %>
-    		<%= registration.submit "Register", class: "btn btn-large btn-primary" %>
-    	<% end %>	
+		
+		
     	    	
     	<p><%= link_to "Player Camp Agreement", player_camp_agreement_path %></p>
     	<p><%= link_to "Refund Policy", refund_policy_path %></p>

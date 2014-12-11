@@ -1,42 +1,51 @@
 Rails.application.routes.draw do
-  match '/payments/payment', :to => 'payments#payment', :as => 'paymentspayment', :via => [:get]
-  match '/payments/thank_you', :to => 'payments#thank_you', :as => 'payments_thank_you', :via => [:get]
   root 'static_pages#home'
 
+# => for Users
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :camps do
-    resources :date_time_locations
-  end
+  resources :invitations
+  resources :password_resets
+  match '/home',      to: 'users#home',             via: 'get'
+  match '/signup',    to: 'users#new',              via: 'get'
+  match '/signin',    to: 'sessions#new',           via: 'get'
+  match '/signout',   to: 'sessions#destroy',       via: 'delete'
+  
+# => for Players
   resources :players do
     resources :player_evaluations
   end
-  resources :invitations
-  resources :password_resets
-  resources :player_camp_registrations
   
+# for Camps
+  resources :camps do
+    resources :date_time_locations
+  end
+  match '/camps/publish',     to: 'camps#publish',    via: 'post'
+  match '/camps/unpublish',   to: 'camps#unpublish',  via: 'post'
+  
+# => links Players to Camps  
+  match '/player_unregister',  to: 'player_camp_registrations#un_register',        via: 'post'
+  match '/payments/payment',   to: 'payments#payment',   as: 'paymentspayment',    via: 'get'
+  match '/payments/thank_you', to: 'payments#thank_you', as: 'payments_thank_you', via: 'get'
+  resources :player_camp_registrations
+
+# => for requesting information
   resources :info_requests
   resources :scouting_requests
   resources :support_requests
   
   match '/why_9',     to: 'static_pages#why_9',     via: 'get'
   match '/about_us',  to: 'static_pages#about_us',  via: 'get'
-  #match '/signin',    to: 'static_pages#signin',    via: 'get'
-  match '/privacy_policy',  to: 'static_pages#privacy_policy',  via: 'get'
-  match '/refund_policy',   to: 'static_pages#refund_policy',   via: 'get'
+  
+  match '/privacy_policy',          to: 'static_pages#privacy_policy',          via: 'get'
+  match '/refund_policy',           to: 'static_pages#refund_policy',           via: 'get'
   match '/player_camp_agreement',   to: 'static_pages#player_camp_agreement',   via: 'get'
 
-  match '/signup',    to: 'users#new',              via: 'get'
-  match '/signin',    to: 'sessions#new',           via: 'get'
-  match '/signout',   to: 'sessions#destroy',       via: 'delete'
-  
-  #fix these hacks
+
+  #misc redirects
   match '/invitation/verify', to: 'invitations#verify_user_invitation', via: 'post'
-  match '/camps/publish',     to: 'camps#publish',                      via: 'post'
-  match '/camps/unpublish',   to: 'camps#unpublish',                    via: 'post'
   match '/players/invite',    to: 'players#player_invite',              via: 'post'
-  match '/player_unregister', to: 'player_camp_registrations#un_register', via: 'post'
-  match '/home',              to: 'users#home',                         via: 'get'
+  
   #match '/admin_home',        to: 'users#admin_home',                   via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
