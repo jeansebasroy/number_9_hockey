@@ -24,9 +24,9 @@ Rails.application.routes.draw do
   match '/camps/unpublish',   to: 'camps#unpublish',  via: 'post'
   
 # => links Players to Camps  
-  match '/player_unregister',  to: 'player_camp_registrations#un_register',        via: 'post'
   match '/payments/payment',   to: 'payments#payment',   as: 'paymentspayment',    via: 'get'
   match '/payments/thank_you', to: 'payments#thank_you', as: 'payments_thank_you', via: 'get'
+  match '/player_unregister',  to: 'player_camp_registrations#un_register',        via: 'post'
   resources :player_camp_registrations
 
 # => for requesting information

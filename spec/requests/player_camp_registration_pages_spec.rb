@@ -53,9 +53,9 @@ describe "Player Camp Registration pages" do
     describe "with valid information" do
 
       before do
-        select 'Youth S/M',   from: 'player_camp_registration[jersey_size]'
-            
-        fill_in "Initial:",   with: "rm"
+        select 'Youth L/XL',   from: 'Jersey Size'
+           
+        fill_in 'Initial',   with: "rm"      
       end
 
 # => fix this
@@ -120,9 +120,9 @@ describe "Player Camp Registration pages" do
 
     describe "with valid information" do
       before do
-        select 'Youth L/XL',   from: 'player_camp_registration[jersey_size]'
+        select 'Youth L/XL',   from: 'Jersey Size'
            
-        fill_in "Initial:",   with: "rm"
+        fill_in 'Initial',   with: "rm"
       end
 
 # => fix this

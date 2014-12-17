@@ -89,11 +89,7 @@ describe "Admin Player pages" do
 
     describe "from Player index" do
 
-#      let!(:age_group) { FactoryGirl.create(:age_group) }
-
       before { click_link "All Players" }
-
-# =>       it { should have_title("All Players") }
 
       before { click_link 'Add Player' }
 
@@ -127,7 +123,7 @@ describe "Admin Player pages" do
           fill_in "Jersey No.",   with: "9"
 
           select 'Practice',      from: 'player_evaluation[evaluation_type]'
-          select 'Mite',          from: 'player_evaluation[age_group_id]'
+          select 'Squirt',          from: 'player_evaluation[age_group_id]'
           
           fill_in "League",       with: "NHL"
           fill_in "Level",        with: "Tin"
@@ -254,7 +250,7 @@ describe "Admin Player pages" do
           fill_in "Jersey No.",   with: "9"
 
           select 'Game',          from: 'player_evaluation[evaluation_type]'
-          select 'Mite',          from: 'player_evaluation[age_group_id]'
+          select 'Squirt',        from: 'player_evaluation[age_group_id]'
 
           fill_in "League",       with: "NHL"
           fill_in "Level",        with: "Tin"
@@ -306,7 +302,7 @@ describe "Admin Player pages" do
           fill_in "Jersey No.",   with: "9"
 
           select 'Game',          from: 'player_evaluation[evaluation_type]'
-          select 'Mite',          from: 'player_evaluation[age_group_id]'
+          select 'Squirt',          from: 'player_evaluation[age_group_id]'
           
           fill_in "League",       with: "NHL"
           fill_in "Level",        with: "Tin"

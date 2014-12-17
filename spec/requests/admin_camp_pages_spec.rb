@@ -4,6 +4,7 @@ describe "Admin Camp pages" do
 	
   let(:admin_user) { FactoryGirl.create(:admin) }
 
+  let!(:age_group) { FactoryGirl.create(:age_group) }
   let!(:rink) { FactoryGirl.create(:rink) }
 # => age_group is created once somewhere, but I don't know where?
   #let!(:age_group) { FactoryGirl.create(:age_group) }
@@ -118,6 +119,8 @@ describe "Admin Camp pages" do
 
   describe "view Camp details" do
 
+    let!(:view) { FactoryGirl.create(:camp, name: "View", age_group: age_group.id) }
+
     before { click_link "All Camps" }
     before { click_link "View" }
     
@@ -161,8 +164,8 @@ describe "Admin Camp pages" do
         before { click_button save }
 
         it { should have_selector('div.alert.alert-success') }
-        it { should have_title("Test Camp") }
-        it { should have_content("Camp Name: Test Camp") }
+        it { should have_title("#{view.name}") }
+        it { should have_content("Camp Name: #{view.name}") }
 
       end
     end
@@ -170,17 +173,62 @@ describe "Admin Camp pages" do
 
   describe "All Camps index" do
 
-    before { click_link "All Camps" }
+    describe "with no Camps" do
+      
+      before { click_link "All Camps" }
 
-    it { should have_title("All Camps") }
-    it { should have_link('View') }
-    it { should have_link('Edit') }
-    it { should have_link('Publish') }
-    it { should have_link('Delete') }
+      it { should have_title("All Camps") }
+      it { should_not have_link('View') }
 
+# => why is this test failing?      
+      # fails because there is an "Edit Profile" link
+      #it { should_not have_link('Edit') }
+
+      it { should_not have_link('Publish') }
+      it { should_not have_link('Un-Publish') }
+      it { should_not have_link('Delete') }
+
+    end
+
+    describe "with one Un-Published Camp" do
+    
+      let!(:un_published) { FactoryGirl.create(:camp, name: "Un-Published", age_group: age_group.id,
+                                                publish_date: " ") }
+
+      before { click_link "All Camps" }
+
+      it { should have_title("All Camps") }
+      it { should have_link('View') }
+      it { should have_link('Edit') }
+      it { should have_link('Publish') }
+      it { should_not have_link('Un-Publish') }
+      it { should have_link('Delete') }
+    
+    end
+
+    describe "with one Published Camp" do
+
+      let!(:published) { FactoryGirl.create(:camp, name: "Published", age_group: age_group.id,
+                                            publish_date: "2014-12-17") }
+    
+      before { click_link "All Camps" }
+
+      it { should have_title("All Camps") }
+      it { should have_link('View') }
+      it { should have_link('Edit') }
+# => test fails because picks up on "Un-Publish" link      
+      #it { should_not have_link('Publish') }
+      
+      it { should have_link('Un-Publish') }
+      it { should have_link('Delete') }
+
+    end
+    
   end
 
   describe "edit Camp" do
+
+    let!(:update) { FactoryGirl.create(:camp, name: "Update Camp", age_group: age_group.id) }   
 
     before { click_link "All Camps" }
     before { click_link "Edit" }
@@ -201,7 +249,7 @@ describe "Admin Camp pages" do
       before { click_button "Update" }
           
       it { should have_content("2 for Camp Test") }
-      it { should_not have_content("Test Camp") }  
+      it { should_not have_content("Update Camp") }  
 
     end
  end
@@ -209,6 +257,9 @@ describe "Admin Camp pages" do
   describe "Publish Camp" do
 
     describe "from Camp index" do
+
+      let!(:to_publish_1) { FactoryGirl.create(:camp, name: "To Publish 1", age_group: age_group.id,
+                                                publish_date: " ") }  
 
       before { click_link "All Camps" }
             
@@ -233,6 +284,9 @@ describe "Admin Camp pages" do
 
     describe "from Camp view" do
 
+      let!(:to_publish_2) { FactoryGirl.create(:camp, name: "To Publish 2", age_group: age_group.id,
+                                                publish_date: " ") }  
+
       before { click_link "All Camps" }
       before { click_link "View" }
       before { click_link "Publish" }
@@ -248,6 +302,8 @@ describe "Admin Camp pages" do
 
     describe "from Camp index" do
 
+      let!(:to_delete) { FactoryGirl.create(:camp, name: "To Delete", age_group: age_group.id) }  
+
       before { click_link "All Camps" }
 
 # => need to fix this      
@@ -261,6 +317,7 @@ describe "Admin Camp pages" do
       it { should have_title("All Camps") }
 
     end
+
   end
 
   describe "admin sign out" do

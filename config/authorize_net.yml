@@ -5,4 +5,7 @@ default:
 
 development: 
 test: 
+  api_login_id: 89paG3S8
+  api_transaction_key: 2P4rh5488XG5A8q5
+  merchant_hash_value: 1229WWashington
 production: 

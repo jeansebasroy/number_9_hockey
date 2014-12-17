@@ -7,7 +7,7 @@ class PlayerCampRegistrationsController < ApplicationController
     #@age_group = AgeGroup.find_by(id: @camp.age_group)
     #@camp_dates_times_rinks = Camp.camp_dates_times_rinks(@camp.id)
 
-    redirect_to paymentspayment_path({player_id: params[:player_id], camp_id: params[:camp_id]})
+    redirect_to paymentspayment_path({x_player_id: params[:player_id], x_camp_id: params[:camp_id]})
     #redirect_to paymentspayment_path
   end
 
@@ -94,6 +94,10 @@ class PlayerCampRegistrationsController < ApplicationController
     @camp = Camp.find(@registration.camp_id)
 
     @registration.update_attributes(un_register_date: Date.today)
+
+# => need to notify support so that they know that someone has un-registered from a camp
+    # will need to refund the money and trigger add the refund_transaction record
+
 
     # => this is a hack to get camps that have been un-registered back on the "invitation" list
     @invitation = PlayerCampInvitations.invitation_un_used(@player.id, @camp.id)

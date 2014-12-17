@@ -61,7 +61,11 @@
   			<br />
   			</pre>
 			
-			<%#= hidden_field_tag("x_invoice_num", 9, {:id => "x_invoice_num"}) %>
+			<%= hidden_field_tag("x_cancel_url", root_url ) %>
+			<%#= hidden_field_tag("x_cancel_url", paymentspayment_path({player_id: @player.id, camp_id: @camp.id})) %>
+			<%= hidden_field_tag("x_cancel_url_text", "Cancel") %>
+
+			<%= hidden_field_tag("x_description", "Registration Fee for #{@camp.name}", {:id => "x_description"}) %>
 			
 			<%= hidden_field_tag("x_cust_id", @user.id, {:id => "x_cust_id"}) %>
 			<%= hidden_field_tag("x_first_name", @user.first_name, {:id => "x_first_name"}) %>
@@ -71,6 +75,41 @@
 			<%= hidden_field_tag("x_player_id", @player.id, {:id => "x_player_id"}) %>
 			<%= hidden_field_tag("x_camp_id", @camp.id, {:id => "x_camp_id"}) %>
   			
+			<%#= hidden_field_tag("x_header2_html_payment_form", 
+				"<style type='text/css' media='all'>Fill out the form below:" ) %>
+			<%#= hidden_field_tag("x_footer2_html_payment_form", 
+				"<style type='text/css' media='all'>TD,input{font-family:arial, verdana,
+trebuchet,helvetica,geneva,sans-serif;font-size:11px; color:#000000;};
+footer {
+  height: 60px;
+  padding-top: 5px;
+  a {
+    color: #999;
+    &:hover {
+    	color: white;
+    	text-decoration: none;
+  		}
+  }
+  small {
+    position: relative;
+    top: 50%;
+    transform: translateY(50%);
+    float: left;
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 10px;
+    }
+  }
+}
+</style>
+<footer>Please enter your payment and shipping information.</footer>") %>
+
+
+
   			<%= f.submit 'Register & Pay', class: "btn btn-large btn-primary" %>
 		<% end %>	
     	    	
